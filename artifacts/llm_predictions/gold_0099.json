@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ACCOUNT_ACCESS_AND_SECURITY"
+  ],
+  "intents": [
+    "ACCOUNT_LOGIN_ISSUES"
+  ],
+  "primary_intent": "ACCOUNT_LOGIN_ISSUES",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports account login issues and password reset failure, indicating a need for account access and security support."
+}

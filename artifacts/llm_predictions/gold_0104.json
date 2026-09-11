@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ACCOUNT_ACCESS_AND_SECURITY"
+  ],
+  "intents": [
+    "ACCOUNT_LOGIN_ISSUES"
+  ],
+  "primary_intent": "ACCOUNT_LOGIN_ISSUES",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is unable to log in to their account on multiple platforms and is requesting a verification email, indicating an account login issue."
+}

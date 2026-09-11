@@ -1,0 +1,12 @@
+{
+  "classification_status": "OUT_OF_SCOPE",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer message is a thank-you sign-off with no actionable support request, thus out of scope."
+}

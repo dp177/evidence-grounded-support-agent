@@ -1,0 +1,12 @@
+{
+  "classification_status": "OUT_OF_SCOPE",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer indicates the issue is resolved and thanks support; no actionable support request is made."
+}

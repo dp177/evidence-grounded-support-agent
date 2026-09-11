@@ -1,0 +1,12 @@
+{
+  "classification_status": "AMBIGUOUS",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.0,
+  "reasoning": "Customer's message is too vague to know what they want, and it contains multiple unrelated issues."
+}

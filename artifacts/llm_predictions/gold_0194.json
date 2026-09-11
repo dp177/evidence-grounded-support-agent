@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "WRONG_ITEM_RECEIVED"
+  ],
+  "primary_intent": "WRONG_ITEM_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports receiving incorrect products twice in two months, indicating a possible mistake in order fulfillment."
+}

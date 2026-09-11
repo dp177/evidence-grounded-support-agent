@@ -1,0 +1,256 @@
+{
+  "multi_intent_candidates": [
+    {
+      "case_id": "amazon_case_0015921",
+      "discovery_id": "discovery_00071",
+      "conversation_id": 22571,
+      "turn_index": 2,
+      "candidate_intents": [
+        "ORDER_CANCELLATION + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "Ordered on 7 October 2017 Order# 403-7284574-6433108 not yet delivered. No way to cancel and get refund.",
+      "brand_response_clean": "Please don't provide your order details, we consider it to be personal information. Our page is visible to the public. 2/2^SC"
+    },
+    {
+      "case_id": "amazon_case_0050697",
+      "discovery_id": "discovery_00194",
+      "conversation_id": 73435,
+      "turn_index": 7,
+      "candidate_intents": [
+        "ORDER_CANCELLATION + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "And if they won't be able to get it for me, will I be able to cancel the exchange request and put a request for a refund in?",
+      "brand_response_clean": "Hi Michael! As HS said, it would be best to contact the seller since all sellers have their own polices for returns/exchanges."
+    },
+    {
+      "case_id": "amazon_case_0051568",
+      "discovery_id": "discovery_00202",
+      "conversation_id": 74660,
+      "turn_index": 1,
+      "candidate_intents": [
+        "BILLING_ERROR + CANCELLATION_REQUEST"
+      ],
+      "customer_message_clean": "Amazon double charged me && the payments have been pending for days which I need them to clear so they will either fall off or they can refund me",
+      "brand_response_clean": "Hi Alexandria, have you had a chance to contact us about this? If the charges are pending, they could be authorisations which would need to be cleared by your bank. You can find more information about bank authorisations here: <URL>"
+    },
+    {
+      "case_id": "amazon_case_0080300",
+      "discovery_id": "discovery_00347",
+      "conversation_id": 121105,
+      "turn_index": 5,
+      "candidate_intents": [
+        "ORDER_CANCELLATION + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "can we cancel our prim early and get partial refund, only been renewed last month ?",
+      "brand_response_clean": "Feel free to review the steps to cancel your Prime membership here: <URL>"
+    },
+    {
+      "case_id": "amazon_case_0089237",
+      "discovery_id": "discovery_00405",
+      "conversation_id": 136176,
+      "turn_index": 1,
+      "candidate_intents": [
+        "ORDER_NOT_RECEIVED + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "You guys suck! Prime next day delivery ordered on 20th Nov, still not arrived.. sometimes a refund just doesn't go far enough !",
+      "brand_response_clean": "Hi, sorry to hear that, what's the current status of the tracking and estimated delivery date of your order: <URL>"
+    },
+    {
+      "case_id": "amazon_case_0098442",
+      "discovery_id": "discovery_00469",
+      "conversation_id": 152110,
+      "turn_index": 3,
+      "candidate_intents": [
+        "ORDER_NOT_RECEIVED + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "I have not received any email.... get me my refund for all orders placed on 15th Oct.. all of them were cancelled and I need a refund of 3296..... get me my money",
+      "brand_response_clean": "You might have received an email from social media team here: <URL> . Please reply on the same for further assistance."
+    },
+    {
+      "case_id": "amazon_case_0110457",
+      "discovery_id": "discovery_00540",
+      "conversation_id": 171043,
+      "turn_index": 1,
+      "candidate_intents": [
+        "ORDER_CANCELLATION + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "Hi, I was meant to cancel my prime subscription but found I had been charged for another year. As it's only happened day, would I be able to cancel my membership and be able to get a refund?",
+      "brand_response_clean": "Hi! I'm sorry for this issue with your Amazon Prime Membership. You can look over details of canceling and refund information on this Help page: <URL> Thank you."
+    },
+    {
+      "case_id": "amazon_case_0145074",
+      "discovery_id": "discovery_00722",
+      "conversation_id": 222715,
+      "turn_index": 1,
+      "candidate_intents": [
+        "RETURN_REQUEST + PICKUP_ISSUE"
+      ],
+      "customer_message_clean": "Pickup planned since 28sept and not yet done, inefficient people are sitting at customer care, postponed return pickup and refund",
+      "brand_response_clean": "I'm sorry about the pending pick-up. Kindly share your details here: <URL> and we'll check it."
+    },
+    {
+      "case_id": "amazon_case_0151424",
+      "discovery_id": "discovery_00803",
+      "conversation_id": 233505,
+      "turn_index": 3,
+      "candidate_intents": [
+        "DAMAGED_ITEM + REPLACEMENT_REQUEST"
+      ],
+      "customer_message_clean": "requested replacement item as wrong item received still no news on either return or replacement! Help! <URL>",
+      "brand_response_clean": "Hi, can you get in touch with us here: <URL> we'd be happy to help"
+    },
+    {
+      "case_id": "amazon_case_0156711",
+      "discovery_id": "discovery_00842",
+      "conversation_id": 243220,
+      "turn_index": 1,
+      "candidate_intents": [
+        "ORDER_NOT_RECEIVED + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "i ordered water purifier i found RO memberance missing and water tank used refund raised order407-5968679-4283533 need help",
+      "brand_response_clean": "I'm sorry for the trouble. Please fill this form: <URL> and I’ll contact you at the earliest.(1/2)"
+    },
+    {
+      "case_id": "amazon_case_0001590",
+      "discovery_id": "discovery_00938",
+      "conversation_id": 264393,
+      "turn_index": 2,
+      "candidate_intents": [
+        "DAMAGED_ITEM + REPLACEMENT_REQUEST"
+      ],
+      "customer_message_clean": "delivered defective product on orderid 4__credit_card__ ,ordrd replacement, but bluedirt not picking up my return and also not recieving calls.. Pathetic replacement service by amazon",
+      "brand_response_clean": "Please don't provide your order details, we consider it to be personal information. Our page is visible to the public.2/2^AR"
+    },
+    {
+      "case_id": "amazon_case_0052083",
+      "discovery_id": "discovery_01358",
+      "conversation_id": 337386,
+      "turn_index": 3,
+      "candidate_intents": [
+        "ORDER_CANCELLATION + REFUND_REQUEST"
+      ],
+      "customer_message_clean": "September 23rd.. I was charged $90 for Amazon Prime as well that I can’t get into my account to cancel and get a refund for.",
+      "brand_response_clean": "Oh no! We want to look into this further. Please reach out to us here: <URL> so we can see what's going on."
+    }
+  ],
+  "conversation_states": {
+    "TRACKING_ALREADY_CHECKED": [
+      {
+        "case_id": "amazon_case_0012773",
+        "discovery_id": "discovery_00046",
+        "conversation_id": 18684,
+        "turn_index": 1,
+        "detected_pattern": "link (doesn't|does not) work",
+        "customer_message_clean": "I ordered an Alexa and it's stuck in customs. sends me an email to upload the KYC. However, the link doesn't work. #Help",
+        "context_clean": "CUSTOMER: I ordered an Alexa and it's stuck in customs. sends me an email to upload the KYC. However, the link doesn't work. #Help",
+        "brand_response_clean": "I understand your concern regarding the delivery of the package. Kindly reach out to us 1/2"
+      },
+      {
+        "case_id": "amazon_case_0033703",
+        "discovery_id": "discovery_04341",
+        "conversation_id": 1098618,
+        "turn_index": 1,
+        "detected_pattern": "link (doesn't|does not) work",
+        "customer_message_clean": "I cannot make order reports CSV files on the <URL> site :( This link does not work <URL>",
+        "context_clean": "CUSTOMER: I cannot make order reports CSV files on the <URL> site :( This link does not work <URL>",
+        "brand_response_clean": "I'm sorry that the order reports are not working for you! Are you getting an error message when you try?"
+      }
+    ],
+    "CARRIER_ALREADY_CONTACTED": [
+      {
+        "case_id": "amazon_case_0142125",
+        "discovery_id": "discovery_00709",
+        "conversation_id": 218145,
+        "turn_index": 3,
+        "detected_pattern": "(carrier|courier) (says|told me|claims)",
+        "customer_message_clean": "The carrier says AMZL US",
+        "context_clean": "CUSTOMER: not very happy that I had guaranteed delivery for 3 costumes today and only 1 arrived. There goes that school project.\nBRAND: Oh no, I'm so terribly sorry to hear! Who's the carrier assigned to deliver: <URL>\nCUSTOMER: The carrier says AMZL US",
+        "brand_response_clean": "We'd like to look into this with you! Please provide details about your experience here: <URL>"
+      },
+      {
+        "case_id": "amazon_case_0022981",
+        "discovery_id": "discovery_04280",
+        "conversation_id": 1081373,
+        "turn_index": 2,
+        "detected_pattern": "(carrier|courier) (says|told me|claims)",
+        "customer_message_clean": "Order id 402-6333619-4849936.Courier says unable 2 deliverd prdct while area pin code correct,says pick urself frm it's godawn.",
+        "context_clean": "CUSTOMER: Order id 402-6333619-4849936.Courier says unable 2 deliverd prdct while area pin code correct,says pick urself frm it's godawn.\nBRAND: That's not good. Please report this to our support team here: <URL> let us know how things go. (1/2)",
+        "brand_response_clean": "Don't provide your order number, we consider it to be personal info. Our Twitter page is visible to the public. (2/2)"
+      },
+      {
+        "case_id": "amazon_case_0162315",
+        "discovery_id": "discovery_06706",
+        "conversation_id": 1826112,
+        "turn_index": 3,
+        "detected_pattern": "(carrier|courier) (says|told me|claims)",
+        "customer_message_clean": "Promised 2 day shipping & the USPS carrier claims they were unable to deliver to my house. I live on a regular street. This is the 2nd time",
+        "context_clean": "CUSTOMER: This is the 2nd time being a member has let me down. Might as well cancel my membership 😩\nBRAND: Letting you down is never our intent! Without posting personal/account details, can you tell us what happened?\nCUSTOMER: Promised 2 day shipping & the USPS carrier claims they were unable to deliver to my house. I live on a regular street. This is the 2nd time",
+        "brand_response_clean": "Have you reported this and submit carrier feedback to us: <URL> If so, what options did we provide you?"
+      },
+      {
+        "case_id": "amazon_case_0042540",
+        "discovery_id": "discovery_08838",
+        "conversation_id": 2682181,
+        "turn_index": 4,
+        "detected_pattern": "(contacted|spoke to|called) (the )?(carrier|courier|usps|ups|hermes|royal mail)",
+        "customer_message_clean": "Yeah! I already received a refund for the shipping costs I paid for one day shipping, but I was just told that the package is delayed until tomorrow when I needed it today. I contacted UPS to see if I can pick up the package wherever it currently is.",
+        "context_clean": "CUSTOMER: Don’t offer one day shipping knowing you can’t deliver it on time!\nBRAND: We'd like to help! Do you need assistance with a current order? Have we missed our mark?\nCUSTOMER: Yeah! I already received a refund for the shipping costs I paid for one day shipping, but I was just told that the package is delayed until tomorrow when I needed it today. I contacted UPS to see if I can pick up the package wherever it currently is.\nCUSTOMER: If it arrives tomorrow I’m going to return it and ask for a full refund",
+        "brand_response_clean": "Keep us posted on this. We're here to help."
+      }
+    ],
+    "DETAILS_ALREADY_PROVIDED": [
+      {
+        "case_id": "amazon_case_0088336",
+        "discovery_id": "discovery_03717",
+        "conversation_id": 920961,
+        "turn_index": 8,
+        "detected_pattern": "already (sent|given|provided|dmd) (the )?(details|info|order number|dm)",
+        "customer_message_clean": "already provided details thrice..",
+        "context_clean": "CUSTOMER: after several assurance still not delivered Order #407-4728589-5677939. Pissed off with ATS😢\nBRAND: I'm sorry you've not received your order. We'd like to look into it. Please provide (1/3)^SF\nBRAND: your details here: <URL> we'll get back to you soon. Also, please don't provide your (2/3)^SF\nBRAND: order details, we consider it to be personal information. Our page is visible to the public. (3/3)^SF\nCUSTOMER: this is the worst experience from Amazon.Item returned without any delivery attempt. (1/2)\nCUSTOMER: Now don't tell me to fill in the details.pissed off with u. do u have a better deal for the item? (2/2)\nBRAND: We'll not be able to work on your concern over Twitter. Request you to share your details in the link provided earlier.\nCUSTOMER: already provided details thrice..",
+        "brand_response_clean": "If you have filled the details, you will receive an email communication here: <URL>"
+      }
+    ],
+    "WAITING_WINDOW_EXCEEDED": [
+      {
+        "case_id": "amazon_case_0014568",
+        "discovery_id": "discovery_00058",
+        "conversation_id": 20764,
+        "turn_index": 3,
+        "detected_pattern": "still (no reply|haven't heard|waiting)",
+        "customer_message_clean": "Arriving today. That's all it's said since this morning. My mum is waiting in as is still waiting. Just a rough time frame would be kind",
+        "context_clean": "CUSTOMER: can you let me know the status of parcel #Q40724393184. Thank you x\nBRAND: I'm so sorry! We don't have access to order information via Twitter. What does the tracking show here? <URL>\nCUSTOMER: Arriving today. That's all it's said since this morning. My mum is waiting in as is still waiting. Just a rough time frame would be kind",
+        "brand_response_clean": "I understand. Parcels can be delivered up to 21:00. Please let us know if the order does not arrive by that time."
+      },
+      {
+        "case_id": "amazon_case_0044737",
+        "discovery_id": "discovery_00166",
+        "conversation_id": 64114,
+        "turn_index": 10,
+        "detected_pattern": "(told|said) to wait \\d+ (hours|days)",
+        "customer_message_clean": "I just rang customer services and was told to wait 48 hours, you see my frustration??",
+        "context_clean": "CUSTOMER: Morning, still no sign of my package\nBRAND: Sorry to hear this. Can you contact us here: <URL> so we can take a look at what options we have?\nCUSTOMER: Will do, thanks\nBRAND: Thanks, Laura!\nCUSTOMER: another triumph of customer service. Useless.\nBRAND: Hello! Without posting account information can you tell us more about the issue you're having? We'll be glad to help!^CN\nCUSTOMER: Ok, last year you failed to deliver a dvd 3 times so l gave up with you. My family use wish lists so l had to order some items, which haven’t arrived\nCUSTOMER: I had a message saying it was through my letterbox\nBRAND: Oh no! That is not good! Let's look into this in real time. Please call or chat with us here: <URL>\nCUSTOMER: I just rang customer services and was told to wait 48 hours, you see my frustration??",
+        "brand_response_clean": "Hi Laura, I know its frustrating but this could just be a mis-scan. That's why we ask you to wait a little longer as there is a good chance this will still turn up within the next 48 hours. If not we will take full responsibility and replace or refund for you."
+      },
+      {
+        "case_id": "amazon_case_0068025",
+        "discovery_id": "discovery_00285",
+        "conversation_id": 99898,
+        "turn_index": 1,
+        "detected_pattern": "still (no reply|haven't heard|waiting)",
+        "customer_message_clean": "I private messaged you! And still no reply!",
+        "context_clean": "CUSTOMER: I private messaged you! And still no reply!",
+        "brand_response_clean": "I see you have two issues, One is a delayed package. What is the tracking currently showing on that package? The other issue is a refund request on some broken makeup. Has that been resolved?"
+      },
+      {
+        "case_id": "amazon_case_0087048",
+        "discovery_id": "discovery_00380",
+        "conversation_id": 132379,
+        "turn_index": 3,
+        "detected_pattern": "still (no reply|haven't heard|waiting)",
+        "customer_message_clean": "I have already done this on multiple occasions and still waiting for to help.",
+        "context_clean": "CUSTOMER: - Ordered a One Plus 5t from your prestigious website and got 3 cakes of Nirma bar . 37,999 for 3 bars of Nirma. I tried to complain on Amazon India FB page as well as through emails and phone. Case filed with consumer court , complaint # 517169.FRAUD FRAUD <URL>\nBRAND: I'm sorry about the wrong item delivered. This isn't something we want our customers to experience. Kindly submit your details here: <URL> and we'll have this checked.\nCUSTOMER: I have already done this on multiple occasions and still waiting for to help.",
+        "brand_response_clean": "Kindly provide your details in the link shared earlier and we'll reach out to you."
+      }
+    ]
+  }
+}

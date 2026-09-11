@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS"
+  ],
+  "primary_intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+  "is_multi_intent": false,
+  "states": [
+    "CARRIER_ALREADY_CONTACTED"
+  ],
+  "confidence": 0.9,
+  "reasoning": "Customer reports unhelpful service when calling a phone number, indicating they have already contacted the carrier and experienced poor service, matching CARRIER_FEEDBACK_AND_INSTRUCTIONS."
+}

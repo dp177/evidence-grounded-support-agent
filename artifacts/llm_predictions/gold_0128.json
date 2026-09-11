@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "DAMAGED_OR_DEFECTIVE_ITEM"
+  ],
+  "primary_intent": "DAMAGED_OR_DEFECTIVE_ITEM",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expressed dissatisfaction with the product's quality and mentioned it arrived broken, which aligns with the DAMAGED_OR_DEFECTIVE_ITEM intent."
+}

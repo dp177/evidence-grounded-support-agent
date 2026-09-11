@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS"
+  ],
+  "primary_intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+  "is_multi_intent": false,
+  "states": [
+    "TRACKING_ALREADY_CHECKED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is expressing dissatisfaction with the delivery driver's behavior, specifically not knocking or ringing the doorbell, and leaving the parcel in the wet. This falls under CARRIER_FEEDBACK_AND_INSTRUCTIONS, and the customer has already checked the tracking website, so TRACKING_ALREADY_CHECKED is the most accurate state."
+}

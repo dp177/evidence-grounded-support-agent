@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS"
+  ],
+  "primary_intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports a specific incident involving a carrier's misconduct during delivery, specifically attempting to force a parcel through a letterbox and damaging it, and not allowing the customer to address the issue before leaving."
+}

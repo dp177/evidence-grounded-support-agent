@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST"
+  ],
+  "primary_intent": "CANCEL_ORDER_REQUEST",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about preventing order cancellation, indicating a need to modify or cancel the order."
+}

@@ -1,0 +1,18 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT",
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST",
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "CANCEL_ORDER_REQUEST",
+  "is_multi_intent": true,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about cancelling orders due to incorrect shipping address and wants to know about gift card reimbursement."
+}

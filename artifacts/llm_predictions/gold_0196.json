@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "WRONG_ITEM_RECEIVED"
+  ],
+  "primary_intent": "WRONG_ITEM_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports wrong item received and requests the correct product"
+}

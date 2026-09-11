@@ -1,0 +1,18 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT",
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST",
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "CANCEL_ORDER_REQUEST",
+  "is_multi_intent": true,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about cancelling an exchange request and requesting a refund, indicating a multi-intent issue related to order management and refund status. The customer has already provided details about their return request and is seeking further assistance."
+}

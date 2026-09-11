@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "WHERE_IS_MY_ORDER"
+  ],
+  "primary_intent": "WHERE_IS_MY_ORDER",
+  "is_multi_intent": false,
+  "states": [
+    "TRACKING_ALREADY_CHECKED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their order, specifically the remaining shipments that were expected to arrive by 9pm, and has already checked the tracking details in the app."
+}

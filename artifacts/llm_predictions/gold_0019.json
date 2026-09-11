@@ -1,0 +1,12 @@
+{
+  "classification_status": "OUT_OF_SCOPE",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer's message is a social statement expressing dissatisfaction and frustration, which is not a support inquiry. It does not mention any specific issue with an order, product, or service, and is not asking for help or resolution."
+}

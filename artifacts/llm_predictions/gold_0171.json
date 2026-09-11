@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED",
+    "MARKED_DELIVERED_NOT_RECEIVED"
+  ],
+  "primary_intent": "MARKED_DELIVERED_NOT_RECEIVED",
+  "is_multi_intent": true,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports courier did not deliver package and it was returned without notice, indicating potential delivery delay and marked delivered not received issues."
+}

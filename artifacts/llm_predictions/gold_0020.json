@@ -1,0 +1,12 @@
+{
+  "classification_status": "OUT_OF_SCOPE",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer's message is a request for support on Seller Central, which is outside the scope of AmazonHelp's taxonomy. Seller Central is a platform for third-party sellers, and this inquiry should be directed to the relevant support channel."
+}

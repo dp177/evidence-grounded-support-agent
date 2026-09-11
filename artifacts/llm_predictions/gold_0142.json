@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "DIGITAL_CONTENT_ACCESS"
+  ],
+  "primary_intent": "DIGITAL_CONTENT_ACCESS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is inquiring about accessing Prime Reading content, which falls under Digital Services and Prime. They are specifically having trouble accessing the Prime Reading section, which is a known issue. The customer has already confirmed they have the Kindle app downloaded, which is a necessary step for Prime Reading."
+}

@@ -1,0 +1,521 @@
+{
+  "model": "meta-llama/llama-3.1-8b-instruct",
+  "num_cases": 200,
+  "primary_intent": {
+    "accuracy": 0.6914285714285714,
+    "macro_f1": 0.6712649640899172,
+    "weighted_f1": 0.7197786274263162,
+    "labels": [
+      "ACCOUNT_LOGIN_ISSUES",
+      "CANCEL_ORDER_REQUEST",
+      "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+      "DAMAGED_OR_DEFECTIVE_ITEM",
+      "DELIVERY_DELAYED",
+      "DIGITAL_CONTENT_ACCESS",
+      "MARKED_DELIVERED_NOT_RECEIVED",
+      "MODIFY_ORDER_DETAILS",
+      "OUT_OF_SCOPE_OR_AMBIGUOUS",
+      "PRIME_MEMBERSHIP_MANAGEMENT",
+      "REFUND_STATUS_INQUIRY",
+      "RETURN_PICKUP_ISSUE",
+      "UNRECOGNIZED_OR_DUPLICATE_CHARGE",
+      "WHERE_IS_MY_ORDER",
+      "WRONG_ITEM_RECEIVED"
+    ],
+    "per_intent": {
+      "ACCOUNT_LOGIN_ISSUES": {
+        "precision": 1.0,
+        "recall": 0.8148148148148148,
+        "f1": 0.8979591836734694,
+        "support": 27
+      },
+      "CANCEL_ORDER_REQUEST": {
+        "precision": 0.9,
+        "recall": 0.9,
+        "f1": 0.9,
+        "support": 10
+      },
+      "CARRIER_FEEDBACK_AND_INSTRUCTIONS": {
+        "precision": 0.9090909090909091,
+        "recall": 0.625,
+        "f1": 0.7407407407407407,
+        "support": 16
+      },
+      "DAMAGED_OR_DEFECTIVE_ITEM": {
+        "precision": 1.0,
+        "recall": 0.5555555555555556,
+        "f1": 0.7142857142857143,
+        "support": 9
+      },
+      "DELIVERY_DELAYED": {
+        "precision": 0.2702702702702703,
+        "recall": 0.8333333333333334,
+        "f1": 0.40816326530612246,
+        "support": 12
+      },
+      "DIGITAL_CONTENT_ACCESS": {
+        "precision": 0.9285714285714286,
+        "recall": 0.8666666666666667,
+        "f1": 0.896551724137931,
+        "support": 15
+      },
+      "MARKED_DELIVERED_NOT_RECEIVED": {
+        "precision": 0.3125,
+        "recall": 0.45454545454545453,
+        "f1": 0.37037037037037035,
+        "support": 11
+      },
+      "MODIFY_ORDER_DETAILS": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "support": 12
+      },
+      "OUT_OF_SCOPE_OR_AMBIGUOUS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "PRIME_MEMBERSHIP_MANAGEMENT": {
+        "precision": 0.875,
+        "recall": 0.7777777777777778,
+        "f1": 0.8235294117647058,
+        "support": 9
+      },
+      "REFUND_STATUS_INQUIRY": {
+        "precision": 0.875,
+        "recall": 0.875,
+        "f1": 0.875,
+        "support": 8
+      },
+      "RETURN_PICKUP_ISSUE": {
+        "precision": 0.7142857142857143,
+        "recall": 0.35714285714285715,
+        "f1": 0.47619047619047616,
+        "support": 14
+      },
+      "UNRECOGNIZED_OR_DUPLICATE_CHARGE": {
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.8888888888888888,
+        "support": 8
+      },
+      "WHERE_IS_MY_ORDER": {
+        "precision": 0.75,
+        "recall": 0.4,
+        "f1": 0.5217391304347826,
+        "support": 15
+      },
+      "WRONG_ITEM_RECEIVED": {
+        "precision": 0.8888888888888888,
+        "recall": 0.8888888888888888,
+        "f1": 0.8888888888888888,
+        "support": 9
+      }
+    },
+    "confusion_matrix": [
+      [
+        22,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        10,
+        0,
+        2,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        10,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        13,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        3,
+        0,
+        1,
+        6,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        7,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        4,
+        0,
+        4,
+        0,
+        1,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8
+      ]
+    ]
+  },
+  "multi_intent": {
+    "micro_f1": 0.6428571428571429,
+    "macro_f1": 0.6630378894783789,
+    "exact_set_match": 0.61,
+    "total_cases": 200
+  },
+  "status": {
+    "accuracy": 0.875,
+    "macro_f1": 0.44009776612594903,
+    "labels": [
+      "NORMAL",
+      "AMBIGUOUS",
+      "OUT_OF_SCOPE"
+    ],
+    "confusion_matrix": [
+      [
+        171,
+        1,
+        3
+      ],
+      [
+        6,
+        1,
+        8
+      ],
+      [
+        7,
+        0,
+        3
+      ]
+    ]
+  },
+  "state": {
+    "accuracy": 0.645,
+    "macro_f1": 0.1573170731707317,
+    "allowed_states": [
+      "CARRIER_ALREADY_CONTACTED",
+      "DETAILS_ALREADY_PROVIDED",
+      "INITIAL_INQUIRY",
+      "TRACKING_ALREADY_CHECKED",
+      "WAITING_WINDOW_EXCEEDED"
+    ]
+  },
+  "calibration": {
+    "expected_calibration_error": 0.2531,
+    "total_samples": 175,
+    "buckets": [
+      {
+        "bin_range": "0.0-0.1",
+        "count": 1,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.1-0.2",
+        "count": 0,
+        "mean_confidence": 0.15,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.2-0.3",
+        "count": 0,
+        "mean_confidence": 0.25,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.3-0.4",
+        "count": 0,
+        "mean_confidence": 0.35,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.4-0.5",
+        "count": 0,
+        "mean_confidence": 0.45,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.5-0.6",
+        "count": 0,
+        "mean_confidence": 0.55,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.6-0.7",
+        "count": 0,
+        "mean_confidence": 0.65,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.7-0.8",
+        "count": 0,
+        "mean_confidence": 0.75,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.8-0.9",
+        "count": 0,
+        "mean_confidence": 0.85,
+        "accuracy": 0.0
+      },
+      {
+        "bin_range": "0.9-1.0",
+        "count": 174,
+        "mean_confidence": 0.95,
+        "accuracy": 0.6954
+      }
+    ]
+  },
+  "threshold_abstention": [
+    {
+      "threshold": 0.5,
+      "accepted_count": 174,
+      "coverage": 0.9943,
+      "rejected_fraction": 0.0057,
+      "accuracy_on_accepted": 0.6954
+    },
+    {
+      "threshold": 0.6,
+      "accepted_count": 174,
+      "coverage": 0.9943,
+      "rejected_fraction": 0.0057,
+      "accuracy_on_accepted": 0.6954
+    },
+    {
+      "threshold": 0.7,
+      "accepted_count": 174,
+      "coverage": 0.9943,
+      "rejected_fraction": 0.0057,
+      "accuracy_on_accepted": 0.6954
+    },
+    {
+      "threshold": 0.8,
+      "accepted_count": 174,
+      "coverage": 0.9943,
+      "rejected_fraction": 0.0057,
+      "accuracy_on_accepted": 0.6954
+    },
+    {
+      "threshold": 0.9,
+      "accepted_count": 174,
+      "coverage": 0.9943,
+      "rejected_fraction": 0.0057,
+      "accuracy_on_accepted": 0.6954
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their return pick up, which has not arrived, and is also frustrated with the waiting window that has exceeded."
+}

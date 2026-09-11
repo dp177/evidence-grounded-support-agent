@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "RETURN_PICKUP_ISSUE",
+  "is_multi_intent": false,
+  "states": [
+    "TRACKING_ALREADY_CHECKED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expresses a specific issue with return pickup and also mentions a defective product, which is a known intent in the taxonomy."
+}

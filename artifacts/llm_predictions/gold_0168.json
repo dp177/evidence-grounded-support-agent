@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "REFUND_STATUS_INQUIRY",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their refund, which is a common issue in the Refunds and Billing area."
+}

@@ -1,0 +1,12 @@
+{
+  "classification_status": "OUT_OF_SCOPE",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer's message is a request to check a specific webpage, which is not a typical support inquiry. It appears to be a social banter or a joke, and does not express an actionable support need."
+}

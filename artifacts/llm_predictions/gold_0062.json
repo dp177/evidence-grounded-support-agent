@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is inquiring about a delayed delivery of a pre-ordered product, specifically FIFA 18 for PS4, and is seeking help from Amazon as EA is not assisting them."
+}

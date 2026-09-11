@@ -1,0 +1,76 @@
+# Python & Environments
+__pycache__/
+*.py[cod]
+*.pyc
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.env
+.env.*
+!.env.example
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDE and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Secrets and environment variables
+.env
+*.env
+.env.*
+!.env.example
+*secret*
+*key*.json
+credentials.json
+
+# Raw and Large Processed Datasets
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*.csv
+data/processed/*.parquet
+!data/processed/.gitkeep
+!data/processed/sample_cases.jsonl
+
+# Vector Stores, Embeddings & Indexes
+*.faiss
+*.chroma
+*.index
+*.ann
+indexes/
+embeddings/
+models/
+generated/
+
+# Evaluation outputs and logs
+evaluation/results/
+evaluation/logs/
+*.eval.json
+*.log
+logs/

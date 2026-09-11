@@ -1,0 +1,241 @@
+{
+  "provider": "openrouter",
+  "model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "review_mode": "openrouter",
+  "timestamp": "2026-09-11T20:42:45.694208+00:00",
+  "total_intents_reviewed": 17,
+  "reviews": [
+    {
+      "intent": "WHERE_IS_MY_ORDER",
+      "decision": "KEEP",
+      "recommended_name": "WHERE_IS_MY_ORDER",
+      "reason": "The examples consistently reflect customers seeking tracking updates or reporting discrepancies between tracking status and receipt. This forms a coherent, operationally distinct intent focused on order status inquiries, separate from returns, cancellations, or account issues.",
+      "closest_confusable_intents": [
+        "ORDER_NOT_RECEIVED",
+        "DELIVERY_ISSUE",
+        "TRACKING_UPDATE"
+      ],
+      "operational_distinction": "Agents respond with tracking links, carrier details, and, if marked delivered but not received, initiate an investigation or replacement process. This differs from return/refund flows which require authorization, label generation, and refund processing.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.95
+    },
+    {
+      "intent": "DELIVERY_DELAYED",
+      "decision": "KEEP",
+      "recommended_name": "DELIVERY_DELAYED",
+      "reason": "The examples consistently describe shipments that are late but still in transit; Amazon's responses focus on providing updated ETAs, carrier details, and apologies, which is a distinct support flow from missing or failed deliveries.",
+      "closest_confusable_intents": [
+        "DELIVERY_MISSING",
+        "SHIPPING_ISSUE"
+      ],
+      "operational_distinction": "For DELIVERY_DELAYED, agents typically check carrier status and give an revised delivery date; for DELIVERY_MISSING they initiate a lost\u2011package investigation and may offer refund/replacement, and for SHIPPING_ISSUE they address broader problems like address errors or customs holds.",
+      "annotation_difficulty": "MEDIUM",
+      "confidence": 0.9
+    },
+    {
+      "intent": "MARKED_DELIVERED_NOT_RECEIVED",
+      "decision": "KEEP",
+      "recommended_name": "MARKED_DELIVERED_NOT_RECEIVED",
+      "reason": "The intent groups a coherent set of cases where the system shows delivery but the customer did not receive the package. It leads to distinct support actions (neighbor/safe-place checks, locate\u2011package steps, carrier investigation) that differ from late\u2011delivery or generic missing\u2011item intents, making it operationally useful and consistently annotatable.",
+      "closest_confusable_intents": [
+        "DELIVERY_LATE",
+        "ITEM_NOT_RECEIVED"
+      ],
+      "operational_distinction": "For MARKED_DELIVERED_NOT_RECEIVED, agents advise checking neighbors/safe places, provide locate\u2011package links, and may open a carrier investigation; for DELIVERY_LATE they focus on updated ETAs and compensation; for ITEM_NOT_RECEIVED they verify shipment details and possible split shipments.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.9
+    },
+    {
+      "intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+      "decision": "KEEP",
+      "recommended_name": "CARRIER_FEEDBACK",
+      "reason": "The intent captures specific feedback about carrier behavior (e.g., driver conduct, delivery instructions) that triggers distinct support actions such as logging feedback, contacting carrier quality teams, and assessing damage, which is operationally separable from general delivery issues like missing or late packages.",
+      "closest_confusable_intents": [
+        "DELIVERY_PROBLEM",
+        "SHIPPING_ISSUE",
+        "CARRIER_COMPLAINT"
+      ],
+      "operational_distinction": "Unlike missing/late delivery intents that often initiate refund/replacement or trace workflows, carrier feedback intent focuses on documenting driver behavior, escalating to carrier performance teams, and may only lead to compensation if damage is reported.",
+      "annotation_difficulty": "MEDIUM",
+      "confidence": 0.85
+    },
+    {
+      "intent": "DAMAGED_OR_DEFECTIVE_ITEM",
+      "decision": "KEEP",
+      "recommended_name": "DAMAGED_OR_DEFECTIVE_ITEM",
+      "reason": "The intent groups messages about receiving broken or non-functional products, which is semantically coherent, operationally distinct (triggers replacement/refund workflows different from wrong-item or not-as-described cases), and shows consistent Amazon responses. It is sufficiently frequent and annotatable for reliable taxonomy use.",
+      "closest_confusable_intents": [
+        "WRONG_ITEM_SENT",
+        "ITEM_NOT_AS_DESCRIBED",
+        "QUALITY_ISSUE"
+      ],
+      "operational_distinction": "Damaged/defective items often qualify for immediate replacement or refund without requiring return of the defective unit, whereas wrong-item or not-as-described cases typically require return of the incorrect item before shipping the correct one.",
+      "annotation_difficulty": "MEDIUM",
+      "confidence": 0.91
+    },
+    {
+      "intent": "WRONG_ITEM_RECEIVED",
+      "decision": "KEEP",
+      "recommended_name": "WRONG_ITEM_RECEIVED",
+      "reason": "The cases consistently describe receiving an incorrect product, leading to a distinct support flow focused on returning the wrong item and shipping the correct replacement, which is operationally separable from similar issues like item-not-as-described or damaged goods.",
+      "closest_confusable_intents": [
+        "ITEM_NOT_AS_DESCRIBED",
+        "DAMAGED_ITEM"
+      ],
+      "operational_distinction": "Wrong item received triggers a replacement shipment and return of the incorrect item, whereas item-not-as-described often results in a refund or partial refund without requiring a replacement, and damaged items may involve repair or refund options.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.94
+    },
+    {
+      "intent": "RETURN_PICKUP_ISSUE",
+      "decision": "KEEP",
+      "recommended_name": "RETURN_PICKUP_ISSUE",
+      "reason": "The intent captures messages where customers report that the return pickup was missed, not attempted, or delayed by the carrier. These cases require distinct operational steps (rescheduling pickup, contacting carrier, possible compensation) that differ from other return sub\u2011issues such as label problems, drop\u2011off difficulties, or refund status inquiries, and they elicit a consistent response pattern focused on pickup resolution.",
+      "closest_confusable_intents": [
+        "RETURN_DROP_OFF_ISSUE",
+        "RETURN_LABEL_ISSUE",
+        "RETURN_REFUND_STATUS"
+      ],
+      "operational_distinction": "For RETURN_PICKUP_ISSUE agents typically reschedule the pickup, contact the carrier, and may issue a goodwill gesture; this contrasts with RETURN_DROP_OFF_ISSUE_OFF_ISSUE (guiding to drop\u2011off locations), RETURN_LABEL_ISSUE (resending return labels), and RETURN_REFUND_STATUS (checking refund processing).",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.94
+    },
+    {
+      "intent": "REFUND_STATUS_INQUIRY",
+      "decision": "KEEP",
+      "recommended_name": "REFUND_STATUS_INQUIRY",
+      "reason": "The candidate groups messages where customers ask about the status of an already-issued or pending refund; these are semantically coherent, operationally distinct from refund requests or refund issues, and consistently annotatable. Support agents handle them by checking payment status and providing timelines, a distinct workflow.",
+      "closest_confusable_intents": [
+        "REFUND_REQUEST",
+        "REFUND_ISSUE",
+        "REFUND_PROCESSING_TIME_INQUIRY"
+      ],
+      "operational_distinction": "REFUND_STATUS_INQUIRY triggers a status lookup in the payment/refund system and may involve escalation if delayed, while REFUND_REQUEST initiates a new refund eligibility check and REFUND_ISSUE addresses incorrect amounts or failed refunds.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.95
+    },
+    {
+      "intent": "UNRECOGNIZED_OR_DUPLICATE_CHARGE",
+      "decision": "RENAME",
+      "recommended_name": "DUPLICATE_CHARGE",
+      "reason": "The empirical examples exclusively describe duplicate charge scenarios; combining unrecognized charges conflates distinct operational workflows (fraud investigation vs. authorization hold resolution). Renaming improves semantic coherence and operational usefulness while maintaining sufficient volume.",
+      "closest_confusable_intents": [
+        "UNAUTHORIZED_CHARGE",
+        "BILLING_INQUIRY"
+      ],
+      "operational_distinction": "Duplicate charge handling focuses on verifying pending/posted authorizations and issuing refunds for duplicate posted charges; unrecognized charge handling involves verifying order authenticity, potential fraud review, and may require security escalation.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.94
+    },
+    {
+      "intent": "CANCEL_ORDER_REQUEST",
+      "decision": "KEEP",
+      "recommended_name": "CANCEL_ORDER_REQUEST",
+      "reason": "The examples are semantically coherent and operationally distinct: they all seek to cancel an order, triggering a specific support path (checking cancellation eligibility, providing self\u2011service options or seller/carrier contact) that differs from returns, refunds, or order changes. Splitting would create unnecessary fragmentation; the distinction can be handled via context (order status) rather than separate intents.",
+      "closest_confusable_intents": [
+        "RETURN_ORDER_REQUEST",
+        "REFUND_REQUEST",
+        "CHANGE_ORDER_REQUEST"
+      ],
+      "operational_distinction": "Cancel order requests focus on stopping an order before or shortly after shipment, often requiring eligibility checks, seller contact, or carrier interception. Return/refund requests involve post\u2011delivery processes (return labels, refund issuance), and change order requests involve modifying items/addresses while the order remains active.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.95
+    },
+    {
+      "intent": "MODIFY_ORDER_DETAILS",
+      "decision": "RENAME",
+      "recommended_name": "CHANGE_DELIVERY_ADDRESS",
+      "reason": "The empirical cases uniformly concern delivery address modifications; a more specific name improves operational clarity, retrieval, and automation without causing fragmentation.",
+      "closest_confusable_intents": [
+        "CANCEL_ORDER",
+        "UPDATE_PAYMENT_METHOD"
+      ],
+      "operational_distinction": "Changing a delivery address involves verifying order fulfillment status and updating shipping details via self-service or agent tools, whereas cancelling an order terminates the purchase and may involve refund processing, and updating payment method requires payment validation and may be restricted after order placement.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.93
+    },
+    {
+      "intent": "PRIME_MEMBERSHIP_MANAGEMENT",
+      "decision": "KEEP",
+      "recommended_name": "PRIME_MEMBERSHIP_MANAGEMENT",
+      "reason": "The examples consistently involve Prime-specific actions (cancellation, refund, renewal, charge disputes) that require distinct support flows, tools, and policies compared to generic billing or subscription intents.",
+      "closest_confusable_intents": [
+        "SUBSCRIPTION_CANCELLATION",
+        "ACCOUNT_BILLING_ISSUE"
+      ],
+      "operational_distinction": "Prime membership management includes handling free\u2011trial conversions, Prime\u2011specific refund windows, and benefit\u2011reversal logic, which are not covered by generic subscription cancellation or billing issue workflows.",
+      "annotation_difficulty": "MEDIUM",
+      "confidence": 0.94
+    },
+    {
+      "intent": "DIGITAL_CONTENT_ACCESS",
+      "decision": "KEEP",
+      "recommended_name": "DIGITAL_CONTENT_ACCESS",
+      "reason": "The examples share a clear theme of inability to access or view Prime Video content (streaming, app availability, playback resume). This intent is operationally distinct from generic app crashes or account issues, supports specific troubleshooting steps (connectivity, sign\u2011out/in, device compatibility, reinstall, resume feature), and likely represents a high\u2011volume support topic. Keeping it enables focused retrieval and consistent automation without unnecessary fragmentation.",
+      "closest_confusable_intents": [
+        "APP_NOT_WORKING",
+        "STREAMING_QUALITY_ISSUE"
+      ],
+      "operational_distinction": "DIGITAL_CONTENT_ACCESS targets video\u2011content\u2011specific barriers (availability, playback, app presence) whereas APP_NOT_WORKING covers generic app crashes or errors unrelated to content access, and STREAMING_QUALITY_ISSUE focuses solely on resolution/bitrate problems rather than access or app\u2011presence concerns.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.92
+    },
+    {
+      "intent": "ACCOUNT_LOGIN_OR_OTP",
+      "decision": "RENAME",
+      "recommended_name": "ACCOUNT_LOGIN_ISSUES",
+      "reason": "The intent groups all login/access problems including OTP failures; the name is awkward and can be simplified to ACCOUNT_LOGIN_ISSUES for clearer operational routing and annotation.",
+      "closest_confusable_intents": [
+        "ACCOUNT_LOCKED",
+        "PASSWORD_RESET",
+        "ACCOUNT_SECURITY_COMPROMISE"
+      ],
+      "operational_distinction": "Unlike ACCOUNT_LOCKED (specific hold/lock workflow) or PASSWORD_RESET (focus on reset flow), ACCOUNT_LOGIN_ISSUES routes to a general login troubleshooting flow that handles password, OTP, and access denial cases.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.92
+    },
+    {
+      "intent": "AMBIGUOUS_INQUIRY",
+      "decision": "SPLIT",
+      "recommended_name": "AMBIGUOUS_INQUIRY",
+      "reason": "The examples cover disparate issues (document submission method, order status, support experience complaints, channel preference, and acknowledgments). Separating them yields distinct support actions, retrieval strategies, and response templates, making the intent too broad for effective routing or automation.",
+      "closest_confusable_intents": [
+        "GENERAL_INQUIRY",
+        "THANK_YOU",
+        "ORDER_STATUS_INQUIRY",
+        "SUPPORT_COMPLAINT"
+      ],
+      "operational_distinction": "Splitting enables specific handling: document submission triggers fax/email guidance; order status triggers tracking lookup; support experience triggers escalation or feedback; channel preference triggers DM/alternative channel routing; acknowledgments trigger conversation closure.",
+      "annotation_difficulty": "MEDIUM",
+      "confidence": 0.9
+    },
+    {
+      "intent": "MULTI_INTENT",
+      "decision": "SPLIT",
+      "recommended_name": "REFUND_PAYMENT_ISSUE",
+      "reason": "The examples span distinct issue types (delivery/refund denial, Prime cancellation/refund, double charge, exchange cancellation) that require different support tools, policies, and retrieval strategies; keeping them merged would hinder accurate routing and automation.",
+      "closest_confusable_intents": [
+        "ORDER_DELIVERY_REFUND",
+        "PRIME_MEMBERSHIP_CANCELLATION",
+        "PAYMENT_DOUBLE_CHARGE",
+        "EXCHANGE_RETURN"
+      ],
+      "operational_distinction": "Separate intents enable distinct actions: delivery issues trigger carrier/trace investigations; Prime cancellations use membership management tools; double charges require bank authorization checks; exchange cancellations involve seller-specific return policies.",
+      "annotation_difficulty": "MEDIUM",
+      "confidence": 0.92
+    },
+    {
+      "intent": "OUT_OF_SCOPE",
+      "decision": "DROP",
+      "recommended_name": "",
+      "reason": "The provided examples are all in-scope Amazon support topics (refunds, delivery, complaints, etc.), showing no evidence of out-of-scope content. Keeping an OUT_OF_SCOPE intent adds no operational value and risks misclassification.",
+      "closest_confusable_intents": [
+        "GENERAL_INQUIRY",
+        "REFUND_STATUS"
+      ],
+      "operational_distinction": "No distinct workflow, tools, or policy; out-of-scope cases should be handled by a generic fallback or escalation rather than a dedicated intent.",
+      "annotation_difficulty": "LOW",
+      "confidence": 0.95
+    }
+  ]
+}

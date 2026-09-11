@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED",
+    "MARKED_DELIVERED_NOT_RECEIVED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": true,
+  "states": [
+    "TRACKING_ALREADY_CHECKED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is frustrated with conflicting tracking information and has already filled out forms to provide details."
+}

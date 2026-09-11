@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer explicitly states they did not receive any updates on order status, implying that the promised delivery date has elapsed and the order is delayed."
+}

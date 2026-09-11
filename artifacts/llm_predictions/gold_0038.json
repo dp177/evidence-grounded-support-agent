@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "PRIME_MEMBERSHIP_MANAGEMENT"
+  ],
+  "primary_intent": "PRIME_MEMBERSHIP_MANAGEMENT",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about canceling Prime membership early and seeking a partial refund, indicating a specific support need related to Prime membership management."
+}

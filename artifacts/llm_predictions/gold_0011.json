@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ACCOUNT_ACCESS_AND_SECURITY"
+  ],
+  "intents": [
+    "ACCOUNT_LOGIN_ISSUES"
+  ],
+  "primary_intent": "ACCOUNT_LOGIN_ISSUES",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.9,
+  "reasoning": "Customer asks about fax vs email for submitting documents to resolve account hold, indicating an account access/verification issue; they previously sent details via fax, satisfying DETAILS_ALREADY_PROVIDED."
+}

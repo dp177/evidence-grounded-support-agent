@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ACCOUNT_ACCESS_AND_SECURITY"
+  ],
+  "intents": [
+    "ACCOUNT_LOGIN_ISSUES"
+  ],
+  "primary_intent": "ACCOUNT_LOGIN_ISSUES",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports being unable to sign in due to account lockout, which matches ACCOUNT_LOGIN_ISSUES under ACCOUNT_ACCESS_AND_SECURITY. They previously indicated they already provided billing address details via email, satisfying DETAILS_ALREADY_PROVIDED."
+}

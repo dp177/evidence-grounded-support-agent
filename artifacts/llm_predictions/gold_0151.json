@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "MODIFY_ORDER_DETAILS"
+  ],
+  "primary_intent": "MODIFY_ORDER_DETAILS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is requesting to update shipping address before order shipment, which is a common support need in the DELIVERY_AND_FULFILLMENT area."
+}

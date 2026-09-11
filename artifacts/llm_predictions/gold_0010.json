@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ACCOUNT_ACCESS_AND_SECURITY"
+  ],
+  "intents": [
+    "ACCOUNT_LOGIN_ISSUES"
+  ],
+  "primary_intent": "ACCOUNT_LOGIN_ISSUES",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports account lockout despite multiple contact attempts, seeking access restoration; matches ACCOUNT_LOGIN_ISSUES under ACCOUNT_ACCESS_AND_SECURITY. They indicate they already sent faxes, emails, and called, satisfying DETAILS_ALREADY_PROVIDED state."
+}

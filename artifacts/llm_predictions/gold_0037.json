@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "UNRECOGNIZED_OR_DUPLICATE_CHARGE"
+  ],
+  "primary_intent": "UNRECOGNIZED_OR_DUPLICATE_CHARGE",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is complaining about duplicate charges and pending payments, which falls under the UNRECOGNIZED_OR_DUPLICATE_CHARGE intent in the REFUNDS_AND_BILLING area."
+}

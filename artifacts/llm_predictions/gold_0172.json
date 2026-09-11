@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "RETURN_PICKUP_ISSUE",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer has already initiated a return and is seeking assistance with the return pickup process, specifically asking about self-ship and dropping off at the pickup counter."
+}

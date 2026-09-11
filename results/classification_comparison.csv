@@ -1,0 +1,4 @@
+model,primary_accuracy,primary_macro_f1,primary_weighted_f1,multi_intent_micro_f1,multi_intent_exact_match,status_macro_f1,state_macro_f1
+Majority Baseline,0.0686,0.0092,0.0088,0.0606,0.045,0.3111,0.1985
+TF-IDF + Logistic Regression,0.7771,0.7674,0.7801,0.702,0.635,0.3111,0.1985
+OpenRouter LLM Classifier,0.6914,0.7192,0.7198,0.6429,0.61,0.4401,0.1573

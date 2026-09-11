@@ -1,0 +1,18 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT",
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST",
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "REFUND_STATUS_INQUIRY",
+  "is_multi_intent": true,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports order cancellation and subsequent refund denial after a month, indicating a potential issue with order management and refund processing."
+}

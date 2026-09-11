@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "MODIFY_ORDER_DETAILS"
+  ],
+  "primary_intent": "MODIFY_ORDER_DETAILS",
+  "is_multi_intent": false,
+  "states": [
+    "CARRIER_ALREADY_CONTACTED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer has already contacted customer services and is seeking to modify their order details, specifically the delivery address."
+}

@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "WRONG_ITEM_RECEIVED",
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "WRONG_ITEM_RECEIVED",
+  "is_multi_intent": true,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expresses frustration with receiving the wrong item again, and mentions that they've already provided details to Amazon. The customer's message implies two distinct issues: receiving the wrong item and the lack of progress on the return or replacement."
+}

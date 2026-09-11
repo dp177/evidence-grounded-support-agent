@@ -1,0 +1,38 @@
+{
+  "model": "MajorityBaseline",
+  "development_pool_size": 167929,
+  "golden_test_size": 200,
+  "majority_intent": "DELIVERY_DELAYED",
+  "majority_area": "DELIVERY_AND_FULFILLMENT",
+  "primary_intent_normal_cases": {
+    "total_normal_cases": 175,
+    "accuracy": 0.0686,
+    "macro_f1": 0.0092,
+    "weighted_f1": 0.0088
+  },
+  "multi_intent_metrics": {
+    "micro_f1": 0.0606,
+    "macro_f1": 0.0081,
+    "exact_set_match": 0.045
+  },
+  "status_metrics": {
+    "accuracy": 0.875,
+    "macro_f1": 0.3111
+  },
+  "dev_intent_counts": {
+    "DELIVERY_DELAYED": 4350,
+    "PRIME_MEMBERSHIP_MANAGEMENT": 3521,
+    "DAMAGED_OR_DEFECTIVE_ITEM": 2934,
+    "DIGITAL_CONTENT_ACCESS": 2731,
+    "CANCEL_ORDER_REQUEST": 1770,
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS": 1646,
+    "MARKED_DELIVERED_NOT_RECEIVED": 1349,
+    "WHERE_IS_MY_ORDER": 1101,
+    "WRONG_ITEM_RECEIVED": 895,
+    "REFUND_STATUS_INQUIRY": 836,
+    "ACCOUNT_LOGIN_ISSUES": 727,
+    "RETURN_PICKUP_ISSUE": 258,
+    "UNRECOGNIZED_OR_DUPLICATE_CHARGE": 205,
+    "MODIFY_ORDER_DETAILS": 12
+  }
+}

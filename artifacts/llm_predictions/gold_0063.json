@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "MARKED_DELIVERED_NOT_RECEIVED"
+  ],
+  "primary_intent": "MARKED_DELIVERED_NOT_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is reporting a discrepancy between tracking status and actual delivery, indicating a potential issue with the delivery process."
+}

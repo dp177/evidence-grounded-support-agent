@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS"
+  ],
+  "primary_intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is expressing frustration with the carrier's decision to not leave the package in the safe place and is now unable to change the delivery address for the rescheduled delivery, indicating a need for carrier feedback and instructions."
+}

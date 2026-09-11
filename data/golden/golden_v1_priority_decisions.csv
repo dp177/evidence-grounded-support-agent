@@ -1,0 +1,25 @@
+gold_id,human_status,human_areas,human_intents,human_primary_intent,human_states,human_should_escalate,human_escalation_reason,human_notes
+gold_0006,NORMAL,ACCOUNT_ACCESS_AND_SECURITY,ACCOUNT_LOGIN_ISSUES,ACCOUNT_LOGIN_ISSUES,INITIAL_INQUIRY,True,ACCOUNT_SECURITY_COMPROMISE,Keep current v1 label; compromised-account behavior is a taxonomy-gap signal for v2.
+gold_0007,NORMAL,ACCOUNT_ACCESS_AND_SECURITY,ACCOUNT_LOGIN_ISSUES,ACCOUNT_LOGIN_ISSUES,INITIAL_INQUIRY,True,ACCOUNT_SECURITY_COMPROMISE,Keep current v1 label; hacked account requires human escalation.
+gold_0008,NORMAL,ACCOUNT_ACCESS_AND_SECURITY,ACCOUNT_LOGIN_ISSUES,ACCOUNT_LOGIN_ISSUES,INITIAL_INQUIRY,True,ACCOUNT_SECURITY_COMPROMISE,Keep current v1 label; account takeover is not separately modeled in v1.
+gold_0015,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Pure closure/thanks turn; no current actionable business intent.
+gold_0016,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Pure closure/thanks turn; earlier issue is already being treated as resolved.
+gold_0018,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Angry sign-off without a sufficiently specific current actionable intent.
+gold_0019,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,General support dissatisfaction without a specific actionable intent.
+gold_0020,OUT_OF_SCOPE,,,,INITIAL_INQUIRY,False,,Seller Central is merchant support outside the chosen consumer-support scope.
+gold_0021,OUT_OF_SCOPE,,,,INITIAL_INQUIRY,False,,Product availability/restock is outside the frozen post-purchase support taxonomy.
+gold_0024,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Closure/thanks turn after prior parcel issue.
+gold_0025,NORMAL,DELIVERY_AND_FULFILLMENT,DELIVERY_DELAYED,DELIVERY_DELAYED,INITIAL_INQUIRY,False,,Conversation context makes the active issue an order that has not shipped since Nov 18 and is associated with a later delivery date.
+gold_0032,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Sarcastic service complaint without a specific actionable support intent.
+gold_0050,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Current turn is generic service venting; earlier return context is not enough to infer a fresh actionable intent.
+gold_0054,OUT_OF_SCOPE,,,,INITIAL_INQUIRY,False,,General Amazon app technical failure is not represented by the frozen v1 business intents.
+gold_0064,NORMAL,ACCOUNT_ACCESS_AND_SECURITY,ACCOUNT_LOGIN_ISSUES,ACCOUNT_LOGIN_ISSUES,INITIAL_INQUIRY,True,ACCOUNT_SECURITY_COMPROMISE,Hacked account plus repeated failed support attempts; escalate.
+gold_0098,OUT_OF_SCOPE,,,,INITIAL_INQUIRY,False,,RuPay/Amazon Pay OTP payment failure is outside the frozen v1 business-intent set.
+gold_0102,OUT_OF_SCOPE,,,,INITIAL_INQUIRY,False,,Amazon Pay wallet reload/OTP issue is outside the frozen v1 business-intent set.
+gold_0105,NORMAL,ACCOUNT_ACCESS_AND_SECURITY,ACCOUNT_LOGIN_ISSUES,ACCOUNT_LOGIN_ISSUES,INITIAL_INQUIRY,True,ACCOUNT_SECURITY_COMPROMISE,Compromised seller account; use the closest v1 intent and escalate.
+gold_0106,NORMAL,ACCOUNT_ACCESS_AND_SECURITY,ACCOUNT_LOGIN_ISSUES,ACCOUNT_LOGIN_ISSUES,INITIAL_INQUIRY,True,ACCOUNT_SECURITY_COMPROMISE,Unauthorized credential takeover; use the closest v1 intent and escalate.
+gold_0113,NORMAL,ORDER_MANAGEMENT,CANCEL_ORDER_REQUEST,CANCEL_ORDER_REQUEST,INITIAL_INQUIRY,False,,Customer explicitly adds a cancellation request.
+gold_0114,AMBIGUOUS,,,,INITIAL_INQUIRY,False,,Requests reversal/undo of a cancellation; v1 has no dedicated reverse-cancellation intent.
+gold_0141,OUT_OF_SCOPE,,,,INITIAL_INQUIRY,False,,Kindle Fire TV hardware/Wi-Fi issue is not represented by the frozen v1 business intents.
+gold_0167,NORMAL,REFUNDS_AND_BILLING,REFUND_STATUS_INQUIRY,REFUND_STATUS_INQUIRY,INITIAL_INQUIRY,False,,Explicit refund inquiry after a cancelled cash-on-delivery order.
+gold_0182,NORMAL,REFUNDS_AND_BILLING,UNRECOGNIZED_OR_DUPLICATE_CHARGE,UNRECOGNIZED_OR_DUPLICATE_CHARGE,INITIAL_INQUIRY,False,,Payment-method revision loop plus duplicate charge; billing issue is explicit.

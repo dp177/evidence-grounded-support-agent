@@ -1,0 +1,75 @@
+version: "1.0"
+brand: "AmazonHelp"
+status: "FROZEN"
+
+areas:
+
+  DELIVERY_AND_FULFILLMENT:
+    intents:
+      - WHERE_IS_MY_ORDER
+      - DELIVERY_DELAYED
+      - MARKED_DELIVERED_NOT_RECEIVED
+      - CARRIER_FEEDBACK_AND_INSTRUCTIONS
+
+  RETURNS_AND_REPLACEMENTS:
+    intents:
+      - DAMAGED_OR_DEFECTIVE_ITEM
+      - WRONG_ITEM_RECEIVED
+      - RETURN_PICKUP_ISSUE
+
+  REFUNDS_AND_BILLING:
+    intents:
+      - REFUND_STATUS_INQUIRY
+      - UNRECOGNIZED_OR_DUPLICATE_CHARGE
+
+  ORDER_MANAGEMENT:
+    intents:
+      - CANCEL_ORDER_REQUEST
+      - MODIFY_ORDER_DETAILS
+
+  DIGITAL_SERVICES_AND_PRIME:
+    intents:
+      - PRIME_MEMBERSHIP_MANAGEMENT
+      - DIGITAL_CONTENT_ACCESS
+
+  ACCOUNT_ACCESS_AND_SECURITY:
+    intents:
+      - ACCOUNT_LOGIN_ISSUES
+
+classification_status:
+  - NORMAL
+  - AMBIGUOUS
+  - OUT_OF_SCOPE
+
+multi_intent:
+  type: "boolean"
+
+conversation_states:
+  - INITIAL_INQUIRY
+  - TRACKING_ALREADY_CHECKED
+  - CARRIER_ALREADY_CONTACTED
+  - DETAILS_ALREADY_PROVIDED
+  - WAITING_WINDOW_EXCEEDED
+
+outcomes:
+  - RESOLVED_CLOSURE
+  - ESCALATED_HUMAN_TIER2
+  - DEFLECTED_SELF_SERVICE
+  - CONCESSION_ISSUED
+  - ABANDONED_UNRESPONSIVE
+
+definitions:
+  WHERE_IS_MY_ORDER: "Customer asks where an order/package is or requests its current tracking/delivery status without a clearly established missed promised date."
+  DELIVERY_DELAYED: "Customer reports that the expected/promised delivery time has passed or the shipment is explicitly delayed."
+  MARKED_DELIVERED_NOT_RECEIVED: "Tracking indicates delivery, but the customer states that the physical package was not received."
+  CARRIER_FEEDBACK_AND_INSTRUCTIONS: "Customer provides feedback, complaints, or instructions regarding courier driver conduct, property placement, gate access, or customs/KYC clearance."
+  DAMAGED_OR_DEFECTIVE_ITEM: "Customer received the correct ordered item, but it is physically broken, crushed, leaking, defective, or non-functional out of the box."
+  WRONG_ITEM_RECEIVED: "Customer received a shipment containing an incorrect item, wrong size, or different product variant than what was ordered."
+  RETURN_PICKUP_ISSUE: "Customer has an authorized return or replacement, but the carrier missed or failed the scheduled pickup, or the return drop-off code/label failed."
+  REFUND_STATUS_INQUIRY: "Customer inquires about the status, timeline, or bank credit of a refund for an already returned item or cancelled order."
+  UNRECOGNIZED_OR_DUPLICATE_CHARGE: "Customer reports duplicate charges, unrecognized deductions, or unexpected billing debits on their bank or credit card statement."
+  CANCEL_ORDER_REQUEST: "Customer requests to cancel an active order prior to dispatch/shipment."
+  MODIFY_ORDER_DETAILS: "Customer requests modifications to order attributes (such as shipping address, payment method, or delivery slot) while keeping the order active."
+  PRIME_MEMBERSHIP_MANAGEMENT: "Customer inquires about Prime membership renewal, trial conversion fees, plan cancellation, or membership billing adjustments."
+  DIGITAL_CONTENT_ACCESS: "Customer reports technical barriers or playback failures accessing digital services such as Prime Video, Kindle ebooks, Amazon Music, or digital apps."
+  ACCOUNT_LOGIN_ISSUES: "Customer is unable to log in due to OTP verification code delivery failures, expired reset links, forgotten credentials, or account access lockouts."

@@ -1,0 +1,12 @@
+{
+  "classification_status": "AMBIGUOUS",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.85,
+  "reasoning": "Customer asks to switch to DM without stating a specific support issue, making the intent ambiguous."
+}

@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is frustrated about delayed delivery and lack of resolution from previous customer service interaction, which indicates a delivery issue and a potential carrier issue."
+}

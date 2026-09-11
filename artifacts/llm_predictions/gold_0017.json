@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS"
+  ],
+  "primary_intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the reason for the carrier delay, which is a common issue in delivery and fulfillment. The customer has already checked the carrier's website and found the information unhelpful, indicating a need for further assistance."
+}

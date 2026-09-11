@@ -1,0 +1,24 @@
+# Default Configuration for Evidence-Grounded Support Agent
+
+project:
+  name: "evidence-grounded-support-agent"
+  target_brand: "AmazonHelp"
+  dataset_source: "Customer Support on Twitter"
+
+data:
+  parquet_path: "data/processed/amazon_support_cases.parquet"
+  csv_path: "data/processed/amazon_support_cases.csv"
+  sample_path: "data/processed/sample_cases.jsonl"
+  default_language: "en"
+  filter_quality_ok: true
+
+llm:
+  provider: "google"
+  model: "gemini-3.8-flash-high"
+  temperature: 0.1
+  max_output_tokens: 1024
+
+agent_policy:
+  goal: "maximum safe automation"
+  escalation_threshold: 0.75
+  grounding_verification_required: true

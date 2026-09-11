@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "WRONG_ITEM_RECEIVED",
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "WRONG_ITEM_RECEIVED",
+  "is_multi_intent": true,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is reporting a wrong item received and return pickup issue, with the primary intent being the wrong item received."
+}

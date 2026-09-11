@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "MARKED_DELIVERED_NOT_RECEIVED"
+  ],
+  "primary_intent": "MARKED_DELIVERED_NOT_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expresses frustration with delivery service, specifically alleging that the parcel was delivered to the wrong place and that the courier lied about it being received by the resident. The customer also mentions that they tried to speak to a superior and were promised a call back within 2 hours, which did not happen. This indicates a clear intent to report a delivery issue and seek resolution."
+}

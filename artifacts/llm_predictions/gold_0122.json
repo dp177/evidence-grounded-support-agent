@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "DAMAGED_OR_DEFECTIVE_ITEM"
+  ],
+  "primary_intent": "DAMAGED_OR_DEFECTIVE_ITEM",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports receiving a damaged product, and has already returned it through Amazon's return process."
+}

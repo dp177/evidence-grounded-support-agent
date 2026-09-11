@@ -1,0 +1,6 @@
+metric,value
+total_cases,200
+normal_review_priority,176
+human_review_priority,10
+taxonomy_review_priority,14
+assistant_outcome_filled,21

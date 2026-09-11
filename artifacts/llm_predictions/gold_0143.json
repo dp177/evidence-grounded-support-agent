@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "MARKED_DELIVERED_NOT_RECEIVED"
+  ],
+  "primary_intent": "MARKED_DELIVERED_NOT_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is expressing a delivery issue, specifically that the app is indicating the parcel was delivered, but they have not received it. They also mention being at home during the supposed delivery time, which suggests they are waiting for the parcel to arrive. This matches the WAITING_WINDOW_EXCEEDED state."
+}

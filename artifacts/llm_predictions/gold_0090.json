@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "MODIFY_ORDER_DETAILS"
+  ],
+  "primary_intent": "MODIFY_ORDER_DETAILS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is unable to change the order address, indicating a need for order management support."
+}

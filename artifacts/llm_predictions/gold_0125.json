@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "RETURN_PICKUP_ISSUE",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports a defective product and a failed return pickup attempt, which aligns with the RETURN_PICKUP_ISSUE intent in the RETURNS_AND_REPLACEMENTS area."
+}

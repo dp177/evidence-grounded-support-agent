@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "MARKED_DELIVERED_NOT_RECEIVED"
+  ],
+  "primary_intent": "MARKED_DELIVERED_NOT_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is reporting that the item is being returned undelivered by the courier, which suggests that the package was marked as delivered but not received, and the waiting window for delivery has exceeded."
+}

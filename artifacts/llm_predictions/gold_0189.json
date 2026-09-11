@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their Prime order, which was expected to arrive yesterday. The tracking details indicate that the order was 'out for delivery' yesterday morning, but did not arrive. This suggests a delivery delay."
+}

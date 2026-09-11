@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "RETURN_PICKUP_ISSUE",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports a return pickup issue with a waiting window exceeded, indicating a problem with the return process."
+}
