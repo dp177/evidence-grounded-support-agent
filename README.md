@@ -4,7 +4,7 @@
 <!--                         HERO SECTION                              -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-<img src="assets/hero_banner.jpg" alt="Evidence-Grounded Support Agent — Safety-First AI for Amazon Customer Support" width="100%"/>
+<img src="assets/hero_banner.png" alt="AI Customer Support Agent — System Architecture" width="100%"/>
 
 <br/><br/>
 
@@ -25,7 +25,7 @@
 
 <br/>
 
-<img src="assets/metrics_dashboard.jpg" alt="Performance Dashboard — 85% E2E Success · 0.0% Unsafe Auto-Handle · 1.29s Latency · $0.42 per 1K Cases" width="100%"/>
+<img src="assets/metrics_dashboard.png" alt="Performance Dashboard — 85% E2E Success · 0.0% Unsafe Auto-Handle · 1.29s Latency · $0.42 per 1K Cases" width="100%"/>
 
 <br/><br/>
 
