@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST"
+  ],
+  "primary_intent": "CANCEL_ORDER_REQUEST",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is seeking help with a pre-ordered item (FIFA 18 for PS4) and has been directed to EA's help, but EA is now saying it's Amazon's problem, indicating a need to cancel or resolve the order."
+}

@@ -1,0 +1,12 @@
+{
+  "classification_status": "AMBIGUOUS",
+  "areas": [],
+  "intents": [],
+  "primary_intent": null,
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is expressing frustration and reiterating that they have already provided details, but the tone is too vague to determine the specific support need."
+}

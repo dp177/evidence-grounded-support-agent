@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "REFUND_STATUS_INQUIRY",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer has already spoken to their bankers and confirmed Amazon still has the payment, now requesting a refund for cancelled order #114-8691187-6786642."
+}

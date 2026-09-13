@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "REFUND_STATUS_INQUIRY",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their refund, which was requested on the 27th. They are unable to provide a screenshot of their bank account, but mention that the seller took their money on the 5th of September."
+}

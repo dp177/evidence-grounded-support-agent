@@ -1,0 +1,25 @@
+# Vector Store and Retrieval Configuration
+# Do NOT put API keys in this file.
+# Cloud configuration must come only from environment variables.
+
+vector_store:
+  provider: qdrant
+  mode: local # 'local' or 'cloud'
+
+  local:
+    path: artifacts/retrieval/qdrant
+
+  cloud:
+    url: null # e.g. https://xyz.qdrant.io:6333 or set via QDRANT_URL
+    api_key_env: QDRANT_API_KEY
+
+collection:
+  name: amazon_support_cases_v1
+  distance: cosine # cosine, dot, or euclidean
+
+embedding:
+  model: all-MiniLM-L6-v2
+  dimension: 384
+  normalize: true
+  batch_size: 256
+  cache_dir: artifacts/retrieval/embeddings

@@ -1,0 +1,9 @@
+{
+  "full_corpus_count": 167764,
+  "candidate_count_after_golden_exclusion": 167764,
+  "selected_count": 10000,
+  "random_seed": 42,
+  "conversation_cap": 3,
+  "unique_conversations": 9401,
+  "golden_conversations_excluded": 200
+}

@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "WRONG_ITEM_RECEIVED"
+  ],
+  "primary_intent": "WRONG_ITEM_RECEIVED",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer explicitly states their order was delivered to the wrong address, which matches the WRONG_ITEM_RECEIVED intent."
+}

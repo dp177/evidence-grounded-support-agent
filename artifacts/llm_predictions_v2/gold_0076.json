@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "CARRIER_FEEDBACK_AND_INSTRUCTIONS"
+  ],
+  "primary_intent": "CARRIER_FEEDBACK_AND_INSTRUCTIONS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is expressing dissatisfaction with the delivery service, specifically the driver's decision to leave the parcel on the doorstep, making it vulnerable to the rain. The customer is also questioning the accuracy of the delivery status update, as they received a message saying the parcel was handed to the resident, but it was not. This is a clear case of carrier feedback and instructions, as the customer is providing specific details about the issue and requesting a response from the driver."
+}

@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "DELIVERY_DELAYED"
+  ],
+  "primary_intent": "DELIVERY_DELAYED",
+  "is_multi_intent": false,
+  "states": [
+    "TRACKING_ALREADY_CHECKED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about a delayed order that was initially marked as 'out for delivery' for over 48 hours, but has now been remarked as such, indicating a potential issue with the delivery process."
+}

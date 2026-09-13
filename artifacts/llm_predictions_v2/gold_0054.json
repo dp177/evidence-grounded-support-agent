@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "DIGITAL_CONTENT_ACCESS"
+  ],
+  "primary_intent": "DIGITAL_CONTENT_ACCESS",
+  "is_multi_intent": false,
+  "states": [
+    "TRACKING_ALREADY_CHECKED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is reporting an issue with the app, which is a digital service. They have already tried clearing cache and cookies, which is a common troubleshooting step."
+}

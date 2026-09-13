@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "MODIFY_ORDER_DETAILS"
+  ],
+  "primary_intent": "MODIFY_ORDER_DETAILS",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer has already spoken to customer services and is seeking to modify the delivery address for a replacement item."
+}

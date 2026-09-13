@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "DAMAGED_OR_DEFECTIVE_ITEM",
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "DAMAGED_OR_DEFECTIVE_ITEM",
+  "is_multi_intent": true,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer reports a defective product, requests a replacement, and mentions issues with the return pickup and communication with the courier service."
+}

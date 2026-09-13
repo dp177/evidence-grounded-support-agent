@@ -1,0 +1,69 @@
+{
+  "manifest_version": "1.0",
+  "system_version": "1.0",
+  "frozen_at": "2026-09-13T17:51:00Z",
+  "description": "Immutable system manifest for the Hiver Evidence-Grounded Amazon Support Agent v1.0 submission. All file hashes are SHA-256. Any hash mismatch indicates unauthorized modification.",
+
+  "model_configuration": {
+    "openrouter_model": "meta-llama/llama-3.1-8b-instruct",
+    "openrouter_fallback": "nvidia/nemotron-3-super-120b-a12b:free",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "embedding_dimension": 384,
+    "temperature": 0.0,
+    "max_tokens": 2000
+  },
+
+  "qdrant_configuration": {
+    "provider": "qdrant",
+    "mode": "local",
+    "local_path": "artifacts/retrieval/qdrant",
+    "collection_name": "amazon_support_cases_v1",
+    "distance_metric": "cosine",
+    "embedding_normalize": true,
+    "embedding_batch_size": 256
+  },
+
+  "versioning": {
+    "taxonomy_version": "1.0",
+    "classifier_version": "2.0",
+    "grounding_version": "1.1",
+    "escalation_policy_version": "1.0",
+    "system_version": "1.0"
+  },
+
+  "sampling": {
+    "golden_case_count": 200,
+    "development_demo_count": 55,
+    "sample_seed": "deterministic_per_conversation_id"
+  },
+
+  "file_hashes": {
+    "configs/taxonomy_v1.yaml": "D1C96B6403D391BD911594CDD4E347FA2AAE15635AD353377A7BDFF933FBBD32",
+    "configs/classifier_v2.yaml": "98052CCFF2F96EC70E34180F36E0EEED6579C73F034C8BD8190647FEA5071AF0",
+    "prompts/classification_v2.md": "8985FF8522D980AF3697449B8B6FEDA61364A4F829A1F7DB9A90C3927346E134",
+    "data/development/classification_demos.jsonl": "BA5CC4F59811A739554450E8D2A28EF4B602275B10C575A0D4EA037D23198A5A",
+    "data/golden/golden_set.jsonl": "663ABFA46CC7BBF0309CF7432F0E669910521D0338BCDC95D24A832BB8D906A4",
+    "data/processed/retrieval_documents.parquet": "259179EB9D7E770984DC724043450EB43D65C1152ECD58D3BFF1F40B38A3191C",
+    "data/processed/qdrant_development_sample.parquet": "D4A6E9E44DC43F74F5A815139FF3528DF8DB0C36E1BDAD45FB8DE38752862E15",
+    "configs/retrieval.yaml": "5FE26EC24F4D64AAC8A6A5B85CDAAE2199566A32C4367711C1D0B4A4B3156BCB",
+    "configs/reranking.yaml": "E960D7A2DC7C04CA392C1AD4CADA67A5F7473DBA48A58750E92CDBFA29627FF0",
+    "prompts/response_generation_v1.md": "972B9CCB87D701FE6F1C4D7BDD725347475281DD7934E202B31F506386A48376",
+    "prompts/grounding_v1.md": "1FAC4A8BCFFD4A3D3DEC5D949296069D4AEC862FC0A6FBCC9ADBD5CE1F7957AD",
+    "configs/escalation.yaml": "304BB781FFA64D8E47F742F84F62578751583E96D9AE7059223E91DB88B6B7F5"
+  },
+
+  "golden_v1_integrity": {
+    "case_count": 200,
+    "sha256": "663ABFA46CC7BBF0309CF7432F0E669910521D0338BCDC95D24A832BB8D906A4",
+    "leakage": 0,
+    "evaluation_only": true
+  },
+
+  "final_outputs": {
+    "e2e_predictions": "artifacts/final_v1/e2e_predictions.jsonl",
+    "system_metrics": "artifacts/final_v1/final_system_metrics.json",
+    "system_report": "artifacts/final_v1/final_system_results.md",
+    "judge_calibration": "artifacts/final_v1/llm_judge_calibration.md",
+    "failure_analysis": "artifacts/final_v1/e2e_failure_analysis.md"
+  }
+}

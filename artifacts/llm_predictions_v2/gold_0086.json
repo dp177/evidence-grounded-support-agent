@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST",
+    "MODIFY_ORDER_DETAILS"
+  ],
+  "primary_intent": "CANCEL_ORDER_REQUEST",
+  "is_multi_intent": true,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expresses frustration with previous agent's advice and inability to change delivery address, indicating a need to cancel or modify the order."
+}

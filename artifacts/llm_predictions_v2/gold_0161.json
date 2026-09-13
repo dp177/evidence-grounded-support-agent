@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "PRIME_MEMBERSHIP_MANAGEMENT"
+  ],
+  "primary_intent": "PRIME_MEMBERSHIP_MANAGEMENT",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about cancelling their Prime membership and requesting a refund due to unauthorized renewal."
+}

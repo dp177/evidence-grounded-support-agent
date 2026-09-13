@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "evaluation_date": "2026-09-13",
+    "benchmark_dataset": "Golden Evaluation Set v1.0",
+    "case_count": 200,
+    "pipeline_version": "v1.0-frozen"
+  },
+  "classification": {
+    "primary_accuracy": 0.7714,
+    "primary_macro_f1": 0.7713,
+    "primary_weighted_f1": 0.7801,
+    "multi_intent_micro_f1": 0.7147,
+    "multi_intent_exact_match": 0.67,
+    "status_macro_f1": 0.4481,
+    "state_macro_f1": 0.1425
+  },
+  "retrieval": {
+    "recall_at_1": 0.315,
+    "recall_at_3": 0.425,
+    "recall_at_5": 0.505,
+    "mrr": 0.3816,
+    "top1_grades": {
+      "grade_0": 64,
+      "grade_1": 73,
+      "grade_2": 14,
+      "grade_3": 49
+    },
+    "grade_2_or_3_pct": 31.5
+  },
+  "response_quality_judge": {
+    "mean_relevance": 4.515,
+    "mean_correctness": 4.42,
+    "mean_groundedness": 4.365,
+    "mean_actionability": 4.465,
+    "mean_conciseness": 4.43,
+    "mean_tone": 4.96,
+    "mean_overall": 4.52585,
+    "pct_high_quality_ge4": 0.92,
+    "total_unsupported_claims_flagged": 92
+  },
+  "judge_calibration": {
+    "exact_agreement_pct": 50.0,
+    "mae": 0.5113333333333333,
+    "correlation": 0.05900114652927194
+  },
+  "safety_and_escalation": {
+    "total_cases": 200,
+    "auto_handle_count": 177,
+    "auto_handle_rate_pct": 88.5,
+    "resolution_count": 43,
+    "resolution_rate_pct": 21.5,
+    "clarification_count": 134,
+    "clarification_rate_pct": 67.0,
+    "human_escalation_count": 23,
+    "human_escalation_rate_pct": 11.5,
+    "unsafe_auto_handle_count": 0,
+    "unsafe_auto_handle_rate_pct": 0.0,
+    "grounding_failure_containment_pct": 100.0
+  },
+  "end_to_end": {
+    "raw_auto_handle_rate_pct": 88.5,
+    "strict_success_rate_pct": 85.0,
+    "strict_success_count": 170
+  },
+  "leakage_audit": {
+    "golden_conversation_count": 200,
+    "qdrant_corpus_overlap": 0,
+    "prompt_demo_overlap": 0,
+    "retrieval_evidence_leakage": 0,
+    "leakage_free": true
+  },
+  "cost_and_latency": {
+    "classifier_latency_ms": 120,
+    "retrieval_latency_ms": 22,
+    "reranker_latency_ms": 14,
+    "generation_latency_ms": 850,
+    "grounding_latency_ms": 280,
+    "total_latency_ms": 1286,
+    "avg_llm_calls_per_request": 1.14,
+    "estimated_cost_per_1k_cases_usd": 0.42
+  }
+}

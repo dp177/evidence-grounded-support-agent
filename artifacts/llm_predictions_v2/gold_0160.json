@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "PRIME_MEMBERSHIP_MANAGEMENT"
+  ],
+  "primary_intent": "PRIME_MEMBERSHIP_MANAGEMENT",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expresses dissatisfaction with their Prime trial experience, indicating a potential issue with renewing the membership after the trial ends."
+}

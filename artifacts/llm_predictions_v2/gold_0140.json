@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "DIGITAL_CONTENT_ACCESS"
+  ],
+  "primary_intent": "DIGITAL_CONTENT_ACCESS",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer has already tried different locations and networks, and the issue persists. The customer is also aware of the previous suggestion to uninstall and reinstall the app."
+}

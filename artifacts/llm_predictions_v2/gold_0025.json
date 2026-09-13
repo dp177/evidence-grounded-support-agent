@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "WHERE_IS_MY_ORDER"
+  ],
+  "primary_intent": "WHERE_IS_MY_ORDER",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their order, specifically if there is a problem with it, and has already checked with live chat and was assured it would ship last night. The customer is also referencing a specific delivery date (4th of December)."
+}

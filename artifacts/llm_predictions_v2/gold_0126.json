@@ -1,0 +1,17 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "DAMAGED_OR_DEFECTIVE_ITEM",
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "DAMAGED_OR_DEFECTIVE_ITEM",
+  "is_multi_intent": true,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer expresses dissatisfaction with customer service, 3rd party sellers, damaged goods, and lack of satisfactory resolution."
+}

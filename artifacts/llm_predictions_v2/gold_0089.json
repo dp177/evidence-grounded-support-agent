@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT"
+  ],
+  "intents": [
+    "MODIFY_ORDER_DETAILS"
+  ],
+  "primary_intent": "MODIFY_ORDER_DETAILS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is requesting help with an unrequested delivery address change, which falls under the ORDER_MANAGEMENT area and the MODIFY_ORDER_DETAILS intent."
+}

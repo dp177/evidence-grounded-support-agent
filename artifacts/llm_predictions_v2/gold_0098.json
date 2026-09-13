@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "UNRECOGNIZED_OR_DUPLICATE_CHARGE"
+  ],
+  "primary_intent": "UNRECOGNIZED_OR_DUPLICATE_CHARGE",
+  "is_multi_intent": false,
+  "states": [
+    "WAITING_WINDOW_EXCEEDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is unable to use their Rupay card to make payments or add balance on Amazon, and is not getting redirected to the OTP page, which is a known issue that has been ongoing for a month."
+}

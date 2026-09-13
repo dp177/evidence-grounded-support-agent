@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DELIVERY_AND_FULFILLMENT"
+  ],
+  "intents": [
+    "WHERE_IS_MY_ORDER"
+  ],
+  "primary_intent": "WHERE_IS_MY_ORDER",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about the status of their order, specifically the whereabouts of the remaining shipments."
+}

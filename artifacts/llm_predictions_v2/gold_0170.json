@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "REFUND_STATUS_INQUIRY",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer has already returned the order and is inquiring about the status of the refund, which indicates they have already provided the necessary details."
+}

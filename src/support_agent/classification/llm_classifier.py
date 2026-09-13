@@ -87,6 +87,39 @@ STRICT CLASSIFICATION RULES:
 """
 
 
+def validate_demo_isolation(
+    demos_path: Path | str = "data/development/classification_demos.jsonl",
+    golden_manifest_path: Path | str = "data/splits/split_manifest.json",
+) -> bool:
+    """Validate that zero demonstration conversations appear in Golden V1."""
+    manifest_file = Path(golden_manifest_path)
+    golden_ids = set()
+    if manifest_file.exists():
+        with open(manifest_file, "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+            golden_ids.update(str(c) for c in manifest.get("golden_conversation_ids", []))
+
+    demo_file = Path(demos_path)
+    if not demo_file.exists():
+        raise FileNotFoundError(f"Demonstration file not found: {demo_file}")
+
+    demo_conv_ids = set()
+    total_demos = 0
+    with open(demo_file, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                rec = json.loads(line)
+                demo_conv_ids.add(str(rec.get("conversation_id")))
+                total_demos += 1
+
+    leakage = demo_conv_ids.intersection(golden_ids)
+    if leakage:
+        raise ValueError(
+            f"CRITICAL LEAKAGE: Found {len(leakage)} demonstration conversation IDs in Golden V1: {leakage}"
+        )
+    return True
+
+
 class LLMIntentClassifier:
     """OpenRouter-based LLM classifier constrained to Taxonomy v1."""
 
@@ -95,10 +128,19 @@ class LLMIntentClassifier:
         client: Optional[BaseLLMClient] = None,
         cache_dir: Optional[Path | str] = None,
         taxonomy_path: Optional[Path | str] = None,
+        prompt_path: Optional[Path | str] = None,
+        system_prompt: Optional[str] = None,
     ):
         self.client = client or get_llm_client()
         self.cache_dir = Path(cache_dir) if cache_dir else Path("artifacts/llm_predictions")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+        if system_prompt:
+            self.system_prompt = system_prompt
+        elif prompt_path and Path(prompt_path).exists():
+            self.system_prompt = Path(prompt_path).read_text(encoding="utf-8")
+        else:
+            self.system_prompt = CLASSIFICATION_SYSTEM_PROMPT
 
         # Load taxonomy for strict validation
         tax_file = Path(taxonomy_path) if taxonomy_path else Path("configs/taxonomy_v1.yaml")
@@ -216,7 +258,7 @@ class LLMIntentClassifier:
             try:
                 resp = self.client.generate(
                     prompt=prompt,
-                    system_prompt=CLASSIFICATION_SYSTEM_PROMPT,
+                    system_prompt=self.system_prompt,
                     temperature=0.0,
                     max_tokens=2000,
                 )

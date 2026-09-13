@@ -1,0 +1,28 @@
+{
+  "provider": "qdrant",
+  "mode": "local",
+  "collection_name": "amazon_support_cases_v1",
+  "point_count": 10000,
+  "vector_dimension": 384,
+  "distance_metric": "cosine",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "source_dataset": "data/processed/qdrant_development_sample.parquet",
+  "corpus_hash": "b58e14820b5f4864cd8be8ad48b514678e2de5386e6ff9bb94baaecfe0acc710",
+  "golden_exclusion_count": 200,
+  "indexed_conversations": 9401,
+  "build_timestamp": "2026-09-12 17:43:50 UTC",
+  "sampling_strategy": "hierarchical_stratified",
+  "target_size": 10000,
+  "random_seed": 42,
+  "conversation_cap": 3,
+  "unique_conversations": 9401,
+  "sample_metadata": {
+    "full_corpus_count": 167764,
+    "candidate_count_after_golden_exclusion": 167764,
+    "selected_count": 10000,
+    "random_seed": 42,
+    "conversation_cap": 3,
+    "unique_conversations": 9401,
+    "golden_conversations_excluded": 200
+  }
+}

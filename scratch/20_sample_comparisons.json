@@ -1,0 +1,329 @@
+[
+  {
+    "document_id": "retrieval_doc_0000083",
+    "case_id": "amazon_case_0001782",
+    "conversation_id": 2561,
+    "turn_index": 2,
+    "selected_context_tweet_ids": [
+      2560
+    ],
+    "raw_preceding_context": "CUSTOMER: Erm @AmazonHelp I bought this item for £5.99... why am I only getting £1.67 back?! https://t.co/lb33bFOcW0",
+    "clean_customer_message": "Erm I bought this item for £5.99... why am I only getting £1.67 back?! <URL>",
+    "clean_relevant_context": "BRAND: We'd like to take a closer look into this refund for you. Please reach us at: <URL>",
+    "clean_brand_response": "I'm sorry you didn't receive the refund amount you expected. Please check here for more info: <URL>",
+    "embedding_text": "CUSTOMER:\nErm I bought this item for £5.99... why am I only getting £1.67 back?! <URL>\n\nRELEVANT CONTEXT:\nBRAND: We'd like to take a closer look into this refund for you. Please reach us at: <URL>\n\nAMAZON RESPONSE:\nI'm sorry you didn't receive the refund amount you expected. Please check here for more info: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000087",
+    "case_id": "amazon_case_0001806",
+    "conversation_id": 2577,
+    "turn_index": 4,
+    "selected_context_tweet_ids": [
+      2577,
+      2575,
+      null
+    ],
+    "raw_preceding_context": "CUSTOMER: @115830 amazonuk took money without any https://t.co/w25zXi7DYp they are not giving it back nor giving clear statement of my refund proces\nBRAND: @116321 I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on? ^DG\nCUSTOMER: @AmazonHelp yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it",
+    "clean_customer_message": "and redund issued on 13th <URL> no sing of my money and amazonuk just saying its in the billing department.no signof devlp",
+    "clean_relevant_context": "CUSTOMER: amazonuk took money without any <URL> they are not giving it back nor giving clear statement of my refund proces\nBRAND: I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on?\nCUSTOMER: yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it",
+    "clean_brand_response": "When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund?",
+    "embedding_text": "CUSTOMER:\nand redund issued on 13th <URL> no sing of my money and amazonuk just saying its in the billing department.no signof devlp\n\nRELEVANT CONTEXT:\nCUSTOMER: amazonuk took money without any <URL> they are not giving it back nor giving clear statement of my refund proces\nBRAND: I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on?\nCUSTOMER: yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\n\nAMAZON RESPONSE:\nWhen you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund?"
+  },
+  {
+    "document_id": "retrieval_doc_0000088",
+    "case_id": "amazon_case_0001807",
+    "conversation_id": 2577,
+    "turn_index": 6,
+    "selected_context_tweet_ids": [
+      2577,
+      2575,
+      null,
+      2574,
+      2573
+    ],
+    "raw_preceding_context": "CUSTOMER: @115830 amazonuk took money without any https://t.co/w25zXi7DYp they are not giving it back nor giving clear statement of my refund proces\nBRAND: @116321 I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on? ^DG\nCUSTOMER: @AmazonHelp yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\nCUSTOMER: @AmazonHelp and redund issued on 13th https://t.co/1uydlorGCp no sing of my money and amazonuk just saying its in the billing department.no signof devlp\nBRAND: @116321 When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund? ^LR",
+    "clean_customer_message": "i mailed amazonuk so many time. but i havent got any progress.customer care just saying thats in the billing section.no i havent got refund",
+    "clean_relevant_context": "CUSTOMER: amazonuk took money without any <URL> they are not giving it back nor giving clear statement of my refund proces\nBRAND: I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on?\nCUSTOMER: yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\nCUSTOMER: and redund issued on 13th <URL> no sing of my money and amazonuk just saying its in the billing department.no signof devlp\nBRAND: When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund?",
+    "clean_brand_response": "Have you had a chance to speak with your bank regarding the refund?",
+    "embedding_text": "CUSTOMER:\ni mailed amazonuk so many time. but i havent got any progress.customer care just saying thats in the billing section.no i havent got refund\n\nRELEVANT CONTEXT:\nCUSTOMER: amazonuk took money without any <URL> they are not giving it back nor giving clear statement of my refund proces\nBRAND: I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on?\nCUSTOMER: yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\nCUSTOMER: and redund issued on 13th <URL> no sing of my money and amazonuk just saying its in the billing department.no signof devlp\nBRAND: When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund?\n\nAMAZON RESPONSE:\nHave you had a chance to speak with your bank regarding the refund?"
+  },
+  {
+    "document_id": "retrieval_doc_0000089",
+    "case_id": "amazon_case_0001808",
+    "conversation_id": 2577,
+    "turn_index": 8,
+    "selected_context_tweet_ids": [
+      2577,
+      null,
+      2574,
+      2573,
+      2572,
+      2571
+    ],
+    "raw_preceding_context": "CUSTOMER: @115830 amazonuk took money without any https://t.co/w25zXi7DYp they are not giving it back nor giving clear statement of my refund proces\nBRAND: @116321 I'm sorry for the frustration! Without giving personal/account details, could you tell us a bit more about what's going on? ^DG\nCUSTOMER: @AmazonHelp yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\nCUSTOMER: @AmazonHelp and redund issued on 13th https://t.co/1uydlorGCp no sing of my money and amazonuk just saying its in the billing department.no signof devlp\nBRAND: @116321 When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund? ^LR\nCUSTOMER: @AmazonHelp i mailed amazonuk so many time. but i havent got any progress.customer care just saying thats in the billing section.no i havent got refund\nBRAND: @116321 Have you had a chance to speak with your bank regarding the refund? ^EA",
+    "clean_customer_message": "yes i did,but amazonuk is not doing the refund process.if they do it .i will get the money",
+    "clean_relevant_context": "CUSTOMER: amazonuk took money without any <URL> they are not giving it back nor giving clear statement of my refund proces\nCUSTOMER: yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\nCUSTOMER: and redund issued on 13th <URL> no sing of my money and amazonuk just saying its in the billing department.no signof devlp\nBRAND: When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund?\nCUSTOMER: i mailed amazonuk so many time. but i havent got any progress.customer care just saying thats in the billing section.no i havent got refund\nBRAND: Have you had a chance to speak with your bank regarding the refund?",
+    "clean_brand_response": "I would like someone from our team to take a look into this for you, Sanu. Please reach out here: <URL>",
+    "embedding_text": "CUSTOMER:\nyes i did,but amazonuk is not doing the refund process.if they do it .i will get the money\n\nRELEVANT CONTEXT:\nCUSTOMER: amazonuk took money without any <URL> they are not giving it back nor giving clear statement of my refund proces\nCUSTOMER: yeh sure.i was in uk.came back to india,used my indian bank account to purchase.amazonuk took money for prime.i cancelled it\nCUSTOMER: and redund issued on 13th <URL> no sing of my money and amazonuk just saying its in the billing department.no signof devlp\nBRAND: When you last contacted us what information did we provide? Have you spoken with your bank to see if they have the refund?\nCUSTOMER: i mailed amazonuk so many time. but i havent got any progress.customer care just saying thats in the billing section.no i havent got refund\nBRAND: Have you had a chance to speak with your bank regarding the refund?\n\nAMAZON RESPONSE:\nI would like someone from our team to take a look into this for you, Sanu. Please reach out here: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000091",
+    "case_id": "amazon_case_0001829",
+    "conversation_id": 2580,
+    "turn_index": 4,
+    "selected_context_tweet_ids": [
+      2580,
+      2578,
+      null
+    ],
+    "raw_preceding_context": "CUSTOMER: the @amazonhelp queue is clueless on Amazon Household\nBRAND: @116322 I'm sorry for the frustration! Without giving account/personal details, can you please provide us with more info? ^AC\nCUSTOMER: @AmazonHelp legacy \"shared prime benefits\" account trying to join an amazon household of the prim. account holder to share echo and set up voice profile",
+    "clean_customer_message": "I've been in the prime queue, kindle queue, the echo queue, and now on hold again.",
+    "clean_relevant_context": "CUSTOMER: the queue is clueless on Amazon Household\nBRAND: I'm sorry for the frustration! Without giving account/personal details, can you please provide us with more info?\nCUSTOMER: legacy \"shared prime benefits\" account trying to join an amazon household of the prim. account holder to share echo and set up voice profile",
+    "clean_brand_response": "We'd like to look deeper into this issue. Please provide us with more information here: <URL>",
+    "embedding_text": "CUSTOMER:\nI've been in the prime queue, kindle queue, the echo queue, and now on hold again.\n\nRELEVANT CONTEXT:\nCUSTOMER: the queue is clueless on Amazon Household\nBRAND: I'm sorry for the frustration! Without giving account/personal details, can you please provide us with more info?\nCUSTOMER: legacy \"shared prime benefits\" account trying to join an amazon household of the prim. account holder to share echo and set up voice profile\n\nAMAZON RESPONSE:\nWe'd like to look deeper into this issue. Please provide us with more information here: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000093",
+    "case_id": "amazon_case_0001839",
+    "conversation_id": 2586,
+    "turn_index": 3,
+    "selected_context_tweet_ids": [
+      2586,
+      2585
+    ],
+    "raw_preceding_context": "CUSTOMER: @116324 not dlvd after 1 wk. U lied 2 @AmazonHelp saying left in safe place on Fri. Yesterday u said wld be dlvd 24-48hrs. Sort this now!\nBRAND: @116323 I'm sorry your order hasn't arrived yet! Please let us know if you haven't received it within 48 hours. ^EB",
+    "clean_customer_message": "Well ok but said it’s been dlvd so I can’t see how they will bother to deliver it now! I think they have washed their hands of it",
+    "clean_relevant_context": "CUSTOMER: not dlvd after 1 wk. U lied 2 saying left in safe place on Fri. Yesterday u said wld be dlvd 24-48hrs. Sort this now!\nBRAND: I'm sorry your order hasn't arrived yet! Please let us know if you haven't received it within 48 hours.",
+    "clean_brand_response": "We're definitely here to help! Please reach out to us by phone here: <URL>",
+    "embedding_text": "CUSTOMER:\nWell ok but said it’s been dlvd so I can’t see how they will bother to deliver it now! I think they have washed their hands of it\n\nRELEVANT CONTEXT:\nCUSTOMER: not dlvd after 1 wk. U lied 2 saying left in safe place on Fri. Yesterday u said wld be dlvd 24-48hrs. Sort this now!\nBRAND: I'm sorry your order hasn't arrived yet! Please let us know if you haven't received it within 48 hours.\n\nAMAZON RESPONSE:\nWe're definitely here to help! Please reach out to us by phone here: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000095",
+    "case_id": "amazon_case_0001870",
+    "conversation_id": 2602,
+    "turn_index": 5,
+    "selected_context_tweet_ids": [
+      2602,
+      2599,
+      null,
+      null
+    ],
+    "raw_preceding_context": "CUSTOMER: Rapidly losing faith in @115821 and their #esl CS ability to solve problems. No resolutions or follow ups.\nBRAND: @116325 Sorry for the poor experience. Without giving any account information, could you tell us what's going on? We'd love top help! ^MH\nCUSTOMER: @AmazonHelp Prob 1: can’t get @123967 shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: @AmazonHelp Prob 2: most purchases refused: CC declined. But @117157 says there’s no problem",
+    "clean_customer_message": "Multiple calls to call amazon call center with zero resolution and never a promised call back.",
+    "clean_relevant_context": "CUSTOMER: Rapidly losing faith in and their #esl CS ability to solve problems. No resolutions or follow ups.\nBRAND: Sorry for the poor experience. Without giving any account information, could you tell us what's going on? We'd love top help!\nCUSTOMER: Prob 1: can’t get shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: Prob 2: most purchases refused: CC declined. But says there’s no problem",
+    "clean_brand_response": "Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can.",
+    "embedding_text": "CUSTOMER:\nMultiple calls to call amazon call center with zero resolution and never a promised call back.\n\nRELEVANT CONTEXT:\nCUSTOMER: Rapidly losing faith in and their #esl CS ability to solve problems. No resolutions or follow ups.\nBRAND: Sorry for the poor experience. Without giving any account information, could you tell us what's going on? We'd love top help!\nCUSTOMER: Prob 1: can’t get shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: Prob 2: most purchases refused: CC declined. But says there’s no problem\n\nAMAZON RESPONSE:\nCan you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can."
+  },
+  {
+    "document_id": "retrieval_doc_0000096",
+    "case_id": "amazon_case_0001871",
+    "conversation_id": 2602,
+    "turn_index": 9,
+    "selected_context_tweet_ids": [
+      2602,
+      null,
+      2598,
+      2595,
+      null,
+      null
+    ],
+    "raw_preceding_context": "CUSTOMER: Rapidly losing faith in @115821 and their #esl CS ability to solve problems. No resolutions or follow ups.\nBRAND: @116325 Sorry for the poor experience. Without giving any account information, could you tell us what's going on? We'd love top help! ^MH\nCUSTOMER: @AmazonHelp Prob 1: can’t get @123967 shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: @AmazonHelp Prob 2: most purchases refused: CC declined. But @117157 says there’s no problem\nCUSTOMER: @AmazonHelp Multiple calls to call amazon call center with zero resolution and never a promised call back.\nBRAND: @116325 Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can. ^BG\nCUSTOMER: @AmazonHelp CS Said they would look into logistics problem and call me back on three separate Monday’s with an answer/solution. Never happened.\nCUSTOMER: @AmazonHelp CS could not help with CC payment rejection. Said it was my @117157 bank. Bank says it’s not them.",
+    "clean_customer_message": "Want to speak to someone at corp to address these issues.",
+    "clean_relevant_context": "CUSTOMER: Rapidly losing faith in and their #esl CS ability to solve problems. No resolutions or follow ups.\nCUSTOMER: Prob 1: can’t get shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: Multiple calls to call amazon call center with zero resolution and never a promised call back.\nBRAND: Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can.\nCUSTOMER: CS Said they would look into logistics problem and call me back on three separate Monday’s with an answer/solution. Never happened.\nCUSTOMER: CS could not help with CC payment rejection. Said it was my bank. Bank says it’s not them.",
+    "clean_brand_response": "Have you tried deleting the card from the account and re-adding it? Have you reached out to USPS about these deliveries? <URL>",
+    "embedding_text": "CUSTOMER:\nWant to speak to someone at corp to address these issues.\n\nRELEVANT CONTEXT:\nCUSTOMER: Rapidly losing faith in and their #esl CS ability to solve problems. No resolutions or follow ups.\nCUSTOMER: Prob 1: can’t get shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: Multiple calls to call amazon call center with zero resolution and never a promised call back.\nBRAND: Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can.\nCUSTOMER: CS Said they would look into logistics problem and call me back on three separate Monday’s with an answer/solution. Never happened.\nCUSTOMER: CS could not help with CC payment rejection. Said it was my bank. Bank says it’s not them.\n\nAMAZON RESPONSE:\nHave you tried deleting the card from the account and re-adding it? Have you reached out to USPS about these deliveries? <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000097",
+    "case_id": "amazon_case_0001872",
+    "conversation_id": 2602,
+    "turn_index": 12,
+    "selected_context_tweet_ids": [
+      2602,
+      null,
+      2595,
+      null,
+      2592,
+      null
+    ],
+    "raw_preceding_context": "CUSTOMER: Rapidly losing faith in @115821 and their #esl CS ability to solve problems. No resolutions or follow ups.\nBRAND: @116325 Sorry for the poor experience. Without giving any account information, could you tell us what's going on? We'd love top help! ^MH\nCUSTOMER: @AmazonHelp Prob 1: can’t get @123967 shipments because del person has medical conditions. Non delivered and lost packages.\nCUSTOMER: @AmazonHelp Prob 2: most purchases refused: CC declined. But @117157 says there’s no problem\nCUSTOMER: @AmazonHelp Multiple calls to call amazon call center with zero resolution and never a promised call back.\nBRAND: @116325 Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can. ^BG\nCUSTOMER: @AmazonHelp CS Said they would look into logistics problem and call me back on three separate Monday’s with an answer/solution. Never happened.\nCUSTOMER: @AmazonHelp CS could not help with CC payment rejection. Said it was my @117157 bank. Bank says it’s not them.\nCUSTOMER: @AmazonHelp Want to speak to someone at corp to address these issues.\nBRAND: @116325 Have you tried deleting the card from the account and re-adding it? Have you reached out to USPS about these deliveries? ^AF https://t.co/1XyLaGkcaN\nCUSTOMER: @AmazonHelp Read my last message",
+    "clean_customer_message": "No on the card. It works only half the time. Yes on USPS. They say my delivery person won’t deliver anything over 30 lbs. just sends it back",
+    "clean_relevant_context": "CUSTOMER: Rapidly losing faith in and their #esl CS ability to solve problems. No resolutions or follow ups.\nCUSTOMER: Prob 1: can’t get shipments because del person has medical conditions. Non delivered and lost packages.\nBRAND: Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can.\nCUSTOMER: CS Said they would look into logistics problem and call me back on three separate Monday’s with an answer/solution. Never happened.\nBRAND: Have you tried deleting the card from the account and re-adding it? Have you reached out to USPS about these deliveries? <URL>\nCUSTOMER: Read my last message",
+    "clean_brand_response": "We'd like another chance to look into this. Please reach out by phone or chat: <URL> Please keep us updated.",
+    "embedding_text": "CUSTOMER:\nNo on the card. It works only half the time. Yes on USPS. They say my delivery person won’t deliver anything over 30 lbs. just sends it back\n\nRELEVANT CONTEXT:\nCUSTOMER: Rapidly losing faith in and their #esl CS ability to solve problems. No resolutions or follow ups.\nCUSTOMER: Prob 1: can’t get shipments because del person has medical conditions. Non delivered and lost packages.\nBRAND: Can you tell us what insight / advice was provided with when you spoke with us last? We'd like to help if we can.\nCUSTOMER: CS Said they would look into logistics problem and call me back on three separate Monday’s with an answer/solution. Never happened.\nBRAND: Have you tried deleting the card from the account and re-adding it? Have you reached out to USPS about these deliveries? <URL>\nCUSTOMER: Read my last message\n\nAMAZON RESPONSE:\nWe'd like another chance to look into this. Please reach out by phone or chat: <URL> Please keep us updated."
+  },
+  {
+    "document_id": "retrieval_doc_0000098",
+    "case_id": "amazon_case_0002536",
+    "conversation_id": 3655,
+    "turn_index": 1,
+    "selected_context_tweet_ids": [
+      3654
+    ],
+    "raw_preceding_context": "None",
+    "clean_customer_message": "just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying",
+    "clean_relevant_context": "BRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>",
+    "clean_brand_response": "Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>",
+    "embedding_text": "CUSTOMER:\njust noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying\n\nRELEVANT CONTEXT:\nBRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>\n\nAMAZON RESPONSE:\nHi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000099",
+    "case_id": "amazon_case_0002537",
+    "conversation_id": 3655,
+    "turn_index": 2,
+    "selected_context_tweet_ids": [
+      3654
+    ],
+    "raw_preceding_context": "CUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying @115830",
+    "clean_customer_message": "just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying",
+    "clean_relevant_context": "BRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>",
+    "clean_brand_response": "Sorry to hear this. Did you select Free delivery at the checkout?",
+    "embedding_text": "CUSTOMER:\njust noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying\n\nRELEVANT CONTEXT:\nBRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>\n\nAMAZON RESPONSE:\nSorry to hear this. Did you select Free delivery at the checkout?"
+  },
+  {
+    "document_id": "retrieval_doc_0000100",
+    "case_id": "amazon_case_0002538",
+    "conversation_id": 3655,
+    "turn_index": 4,
+    "selected_context_tweet_ids": [
+      3654,
+      3655,
+      3656
+    ],
+    "raw_preceding_context": "CUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying @115830\nBRAND: @116586 Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: https://t.co/wRa3FyXyBb ^KI\nBRAND: @116586 Sorry to hear this. Did you select Free delivery at the checkout? ^PK",
+    "clean_customer_message": "No this is my point why would Amazon automatically select a pay for delivery option after I purposely spent more on shopping to qualify for FREE delivery. I am seriously annoyed with Amazon for being this misleading",
+    "clean_relevant_context": "BRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>\nCUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying\nBRAND: Sorry to hear this. Did you select Free delivery at the checkout?",
+    "clean_brand_response": "I do apologise Jacob. If you can reach out to us here: <URL> We will be happy to look into this for you.",
+    "embedding_text": "CUSTOMER:\nNo this is my point why would Amazon automatically select a pay for delivery option after I purposely spent more on shopping to qualify for FREE delivery. I am seriously annoyed with Amazon for being this misleading\n\nRELEVANT CONTEXT:\nBRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>\nCUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying\nBRAND: Sorry to hear this. Did you select Free delivery at the checkout?\n\nAMAZON RESPONSE:\nI do apologise Jacob. If you can reach out to us here: <URL> We will be happy to look into this for you."
+  },
+  {
+    "document_id": "retrieval_doc_0000101",
+    "case_id": "amazon_case_0002539",
+    "conversation_id": 3655,
+    "turn_index": 6,
+    "selected_context_tweet_ids": [
+      3654,
+      3655,
+      3656,
+      445421,
+      445419
+    ],
+    "raw_preceding_context": "CUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying @115830\nBRAND: @116586 Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: https://t.co/wRa3FyXyBb ^KI\nBRAND: @116586 Sorry to hear this. Did you select Free delivery at the checkout? ^PK\nCUSTOMER: @AmazonHelp No this is my point why would Amazon automatically select a pay for delivery option after I purposely spent more on shopping to qualify for FREE delivery. I am seriously annoyed with Amazon for being this misleading\nBRAND: @116586 I do apologise Jacob. If you can reach out to us here: https://t.co/JzP7hlRCV9 We will be happy to look into this for you. ^PK",
+    "clean_customer_message": "Done",
+    "clean_relevant_context": "BRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>\nCUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying\nBRAND: Sorry to hear this. Did you select Free delivery at the checkout?\nCUSTOMER: No this is my point why would Amazon automatically select a pay for delivery option after I purposely spent more on shopping to qualify for FREE delivery. I am seriously annoyed with Amazon for being this misleading\nBRAND: I do apologise Jacob. If you can reach out to us here: <URL> We will be happy to look into this for you.",
+    "clean_brand_response": "Thanks for contacting us, please keep us posted.",
+    "embedding_text": "CUSTOMER:\nDone\n\nRELEVANT CONTEXT:\nBRAND: Hi, you can edit your order at any time before it enters the dispatch process. To do this please check out our help page: <URL>\nCUSTOMER: just noticed I paid £4.95 delivery on Amazon simply because I did not select the FREE delivery option, after I spent enough to qualify... what a RIP OFF, why is it not free automatically when qualifying\nBRAND: Sorry to hear this. Did you select Free delivery at the checkout?\nCUSTOMER: No this is my point why would Amazon automatically select a pay for delivery option after I purposely spent more on shopping to qualify for FREE delivery. I am seriously annoyed with Amazon for being this misleading\nBRAND: I do apologise Jacob. If you can reach out to us here: <URL> We will be happy to look into this for you.\n\nAMAZON RESPONSE:\nThanks for contacting us, please keep us posted."
+  },
+  {
+    "document_id": "retrieval_doc_0000103",
+    "case_id": "amazon_case_0002574",
+    "conversation_id": 3726,
+    "turn_index": 3,
+    "selected_context_tweet_ids": [
+      3726,
+      3725
+    ],
+    "raw_preceding_context": "CUSTOMER: @115830 Why do you say that an article is eligible for free delivery then offer nothing but standard option at £4.75?\nBRAND: @116610 Is everything in your basket eligible? You can find more info here: https://t.co/d1x19RiAXm Let us know if this helps! ^EB",
+    "clean_customer_message": "There was only one costing a lot more than £20 and FBA -stating eligibility !",
+    "clean_relevant_context": "CUSTOMER: Why do you say that an article is eligible for free delivery then offer nothing but standard option at £4.75?\nBRAND: Is everything in your basket eligible? You can find more info here: <URL> Let us know if this helps!",
+    "clean_brand_response": "We'd like to take a look into this with you. When you have a moment, please reach out to us here: <URL>",
+    "embedding_text": "CUSTOMER:\nThere was only one costing a lot more than £20 and FBA -stating eligibility !\n\nRELEVANT CONTEXT:\nCUSTOMER: Why do you say that an article is eligible for free delivery then offer nothing but standard option at £4.75?\nBRAND: Is everything in your basket eligible? You can find more info here: <URL> Let us know if this helps!\n\nAMAZON RESPONSE:\nWe'd like to take a look into this with you. When you have a moment, please reach out to us here: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000105",
+    "case_id": "amazon_case_0002579",
+    "conversation_id": 3729,
+    "turn_index": 3,
+    "selected_context_tweet_ids": [
+      3729,
+      3727
+    ],
+    "raw_preceding_context": "CUSTOMER: @AmazonHelp i reset my password 3 times and it still says incorrect you gotta be shitting me\nBRAND: @116611 I'm sorry for the trouble! Have you tried the steps outlined here? https://t.co/POJ37mWiEk ^LA",
+    "clean_customer_message": "All of them",
+    "clean_relevant_context": "CUSTOMER: i reset my password 3 times and it still says incorrect you gotta be shitting me\nBRAND: I'm sorry for the trouble! Have you tried the steps outlined here? <URL>",
+    "clean_brand_response": "Hmm.... Let's take a closer look into what's going on here: <URL>",
+    "embedding_text": "CUSTOMER:\nAll of them\n\nRELEVANT CONTEXT:\nCUSTOMER: i reset my password 3 times and it still says incorrect you gotta be shitting me\nBRAND: I'm sorry for the trouble! Have you tried the steps outlined here? <URL>\n\nAMAZON RESPONSE:\nHmm.... Let's take a closer look into what's going on here: <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000107",
+    "case_id": "amazon_case_0002583",
+    "conversation_id": 3733,
+    "turn_index": 3,
+    "selected_context_tweet_ids": [
+      3733,
+      3731
+    ],
+    "raw_preceding_context": "CUSTOMER: @AmazonHelp um, my account was locked as soon as I tried to login on desktop. I still haven’t received an email on how to get it unlocked...\nBRAND: @116612 I'm sorry your account is locked! Please reach out directly to us here: https://t.co/jzvkhdlrK5 so we can take a closer look. ^TN",
+    "clean_customer_message": "I can’t log in because it’s locked.",
+    "clean_relevant_context": "CUSTOMER: um, my account was locked as soon as I tried to login on desktop. I still haven’t received an email on how to get it unlocked...\nBRAND: I'm sorry your account is locked! Please reach out directly to us here: <URL> so we can take a closer look.",
+    "clean_brand_response": "The link provided will allow you to contact us without signing in! Select \"skip log in\" and you'll be in touch in no time!",
+    "embedding_text": "CUSTOMER:\nI can’t log in because it’s locked.\n\nRELEVANT CONTEXT:\nCUSTOMER: um, my account was locked as soon as I tried to login on desktop. I still haven’t received an email on how to get it unlocked...\nBRAND: I'm sorry your account is locked! Please reach out directly to us here: <URL> so we can take a closer look.\n\nAMAZON RESPONSE:\nThe link provided will allow you to contact us without signing in! Select \"skip log in\" and you'll be in touch in no time!"
+  },
+  {
+    "document_id": "retrieval_doc_0000109",
+    "case_id": "amazon_case_0002589",
+    "conversation_id": 3737,
+    "turn_index": 3,
+    "selected_context_tweet_ids": [
+      3737,
+      3735
+    ],
+    "raw_preceding_context": "CUSTOMER: @AmazonHelp Warum ist es mir (und scheinbar auch ein paar anderen) nicht möglich per Bankeinzug zu bezahlen?\nBRAND: @116613 Hier findest du alle Infos darüber: https://t.co/FSmvkW0SJB ^AS",
+    "clean_customer_message": "Kann ich dann wenigstens mein Amazon-Konto aufladen um zu bezahlen. Ich habe keine Kreditkarte und möchte auch keine",
+    "clean_relevant_context": "CUSTOMER: Warum ist es mir (und scheinbar auch ein paar anderen) nicht möglich per Bankeinzug zu bezahlen?\nBRAND: Hier findest du alle Infos darüber: <URL>",
+    "clean_brand_response": "Du hast die Möglichkeit, Amazon.de Geschenkkarten aus dem stationären Handel für deine Bestellungen einzulösen. Gruß",
+    "embedding_text": "CUSTOMER:\nKann ich dann wenigstens mein Amazon-Konto aufladen um zu bezahlen. Ich habe keine Kreditkarte und möchte auch keine\n\nRELEVANT CONTEXT:\nCUSTOMER: Warum ist es mir (und scheinbar auch ein paar anderen) nicht möglich per Bankeinzug zu bezahlen?\nBRAND: Hier findest du alle Infos darüber: <URL>\n\nAMAZON RESPONSE:\nDu hast die Möglichkeit, Amazon.de Geschenkkarten aus dem stationären Handel für deine Bestellungen einzulösen. Gruß"
+  },
+  {
+    "document_id": "retrieval_doc_0000112",
+    "case_id": "amazon_case_0002614",
+    "conversation_id": 3745,
+    "turn_index": 2,
+    "selected_context_tweet_ids": [
+      null
+    ],
+    "raw_preceding_context": "BRAND: @116616 David, te recomendamos no compartir informaciones personales por este medio, te sugerimos editar o eliminar este mensaje. (1/2)",
+    "clean_customer_message": "infórmese... no voy a perder más mi tiempo...",
+    "clean_relevant_context": "BRAND: David, te recomendamos no compartir informaciones personales por este medio, te sugerimos editar o eliminar este mensaje. (1/2)",
+    "clean_brand_response": "¿Puedes explicarnos bien el inconveniente y mandarnos los detalles en este enlace por favor? <URL>",
+    "embedding_text": "CUSTOMER:\ninfórmese... no voy a perder más mi tiempo...\n\nRELEVANT CONTEXT:\nBRAND: David, te recomendamos no compartir informaciones personales por este medio, te sugerimos editar o eliminar este mensaje. (1/2)\n\nAMAZON RESPONSE:\n¿Puedes explicarnos bien el inconveniente y mandarnos los detalles en este enlace por favor? <URL>"
+  },
+  {
+    "document_id": "retrieval_doc_0000113",
+    "case_id": "amazon_case_0002615",
+    "conversation_id": 3749,
+    "turn_index": 0,
+    "selected_context_tweet_ids": [
+      3749,
+      3747,
+      3748,
+      3750,
+      3751,
+      3752
+    ],
+    "raw_preceding_context": "None",
+    "clean_customer_message": "Mac book pro, with Chrome",
+    "clean_relevant_context": "CUSTOMER: why your videos on Germany breaks too?\nBRAND: Have you already tried a restart? Kind regards\nCUSTOMER: Many times, but still failing, and it happen with some show\nBRAND: Is this still ongoing? What devices are you using?\nCUSTOMER: Sadly yes\nBRAND: What devices are you using for Amazon Video?",
+    "clean_brand_response": "Hi! I just wanted to ask if my colleagues could assist you? Regards",
+    "embedding_text": "CUSTOMER:\nMac book pro, with Chrome\n\nRELEVANT CONTEXT:\nCUSTOMER: why your videos on Germany breaks too?\nBRAND: Have you already tried a restart? Kind regards\nCUSTOMER: Many times, but still failing, and it happen with some show\nBRAND: Is this still ongoing? What devices are you using?\nCUSTOMER: Sadly yes\nBRAND: What devices are you using for Amazon Video?\n\nAMAZON RESPONSE:\nHi! I just wanted to ask if my colleagues could assist you? Regards"
+  },
+  {
+    "document_id": "retrieval_doc_0000114",
+    "case_id": "amazon_case_0002616",
+    "conversation_id": 3749,
+    "turn_index": 2,
+    "selected_context_tweet_ids": [
+      3748,
+      3750,
+      3751,
+      3752,
+      3753,
+      3755
+    ],
+    "raw_preceding_context": "BRAND: @116617 Hi! I just wanted to ask if my colleagues could assist you? Regards ^TA",
+    "clean_customer_message": "I need to change the language of my account to be able to get support, which I don't have the time to do, there's any other way to contact?",
+    "clean_relevant_context": "CUSTOMER: Many times, but still failing, and it happen with some show\nBRAND: Is this still ongoing? What devices are you using?\nCUSTOMER: Sadly yes\nBRAND: What devices are you using for Amazon Video?\nCUSTOMER: Mac book pro, with Chrome\nBRAND: Hi! I just wanted to ask if my colleagues could assist you? Regards",
+    "clean_brand_response": "Changing language is just a simple click: <URL> You can reach our support here: <URL>",
+    "embedding_text": "CUSTOMER:\nI need to change the language of my account to be able to get support, which I don't have the time to do, there's any other way to contact?\n\nRELEVANT CONTEXT:\nCUSTOMER: Many times, but still failing, and it happen with some show\nBRAND: Is this still ongoing? What devices are you using?\nCUSTOMER: Sadly yes\nBRAND: What devices are you using for Amazon Video?\nCUSTOMER: Mac book pro, with Chrome\nBRAND: Hi! I just wanted to ask if my colleagues could assist you? Regards\n\nAMAZON RESPONSE:\nChanging language is just a simple click: <URL> You can reach our support here: <URL>"
+  }
+]

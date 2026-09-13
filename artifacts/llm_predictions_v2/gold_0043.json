@@ -1,0 +1,18 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "ORDER_MANAGEMENT",
+    "REFUNDS_AND_BILLING"
+  ],
+  "intents": [
+    "CANCEL_ORDER_REQUEST",
+    "REFUND_STATUS_INQUIRY"
+  ],
+  "primary_intent": "REFUND_STATUS_INQUIRY",
+  "is_multi_intent": true,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is inquiring about a refund for a canceled order, which indicates a refund status inquiry. Additionally, the customer mentions that the order was canceled and the company agreed, which indicates a cancel order request. The customer is expressing disappointment, which suggests that the issue has not been resolved."
+}

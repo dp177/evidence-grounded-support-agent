@@ -1,0 +1,2574 @@
+[
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and empathetic, and the response is concise and to the point.",
+    "gold_id": "gold_0004"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0005"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The response is relevant, correct, and grounded in the context. It provides clear next steps and a polite tone. However, it could be more concise and the actionability score could be higher if the link to escalate was provided.",
+    "gold_id": "gold_0001"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear next steps and a polite tone. The only area for improvement is conciseness, as the reply could be slightly shorter. No unsupported claims were detected.",
+    "gold_id": "gold_0002"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear next steps and a polite, professional tone. The only minor deduction is due to the conciseness score, as the reply is a bit straightforward and lacks any unnecessary details.",
+    "gold_id": "gold_0003"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and empathetic. The reply is concise and grounded in the retrieved evidence.",
+    "gold_id": "gold_0007"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The response is concise and supported by the retrieved evidence.",
+    "gold_id": "gold_0008"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear and actionable next steps, is concise, and maintains a polite and professional tone. The only minor deduction is in conciseness, as the reply is already quite direct and to the point.",
+    "gold_id": "gold_0006"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's issue, factually correct, and grounded in the conversation context. It provides a clear next step, but could be more concise. The tone is polite and professional.",
+    "gold_id": "gold_0009"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The customer has not been without a response for 72 hours, as they mentioned they have received the same email over and over again"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant and correct, but it does not fully address the customer's concern about the repetitive email response. The tone is polite and empathetic, but the claim about the 72-hour response time is not supported by the evidence.",
+    "gold_id": "gold_0010"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The generated assistant reply is generally accurate and helpful, but it doesn't directly address the customer's request to DM. It provides an alternative solution, which is correct according to Amazon policies.",
+    "gold_id": "gold_0014"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but doesn't directly address the issue of the missing packages. It's correct in asking for the order number, but doesn't acknowledge the customer's frustration or provide a clear explanation for the delay. The reply is grounded in the context and evidence, and provides a clear next step for the customer. The tone is polite and professional.",
+    "gold_id": "gold_0012"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and empathetic. The response is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0013"
+  },
+  {
+    "relevance": 2,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 1,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 3.83,
+    "evaluation_rationale": "The reply is polite and professional, but it doesn't address the customer's specific concern about their Prime status or provide any next steps. It seems to be a generic closing statement.",
+    "gold_id": "gold_0015"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. It is concise, polite, and empathetic. The tone is professional and shows understanding of the customer's frustration.",
+    "gold_id": "gold_0016"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 3,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Please wait for the email to arrive",
+      "If you're still experiencing issues, please don't hesitate to reach out to us directly"
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is generally relevant and correct, but it lacks strict grounding in the context and retrieved evidence. The actionability and conciseness are good, but the tone is excellent. The unsupported claims are the phrases 'Please wait for the email to arrive' and 'If you're still experiencing issues, please don't hesitate to reach out to us directly', which are not explicitly supported by the context or evidence.",
+    "gold_id": "gold_0011"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. It is grounded in the previous conversation and historical precedent, and the tone is polite and empathetic.",
+    "gold_id": "gold_0017"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's frustration, acknowledges their concern, and invites further information to investigate and make things right. The tone is polite, professional, and empathetic. The reply is concise and actionable, and all claims are supported by the context and retrieved evidence.",
+    "gold_id": "gold_0019"
+  },
+  {
+    "relevance": 2,
+    "correctness": 4,
+    "groundedness": 2,
+    "actionability": 2,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [
+      "Could you please confirm if you've received any correspondence from our social media team at <URL>?",
+      "This question is a repeat of a previous question (from the customer's previous message)"
+    ],
+    "overall_score": 3.0,
+    "evaluation_rationale": "The reply is somewhat relevant as it addresses the customer's frustration, but it doesn't directly address the customer's specific question or concern. The correctness is high as it's based on general Amazon policies. However, the groundedness is low as the question is a repeat of a previous question. The actionability is low as it doesn't provide clear next steps. The conciseness is good, and the tone is polite and professional.",
+    "gold_id": "gold_0018"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The generated assistant reply is generally relevant, correct, and grounded in the context and retrieved evidence. It provides clear next steps and a polite tone. However, it could be more concise and directly address the customer's specific question about Seller Central support.",
+    "gold_id": "gold_0020"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "The Redmi 5A is a previous model (this is a fact, but not directly relevant to the customer's question about when to get it on Amazon)"
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is generally accurate and helpful, but could be more directly relevant to the customer's question about when to get the Redmi 5A on Amazon. The mention of the Redmi 5A being a previous model is a correct statement, but it doesn't address the customer's question about availability.",
+    "gold_id": "gold_0021"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The response is relevant to the customer's concern, factually correct, and grounded in the conversation context. It provides a clear next step (providing the order number) but could be more direct. The tone is polite and empathetic.",
+    "gold_id": "gold_0022"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is a direct copy of the previous response in the conversation context, which is a good practice. It addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and grounded in the conversation history.",
+    "gold_id": "gold_0024"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply directly addresses the customer's concern about the order status, is factually accurate, and provides a clear next step. The tone is polite and professional. The only deduction in correctness is due to the assumption that the delivery date was not met, which is not explicitly stated in the previous conversation.",
+    "gold_id": "gold_0025"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, and grounded in the context. It provides a clear next step for the customer to reach out if they have further concerns. The tone is polite and professional. The only area for improvement is in actionability, as the reply does not explicitly state what the customer should do next if they have further concerns.",
+    "gold_id": "gold_0026"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "exploring safe place delivery options in your account to ensure timely return processing"
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply addresses the customer's concern about the refund, but the claim about 'safe place delivery options' is not supported by the context or retrieved evidence. The tone is polite and professional, but the reply could be more concise by directly addressing the customer's specific issue.",
+    "gold_id": "gold_0028"
+  },
+  {
+    "relevance": 2,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 3,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "You may want to try contacting us via a different channel or escalating the issue to a human customer support representative."
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The generated assistant reply is somewhat relevant to the customer's inquiry, but it doesn't directly address the issue of not receiving a response to their private message. The reply is mostly correct, but the suggestion to escalate the issue to a human representative is not supported by the context or retrieved evidence. The reply is grounded in the context, but the actionability is somewhat vague. The tone is polite and professional.",
+    "gold_id": "gold_0023"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the customer was promised same-day delivery is not explicitly stated in the previous conversation context."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded, but could be more specific in its actionability and conciseness. The tone is polite and professional. The only unsupported claim is the assumption that same-day delivery was promised, which is not explicitly stated in the previous conversation context.",
+    "gold_id": "gold_0030"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply effectively addresses the customer's concern, provides a clear next step, and maintains a polite tone. The reply is grounded in the context and retrieved evidence, and it does not contain any unsupported or fabricated claims.",
+    "gold_id": "gold_0031"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, with a clear tone. However, it could be more actionable by providing a specific next step. The conciseness is excellent, and there are no unsupported claims.",
+    "gold_id": "gold_0032"
+  },
+  {
+    "relevance": 2,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is somewhat relevant as it acknowledges the customer's shout-out, but it doesn't directly address the URL provided. The correctness and groundedness are high as the information is accurate and supported by the context. The actionability is good, but could be improved by providing more specific next steps. The tone is polite and professional.",
+    "gold_id": "gold_0033"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply assumes the customer wants to schedule a call, which may not be the case."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded in the context. It offers a clear next step, is concise, and has a polite tone. However, it assumes the customer wants to schedule a call, which may not be the case.",
+    "gold_id": "gold_0027"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern about the delayed delivery and provides a clear next step to resolve the issue. The tone is polite and professional. The reply is factually accurate and supported by the context and retrieved evidence.",
+    "gold_id": "gold_0036"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. It is well-supported by the context and evidence, and the tone is polite and professional.",
+    "gold_id": "gold_0037"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 3,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "You may want to explore safe place delivery options in your account to ensure timely delivery of your order."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is generally relevant and correct, but the actionability score is lower due to the vague suggestion to explore safe place delivery options, which is not a clear next step. The tone is polite and professional, but the groundedness score is lower because the claim about exploring safe place delivery options is not supported by the context or retrieved evidence.",
+    "gold_id": "gold_0029"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally well-structured and addresses the customer's concern, but could be more specific about the actions Amazon will take to prevent similar experiences in the future.",
+    "gold_id": "gold_0035"
+  },
+  {
+    "relevance": 4,
+    "correctness": 2,
+    "groundedness": 1,
+    "actionability": 3,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [
+      "It's possible that you were signed up for a free trial or a promotion that included a free Prime membership."
+    ],
+    "overall_score": 3.0,
+    "evaluation_rationale": "The reply is somewhat relevant, but it doesn't directly address the customer's question. The correctness is low because the claim about free trials or promotions is not supported by the context or retrieved evidence. The groundedness is low because the claim is not strictly supported. The actionability is moderate because the reply doesn't give clear next steps. The conciseness is good, and the tone is polite and professional.",
+    "gold_id": "gold_0034"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. It is concise, polite, and professional. The tone is empathetic and supportive.",
+    "gold_id": "gold_0039"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0041"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is relevant to the customer's issue, but doesn't directly address the charge for Amazon Prime. It's correct in asking for the confirmation number, but it's not entirely grounded as it assumes the fax was sent successfully. The reply is actionable, concise, and has a polite tone.",
+    "gold_id": "gold_0042"
+  },
+  {
+    "gold_id": "gold_0038",
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [],
+    "overall_score": 4.0,
+    "evaluation_rationale": "Fallback: Failed to parse valid JSON from text: {\n  \"relevance\": 4,\n  \"correctness\": 4,\n  \"groundedness\": 4,\n  \"actionability\": 5,\n  \"conciseness\": 4,\n  \"tone\": 5,\n  \"unsupported_claims\": [\"Refunds may take 5-7 business days\" - this claim is not su..."
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The assistant reply does not address the customer's frustration with the lack of progress on the replacement item."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The assistant reply is relevant, correct, and grounded, but could be more concise and directly address the customer's frustration. The tone is polite and professional, but the customer's emotional state is not acknowledged.",
+    "gold_id": "gold_0040"
+  },
+  {
+    "relevance": 2,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [
+      "The customer had not previously provided the order number or email address associated with the order"
+    ],
+    "overall_score": 3.17,
+    "evaluation_rationale": "The reply is somewhat relevant as it asks for additional information, but it does not directly address the customer's concern about the refund. The correctness is moderate as it does not acknowledge the customer's previous agreement to cancel the order. The groundedness is low as it assumes the customer has not provided the order information previously. The actionability is good as it provides a clear next step. The conciseness is good, and the tone is polite. The overall score is moderate due to the lack of direct address to the customer's concern and the assumption about the customer's previous actions.",
+    "gold_id": "gold_0043"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "we can't guarantee the exchange will be processed in time for your social event next Friday"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant and correct, but the claim about not being able to guarantee the exchange processing time is not supported by the context or evidence. The customer has already submitted a return request and the seller has 2 days to respond, but the assistant's statement implies a fixed timeline that may not be accurate.",
+    "gold_id": "gold_0044"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply addresses the customer's concern about delays and Prime benefits, but doesn't directly answer the question of why they're paying for Prime. It's a good start, but could be more direct and clear in its explanation.",
+    "gold_id": "gold_0045"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 3,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "We'll also look into the issue of your package being delivered to the wrong house and take necessary steps to prevent this from happening in the future."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply addresses the customer's concern about the lost package, but the claim about preventing future issues with wrong house deliveries is not supported by the conversation history. The customer has already experienced this issue twice in the last two weeks, and the previous conversation did not result in any resolution or prevention of future issues.",
+    "gold_id": "gold_0049"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is relevant, correct, and grounded, but could be more actionable. The tone is polite and professional.",
+    "gold_id": "gold_0047"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually correct, and grounded in the context. It provides clear next steps, but could be more concise. The tone is polite and professional.",
+    "gold_id": "gold_0048"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 3,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "We'll take care of the forms",
+      "We'll get to the bottom of this"
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply addresses the customer's frustration and concern about conflicting tracking information, but makes two unsupported claims. The tone is polite and professional, but the reply could be more concise and grounded in the context.",
+    "gold_id": "gold_0051"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Providing a phone number (1-866-216-9085) instead of the customer-provided phone number (8655123588)"
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is mostly relevant, correct, and actionable. However, it fails to acknowledge the customer's provided phone number and instead provides a different one. The tone is polite and professional, but the conciseness could be improved by avoiding the unnecessary phone number.",
+    "gold_id": "gold_0046"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The response is concise and supported by historical precedent.",
+    "gold_id": "gold_0052"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides actionable steps and a polite tone. The only area for improvement is conciseness, as the reply could be slightly shorter.",
+    "gold_id": "gold_0054"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually accurate, and grounded in the context. It provides a clear next step for the customer to share more information about their issue. The tone is polite and empathetic. The only area for improvement is conciseness, as the reply could be slightly shorter.",
+    "gold_id": "gold_0050"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern about the lack of tracking updates and provides a clear next step for the customer to investigate further. The response is factually accurate, grounded in the context, and provides actionable steps. The tone is polite and professional. The reply is concise and to the point.",
+    "gold_id": "gold_0056"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, factually accurate, and grounded in the context. It provides clear next steps, is concise, and has a polite tone. However, it could be more actionable by providing more specific options for next steps.",
+    "gold_id": "gold_0057"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides a clear next step, and is factually accurate. However, it does not explicitly acknowledge the customer's frustration or provide a more specific explanation for the delay, which might have improved the tone.",
+    "gold_id": "gold_0058"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0061"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Since you're a Prime member, you should receive your package at your doorstep without any issues."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant and correct, but the claim about Prime members receiving packages at their doorstep without issues is not entirely accurate, as evidenced by the customer's previous complaints about delayed deliveries. The reply is grounded in the context, but the unsupported claim detracts from its overall score.",
+    "gold_id": "gold_0060"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the customer can proceed with a refund or a replacement order without further action is not supported by the context or retrieved evidence."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded, but it makes an unsupported claim about the customer's ability to proceed with a refund or replacement order without further action. The tone is polite and professional, and the reply provides clear next steps to the customer.",
+    "gold_id": "gold_0055"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that checking the carrier information will help determine the status of the order is not entirely accurate, as the customer has already provided the URL and the app's information."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but it doesn't directly address the specific question. The correctness of the reply is partially accurate, as the customer has already provided the URL and the app's information. The groundedness of the reply is good, as it doesn't make any false claims. The actionability of the reply is good, as it provides a clear next step. The conciseness of the reply is good, but it could be improved. The tone of the reply is polite and professional.",
+    "gold_id": "gold_0053"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, grounded, actionable, concise, and has a polite tone. It directly addresses the customer's concern, provides a clear next step, and is supported by the context and retrieved evidence.",
+    "gold_id": "gold_0059"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and is supported by the context and evidence. It offers a clear next step and is polite and professional in tone.",
+    "gold_id": "gold_0063"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the customer should try resetting their password by going to the Amazon website and clicking on 'Forgot Password' is not directly supported by the historical evidence, as the customer has already mentioned they cannot use any passwords or email."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally helpful and provides a clear next step, but it does not fully address the customer's specific issue of being unable to use any passwords or email. The tone is polite and professional, but the relevance could be improved by directly addressing the customer's previous attempts to log in.",
+    "gold_id": "gold_0065"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually correct, and grounded in Amazon's policies. It provides clear next steps, but could be more concise. The tone is polite and professional.",
+    "gold_id": "gold_0066"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "uninstalling and reinstalling the app is not the first step to try, as per previous conversation"
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant and correct, but it doesn't fully address the customer's concern about the app allowing login while the web browser doesn't. The suggestion to uninstall and reinstall the app is not the first step to try, as per previous conversation. The tone is polite and professional.",
+    "gold_id": "gold_0067"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply directly addresses the customer's login issue, provides accurate information, and offers clear next steps. The tone is polite and professional. The only minor deduction in conciseness is due to the inclusion of a slightly redundant phrase 'If that doesn't work'.",
+    "gold_id": "gold_0068"
+  },
+  {
+    "gold_id": "gold_0064",
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [],
+    "overall_score": 4.0,
+    "evaluation_rationale": "Fallback: Failed to parse valid JSON from text: {\n  \"relevance\": 4,\n  \"correctness\": 4,\n  \"groundedness\": 4,\n  \"actionability\": 4,\n  \"conciseness\": 4,\n  \"tone\": 5,\n  \"unsupported_claims\": [\"I'm sorry to hear that you're experiencing issues with you..."
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 3,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The suggestion to reset the password by going to the provided webpage is not explicitly mentioned in the retrieved evidence."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is generally relevant and correct, but it lacks grounding in the retrieved evidence. The suggestion to reset the password is not explicitly mentioned in the previous conversations, which might lead to confusion. The tone is polite and professional, and the next steps are clear.",
+    "gold_id": "gold_0069"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually accurate, and grounded in the context. It provides clear next steps and a polite tone. However, it could be more concise and directly address the customer's expectation of Amazon's responsibility.",
+    "gold_id": "gold_0062"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "This isn't the standard delivery practice we strive for."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant and accurate, but the claim about Amazon's standard delivery practice is not supported by the retrieved evidence. The customer has already mentioned that other carriers (USPS, UPS, FedEx) do not have this policy, implying that it's not a standard practice across the industry.",
+    "gold_id": "gold_0071"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides a clear next step, and is polite and empathetic. However, it doesn't explicitly address the customer's question about the tracking status and expected delivery date, which is a key point of contention. The correctness score is 4 because it doesn't explicitly state that the customer's package is likely to be dispatched today, which is a common Amazon policy.",
+    "gold_id": "gold_0072"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The generated assistant reply is a good attempt to address the customer's concern, but it could be more specific in its next steps. The tone is polite and professional, and the reply is concise and grounded in the context and evidence.",
+    "gold_id": "gold_0070"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "The tracking information hasn't been updated since the order was placed."
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant and actionable, but the claim about the tracking information not being updated since the order was placed is not supported by the retrieved evidence, which shows that the customer did receive an email with an updated order status in September.",
+    "gold_id": "gold_0073"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context. It provides a clear next step for the customer to provide the order number, which is actionable. The tone is polite and empathetic. The only area for improvement is conciseness, but it's not a major concern.",
+    "gold_id": "gold_0075"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply effectively addresses the customer's concern, provides a clear next step, and maintains a polite tone. The reply is factually accurate and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0076"
+  },
+  {
+    "gold_id": "gold_0074",
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [],
+    "overall_score": 4.0,
+    "evaluation_rationale": "Fallback: Failed to parse valid JSON from text: {\n  \"relevance\": 4,\n  \"correctness\": 4,\n  \"groundedness\": 4,\n  \"actionability\": 4,\n  \"conciseness\": 4,\n  \"tone\": 5,\n  \"unsupported_claims\": [\"Checking the tracking information for any updates\" - while..."
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0077"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Providing feedback on the carrier's performance may not be the most effective way to address the issue, as per historical precedent [1] and [2]"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded, but could be improved by providing more effective next steps. The tone is polite and professional. The customer's previous experience with the courier suggests that simply providing feedback may not be enough to resolve the issue.",
+    "gold_id": "gold_0078"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Our drivers are instructed to ring the doorbell when possible"
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply addresses the customer's concerns but makes an unsupported claim about drivers being instructed to ring the doorbell when possible, which is not explicitly stated in the retrieved evidence. The tone is polite and professional, but the reply could be more concise by directly referencing the 'Contact us' section and avoiding the phrase 'when possible'.",
+    "gold_id": "gold_0080"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 3,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "You've mentioned that you've already shared the necessary details."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but the claim that the customer has already shared necessary details is not supported by the conversation history. The customer has mentioned multiple times that they have shared details, but the brand has not acknowledged or confirmed this. The tone is polite and professional, but the reply could be more concise by directly addressing the customer's new information about the courier issue.",
+    "gold_id": "gold_0082"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply effectively addresses the customer's concern, provides a clear next step, and maintains a polite and professional tone. The reply is grounded in the context and evidence, and does not contain any unsupported or fabricated claims.",
+    "gold_id": "gold_0079"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Please provide your phone number so I can look into this further and ensure that the pickup service contacts you as soon as possible."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is relevant and actional, but the claim that the assistant can 'ensure that the pickup service contacts you as soon as possible' is not supported by the retrieved evidence. The assistant should instead focus on escalating the issue or providing a clear explanation of the next steps.",
+    "gold_id": "gold_0085"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "We'll need to investigate this further.",
+      "so we can look into this issue and assist you with the next steps."
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is highly relevant and actionable, but the correctness and groundedness are slightly compromised due to the repeated request for order details, which is already provided in the previous conversation. The tone is polite and professional.",
+    "gold_id": "gold_0081"
+  },
+  {
+    "relevance": 4,
+    "correctness": 2,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "I want to clarify that you've already spoken with customer services",
+      "I want to escalate this to a human support agent"
+    ],
+    "overall_score": 3.5,
+    "evaluation_rationale": "The reply is somewhat relevant to the customer's concern, but it's not directly addressing the request to change the address. The correctness is low because it contradicts the historical precedent that once an order is placed, the delivery address cannot be changed. The groundedness is low because the claims about clarifying the customer's previous conversation and escalating the issue are not supported by the context. The actionability is high because it provides a clear next step. The conciseness is high because the reply is direct and to the point. The tone is excellent.",
+    "gold_id": "gold_0087"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear next steps and a polite tone. However, it could be more concise. No unsupported claims were detected.",
+    "gold_id": "gold_0083"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply accurately addresses the customer's inquiry, provides correct information, and offers a clear next step. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0088"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but could be more specific in its request for details. It is factually accurate and grounded in the context. The tone is polite and professional. However, the actionability score is lower because the reply does not provide a clear next step, instead asking the customer to provide more details.",
+    "gold_id": "gold_0086"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 3,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the customer received an email from the social media team on the 12th is not supported by the previous conversation context."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the groundedness is compromised by the unsupported claim. The tone is polite and professional, and the actionability is clear. However, the conciseness could be improved by removing repetitive filler.",
+    "gold_id": "gold_0084"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The only minor issue is that the reply is slightly verbose, but it's still concise and easy to understand.",
+    "gold_id": "gold_0089"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant, accurate, and actionable. It provides a clear next step for the customer to contact support. The tone is polite and empathetic. The only area for improvement is conciseness, as the reply could be slightly shorter. No unsupported claims were detected.",
+    "gold_id": "gold_0090"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context, providing actionable next steps and a polite tone. The only area for improvement is conciseness, which is already very good. The reply is well-supported by the context and retrieved evidence, and there are no unsupported claims.",
+    "gold_id": "gold_0091"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The reply is concise and fully supported by the context and retrieved evidence.",
+    "gold_id": "gold_0095"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "We're constantly working to improve our services"
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. However, the claim about constantly working to improve services is not supported by the retrieved evidence and may be considered a vague statement.",
+    "gold_id": "gold_0094"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "It's possible that the issue is related to our service being down",
+      "Please check if you're getting a specific error message when trying to access the content"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but it introduces a speculative possibility that the issue is related to Amazon's service being down, which is not supported by the context or evidence. The reply also asks the customer to check for a specific error message, which is not a clear next step. The tone is polite and professional, but the conciseness could be improved by removing the speculative claim.",
+    "gold_id": "gold_0092"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern about their password not working, asks for relevant information, and provides a clear next step. The tone is polite and professional. The reply is factually accurate and supported by the context and retrieved evidence.",
+    "gold_id": "gold_0096"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 3,
+    "conciseness": 3,
+    "tone": 5,
+    "unsupported_claims": [
+      "Can you please confirm that you've tried resetting your password multiple times and the verification code is not being sent to your email?",
+      "Can you provide me with your order number or a screenshot of the error message you're seeing?"
+    ],
+    "overall_score": 3.83,
+    "evaluation_rationale": "The reply is generally relevant and correct, but it asks for additional information that is not necessary to address the customer's concern. The tone is polite and professional, but the actionability could be improved by providing a more direct solution or next step.",
+    "gold_id": "gold_0097"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, with clear next steps and a polite tone. However, it could be slightly more concise.",
+    "gold_id": "gold_0101"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, with clear and actionable next steps. The tone is polite and professional. The only minor deduction is for conciseness, as the reply is slightly longer than necessary, but still very direct and to the point.",
+    "gold_id": "gold_0100"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides a clear next step, and maintains a polite tone. However, it could be more concise and accurate in its claim about the support team's ability to resolve the issue.",
+    "gold_id": "gold_0098"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "skipping the sign-in process by clicking on the link provided in the email we sent you"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the claim about skipping the sign-in process by clicking on the link provided in the email is not supported by the context or retrieved evidence. The reply is actionable, concise, and has a polite tone. However, the tone could be more empathetic.",
+    "gold_id": "gold_0099"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0102"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "it's possible that the changes haven't taken effect yet"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is somewhat relevant to the customer's issue, but it doesn't directly address the fact that the account settings were changed by someone else. The correctness is partially accurate, but the claim about the changes not taking effect yet is not supported by the evidence. The groundedness is low because the claim is not supported by the context or evidence. The actionability is good, but the conciseness could be improved. The tone is polite and professional.",
+    "gold_id": "gold_0106"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the app isn't pre-installed on the device is not entirely accurate, as the customer has already mentioned it's not on the Home screen or Google Play Store."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant, correct, and actionable. However, it could be more grounded by acknowledging the customer's specific situation and providing a more accurate explanation. The tone is polite and professional, but the conciseness could be improved by avoiding the phrase 'I'll do my best to assist you further.'",
+    "gold_id": "gold_0093"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The response is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0107"
+  },
+  {
+    "gold_id": "gold_0103",
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [],
+    "overall_score": 4.0,
+    "evaluation_rationale": "Fallback: Failed to parse valid JSON from text: {\n  \"relevance\": 4,\n  \"correctness\": 4,\n  \"groundedness\": 4,\n  \"actionability\": 4,\n  \"conciseness\": 4,\n  \"tone\": 5,\n  \"unsupported_claims\": [\n    \"The issue can be as simple as an incorrect email addr..."
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The order is still in a processing state"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant and correct, but the claim about the order being in a processing state is not supported by the previous conversation context, where the customer mentioned the order was due to arrive between the 14th-17th Oct, implying it was already past the expected delivery date. The customer's frustration and the previous conversation history suggest that the order is likely delayed or missing, not in a processing state.",
+    "gold_id": "gold_0108"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Checking spam or junk email folder may not resolve the issue, as the customer has already tried this multiple times"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is relevant to the customer's issue, but its correctness is compromised by the assumption that the verification email is likely in the spam folder. The groundedness is low because this claim is not supported by the context or evidence. The actionability is good, but the conciseness could be improved by providing more specific next steps. The tone is polite and empathetic.",
+    "gold_id": "gold_0104"
+  },
+  {
+    "gold_id": "gold_0105",
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 4,
+    "unsupported_claims": [],
+    "overall_score": 4.0,
+    "evaluation_rationale": "Fallback: Failed to parse valid JSON from text: {\n  \"relevance\": 4,\n  \"correctness\": 4,\n  \"groundedness\": 4,\n  \"actionability\": 4,\n  \"conciseness\": 4,\n  \"tone\": 5,\n  \"unsupported_claims\": [\n    \"Please allow 24-48 hours for them to reach out to you..."
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "initiate a refund instead"
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the claim of 'initiating a refund instead' is not supported by the context or retrieved evidence. The customer has already expressed frustration with the refund option being offered in the previous conversation.",
+    "gold_id": "gold_0109"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "Unfortunately, once an order has shipped, it's typically not possible to stop it in its tracks."
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the claim about not being able to stop the order in its tracks is not entirely accurate according to the retrieved evidence. The evidence suggests that Amazon may be able to assist with cancellation and refund even after shipment, although the specifics depend on the situation. The reply is grounded in the context, actionability is high, and tone is polite and professional.",
+    "gold_id": "gold_0112"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear and actionable next steps, is concise, and has a polite and professional tone. However, it could be slightly more concise.",
+    "gold_id": "gold_0110"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply is a well-structured and accurate response that directly addresses the customer's concern. It provides a clear next step and is supported by the retrieved evidence. The tone is polite and professional. The only minor improvement would be to make the response even more concise, but it is already quite lean.",
+    "gold_id": "gold_0111"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "claim to have received your delivery at half past two"
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally well-structured and addresses the customer's concern. However, it assumes the customer received a delivery at half past two, which contradicts their statement. The tone is polite and professional, but the reply could be more direct in its questioning of the customer's claim.",
+    "gold_id": "gold_0116"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear and actionable next steps, is concise, and has a polite and professional tone. The only reason it's not a perfect score is that it's slightly redundant with the previous response, but this doesn't detract from its overall effectiveness.",
+    "gold_id": "gold_0114"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, is factually accurate, and provides a clear next step. The tone is polite and empathetic. The only minor deduction is for conciseness, as the reply is a bit straightforward but not overly verbose.",
+    "gold_id": "gold_0115"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply implies that the customer has not contacted the support team directly via the link provided in the email or through the Amazon website, which is not explicitly stated in the previous conversation context."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is relevant and addresses the customer's concern, but it implies an action that is not explicitly stated in the previous conversation context. The tone is polite and professional, and the reply provides clear next steps. However, the correctness and groundedness scores are slightly lower due to the implication of an action that is not supported by the context.",
+    "gold_id": "gold_0113"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and empathetic. The response is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0117"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides a suitable resolution, and is factually accurate according to Amazon policies. The tone is polite, professional, and empathetic. The reply is concise and actionable, and all claims are supported by the context and retrieved evidence.",
+    "gold_id": "gold_0118"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0120"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, is factually accurate, and provides a clear next step. The tone is polite and professional. The reply is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0121"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is highly relevant and action-oriented, but slightly less grounded due to the lack of specific mention of the customer's order details or a direct link to the support team's contact information. The tone is polite and professional.",
+    "gold_id": "gold_0123"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. It is concise, polite, and empathetic. The tone is professional and customer-centric.",
+    "gold_id": "gold_0125"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The fact that nobody lives here with the name on the parcel is unusual."
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is highly relevant and actionable, but the correctness is slightly compromised due to the unsupported claim. The tone is polite and professional, and the conciseness is good. However, the groundedness is not perfect as the claim about the unusualness of the situation is not strictly supported by the context or retrieved evidence.",
+    "gold_id": "gold_0119"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, accurate, and actionable. It directly addresses the customer's concern, provides a clear next step, and maintains a polite tone. The only area for improvement is conciseness, as the reply is already quite concise.",
+    "gold_id": "gold_0124"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually correct, and grounded in the context. It provides clear next steps, but could be more concise. The tone is polite and professional.",
+    "gold_id": "gold_0127"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, providing clear next steps and a polite tone. It is concise and actionable, making it an effective response to the customer's inquiry.",
+    "gold_id": "gold_0122"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, and grounded in the context. It provides clear next steps for the customer and is concise and empathetic in tone. The only minor deduction is in the overall score, as the reply is not entirely novel, but rather builds upon the customer's previous statements.",
+    "gold_id": "gold_0126"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, accurate, and actionable. It provides a clear next step for the customer to check return and replacement options. The tone is polite and professional. The reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0128"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and empathetic. The only deduction in correctness is due to the slight vagueness of 'possible that it's still on its way', but it's a minor point.",
+    "gold_id": "gold_0130"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and empathetic. The response is concise and grounded in the context.",
+    "gold_id": "gold_0132"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and empathetic, and the reply is concise and well-supported by the context and retrieved evidence.",
+    "gold_id": "gold_0133"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply is highly relevant, correct, and grounded, providing a clear next step for the customer. The tone is polite and empathetic. The only minor deduction is for conciseness, as the reply is already quite concise.",
+    "gold_id": "gold_0129"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not directly address the customer's specific question or concern regarding Prime shipping and delays."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally good, but it doesn't directly address the customer's concern about Prime shipping and delays. It asks the customer to check the tracking information, which is a good next step, but it doesn't provide any specific information about why the package was delayed or what Amazon is doing to prevent such delays in the future.",
+    "gold_id": "gold_0131"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not directly address the customer's specific question or concern"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is somewhat relevant, but it does not directly address the customer's question. It is mostly correct, but it does not provide a clear solution to the customer's problem. The tone is polite and professional, but the reply could be more concise and actionable.",
+    "gold_id": "gold_0136"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Requesting the order number is not a necessary step to resolve the issue, as Amazon has already spoken to the customer"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded, but could be more concise and action-oriented. The tone is polite and empathetic. The only unsupported claim is the request for the order number, which is not necessary given the customer's previous conversation with Amazon.",
+    "gold_id": "gold_0135"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not strictly support the claim that the customer should check their confirmation email or order details for the estimated delivery date, as this information is not typically provided at checkout."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally well-structured and provides a clear next step for the customer. However, the claim about checking the confirmation email or order details for the estimated delivery date is not strictly supported by the context or retrieved evidence. The tone is polite and professional, but the conciseness could be improved by providing a more direct answer.",
+    "gold_id": "gold_0134"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "uninstalling and reinstalling the app may not resolve the issue, as the customer has already experienced the issue on multiple devices"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but the suggested solution may not be effective given the customer's previous experience with multiple devices. The tone is polite and professional, but the conciseness could be improved by providing more specific guidance on what to expect after reinstalling the app.",
+    "gold_id": "gold_0139"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Restarting router and modem may not resolve the issue if it's a device-specific problem"
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is highly relevant and actionable, but the correctness is slightly compromised due to the lack of evidence supporting the effectiveness of restarting the router and modem. The tone is polite and professional, but the conciseness could be improved by removing the phrase 'I'd be happy to help you troubleshoot further'.",
+    "gold_id": "gold_0141"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides a clear next step (staying tuned for updates) and is concise and polite in tone. The only area for improvement is in actionability, as the reply could be more specific about when to expect updates.",
+    "gold_id": "gold_0138"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "There are no ongoing issues with the app",
+      "checking internet connection speed is a general troubleshooting step that may not be relevant to the customer's specific issue"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is somewhat relevant to the customer's issue, but it doesn't directly address the specific problem of slow video downloads in the Amazon Prime Videos app. The correctness is partially accurate, as there may be no ongoing issues with the app, but the customer has already reported the issue in the previous conversation. The groundedness is low because the reply doesn't take into account the customer's previous statements about the issue being present across different locations and networks. The actionability is good, but the conciseness could be improved by directly addressing the customer's specific issue. The tone is polite and professional.",
+    "gold_id": "gold_0140"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not directly address the customer's concern about not being able to download a book into their Kindle app."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is a good start, but it does not directly address the customer's concern. It asks for additional information, which is a good next step, but it does not provide a clear solution to the customer's problem.",
+    "gold_id": "gold_0137"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's issue, factually correct, and grounded in the context. It provides clear next steps, but could be more concise. The tone is polite and professional.",
+    "gold_id": "gold_0144"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but doesn't directly address the specific issue of the expected delivery time being missed. It's correct in acknowledging the customer's frustration and providing a clear next step. The reply is grounded in the context, but doesn't reference any specific evidence from the conversation history. The tone is polite and empathetic.",
+    "gold_id": "gold_0146"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "This might be due to the way the app is configured."
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant and actionable, but the correctness is slightly lower due to the speculative claim about the app configuration. The tone is professional and polite, and the conciseness is excellent.",
+    "gold_id": "gold_0142"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "We expect the carrier to deliver the package within one business day."
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant and action-oriented, but the claim about the expected delivery time is not explicitly stated in the retrieved evidence. The tone is polite and professional, but the conciseness is perfect.",
+    "gold_id": "gold_0147"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the parcel might have been delivered to a wrong address is not directly supported by the context or retrieved evidence."
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is generally relevant and actionable, but the correctness and groundedness scores are slightly lower due to the unsupported claim about the wrong address. The tone is polite and professional.",
+    "gold_id": "gold_0143"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply directly addresses the customer's concern about the delayed package, provides a clear next step, and is polite and empathetic. However, it does not explicitly acknowledge the previous communication breakdown or the customer's frustration, which might be a missed opportunity for improvement.",
+    "gold_id": "gold_0148"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Once the order is placed, you won't be able to change the shipping address."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the claim about not being able to change the shipping address after the order is placed is not supported by the retrieved evidence. The customer's concern is addressed, and the next steps are clear, but the tone is polite and professional.",
+    "gold_id": "gold_0151"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is mostly relevant, correct, and grounded, but could be more actionable and concise. The tone is polite and professional.",
+    "gold_id": "gold_0145"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is relevant and action-oriented, but could be more concise. It is factually correct and grounded in the context, with a polite and professional tone.",
+    "gold_id": "gold_0150"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "You won't be able to edit the shipping address",
+      "I recommend contacting customer support via chat or phone"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is somewhat relevant to the customer's question, but it doesn't directly address the gift card reimbursement question. The correctness is partially accurate, as Amazon does allow editing shipping addresses in certain circumstances, but the reply doesn't provide clear guidance on gift card reimbursement. The groundedness is low because the claims about editing shipping addresses are not supported by the context or evidence. The actionability is good, but the conciseness could be improved. The tone is professional and polite.",
+    "gold_id": "gold_0152"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "It seems like the app is taking you to the tracking details for the delivered items when you press on the shipment."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The generated assistant reply is generally good, but it makes an assumption about the app's behavior without explicit evidence from the customer's context or retrieved evidence. The reply is clear, concise, and polite, but it could be more actionable by providing a clear explanation or a direct link to the tracking details.",
+    "gold_id": "gold_0149"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Our system is designed to prioritize the address provided at the time of order placement."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, but the claim about the system design is not explicitly stated in the retrieved evidence. The tone is polite and professional, but the reply could be more concise by removing the phrase 'I'm afraid'.",
+    "gold_id": "gold_0153"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The generated assistant reply is generally relevant, correct, and grounded in the context and retrieved evidence. However, it could be more actionable by providing a direct link or a more specific instruction on how to update the shipping address. The tone is polite and professional.",
+    "gold_id": "gold_0156"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and professional. The only area for improvement is conciseness, as the reply could be slightly more direct.",
+    "gold_id": "gold_0158"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "confirm if you've received an email confirming your Prime subscription and when the last charge was made"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant and action-oriented, but the request for confirmation of the Prime subscription and last charge is not directly related to the customer's issue of not finding the cancellation option. This might be seen as a detour or an attempt to gather additional information not directly relevant to the customer's concern.",
+    "gold_id": "gold_0159"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "Changing delivery address until a delivery attempt has been made is not a standard Amazon policy."
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant, concise, and action-oriented. However, it does not fully address the customer's concern about the delivery address change policy, which is not explicitly stated in the retrieved evidence. The tone is polite and professional, but the correctness and groundedness scores are lower due to the unsupported claim about delivery address change policy.",
+    "gold_id": "gold_0154"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "If you cancel the trial, you won't be able to use the free benefits later, but you'll still receive the benefits for the remainder of the 30-day period."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the claim about not being able to use free benefits after canceling the trial is not supported by the retrieved evidence. The tone is polite and professional, but the conciseness could be improved by removing the phrase about speaking with the support directly.",
+    "gold_id": "gold_0160"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 3,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Checking email associated with Amazon account for Prime membership information is not a necessary step to resolve the issue."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is mostly relevant, correct, and grounded, but lacks a clear next step to resolve the issue. The tone is polite and professional. However, checking the email associated with the Amazon account is not a necessary step to resolve the issue, making it slightly less action-oriented.",
+    "gold_id": "gold_0157"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers clear next steps. The tone is polite and empathetic. The only minor deduction in conciseness is due to the inclusion of two URLs, which could be condensed into one.",
+    "gold_id": "gold_0162"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "If you have any questions or concerns about the cancellation process or refund eligibility, you can contact us directly."
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant and action-oriented, but the correctness is slightly lower because it doesn't explicitly mention refund eligibility. The groundedness is also slightly lower because the claim about contacting support for questions or concerns is not supported by the retrieved evidence. The tone is polite and professional, but the unsupported claim about contacting support is a minor issue.",
+    "gold_id": "gold_0161"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "You can purchase a new membership for the next year from your cart now, but it will start after your current membership ends."
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is mostly relevant and correct, but the claim about purchasing a new membership from the cart now is not entirely accurate according to the retrieved evidence. The customer can purchase a new membership from the cart, but it will not start after the current membership ends, it will start immediately.",
+    "gold_id": "gold_0163"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply directly addresses the customer's question about the refund status, provides accurate information about the refund process, and offers a clear next step. The tone is polite and empathetic. The only minor deduction is for actionability, as the reply could be more specific about what the customer can do next (e.g., check the order status or contact the seller).",
+    "gold_id": "gold_0166"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded in the context and retrieved evidence. It provides clear next steps and a polite tone. However, it could be more concise.",
+    "gold_id": "gold_0164"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually correct, and grounded in the context. It provides a clear next step, but could be more concise. The tone is polite and professional.",
+    "gold_id": "gold_0165"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, with clear and actionable next steps. The tone is polite and professional. The only deduction is in correctness, as the reply doesn't explicitly state that cash refunds are typically processed via check or bank transfer, but this is a minor point.",
+    "gold_id": "gold_0167"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply is a clear and concise response that directly addresses the customer's concern. It requests the order number, which is a standard procedure to investigate and resolve the issue. The tone is polite and empathetic, and the reply is factually accurate according to general Amazon policies. The only potential improvement is to provide a more specific next step, but the overall response is well-crafted.",
+    "gold_id": "gold_0155"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Requesting order number is not necessary to investigate a refund issue"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is somewhat relevant to the customer's concern, but it's not directly addressing the issue of the refund not being received yet. The correctness is partially accurate as Amazon does have a process for investigating refund issues, but the specific request for the order number is not necessary. The reply is grounded in the context, but it's not fully supported by the evidence. The actionability is good, and the tone is polite and professional. The conciseness is good, but the request for the order number is unnecessary.",
+    "gold_id": "gold_0168"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The assistant's claim that they 'can't discuss or share any personal information, including order details' is partially supported by the historical evidence, but the specific reason provided ('we can't discuss or share any personal information, including order details') is not explicitly stated in the evidence. However, the assistant's intention to protect customer information is consistent with Amazon's policies."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The assistant's response is generally well-structured and addresses the customer's concern. However, the correctness and groundedness scores are slightly lower due to the partially unsupported claim about not discussing order details.",
+    "gold_id": "gold_0169"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "Please don't provide your order or account details as they are considered personal information."
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant and action-oriented, but the claim about not sharing order/account details is not supported by the historical evidence, which shows that the customer service team has previously asked customers not to share these details, but the assistant's response is not consistent with this precedent.",
+    "gold_id": "gold_0170"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. It is grounded in the context and evidence, and the tone is polite and professional.",
+    "gold_id": "gold_0171"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and empathetic. The reply is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0174"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [
+      "The carrier had a high volume of packages to deliver on Cyber Monday",
+      "marked your package as delivered prematurely"
+    ],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is highly relevant and action-oriented, but the claims about the carrier's volume and the package being marked as delivered prematurely are not supported by the conversation context or retrieved evidence. The customer has already mentioned that the carrier told them they had too many packages to get out, which is a different reason for the delay.",
+    "gold_id": "gold_0175"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that the customer can drop off the packages at the designated pickup counter is not explicitly supported by the retrieved evidence, although it is a plausible assumption based on Amazon's general practices."
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is generally accurate and provides clear next steps, but the claim about dropping off packages at the pickup counter is not explicitly supported by the retrieved evidence. The tone is polite and professional, and the reply is concise and relevant to the customer's inquiry.",
+    "gold_id": "gold_0172"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not provide a clear timeline for resolving the issue.",
+      "The reply does not specify what actions will be taken to resolve the issue."
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant and correct, but lacks specificity in terms of timeline and actions. It is grounded in the context, but could be more concise. The tone is polite and empathetic, but the unsupported claims detract from the overall score.",
+    "gold_id": "gold_0173"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, correct in its information, and grounded in the context. It provides actionable next steps, is concise, and has a polite tone. However, it could be more specific in its actionability, as it only asks for the order number without providing a clear plan for resolution.",
+    "gold_id": "gold_0176"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is relevant, correct, and grounded, but could be more actionable. The tone is polite and professional. The only area for improvement is providing more concrete next steps.",
+    "gold_id": "gold_0177"
+  },
+  {
+    "relevance": 4,
+    "correctness": 3,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "check your order history to see if you placed two orders by accident"
+    ],
+    "overall_score": 3.67,
+    "evaluation_rationale": "The reply is generally relevant and actionable, but lacks groundedness as it suggests a possible cause (accidental duplicate orders) without evidence. The tone is polite and professional.",
+    "gold_id": "gold_0178"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply directly addresses the customer's concerns, provides a clear next step, and is polite and professional. However, it does not explicitly acknowledge the customer's previous interactions with Amazon, which might be seen as a minor oversight.",
+    "gold_id": "gold_0182"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply is highly relevant, correct, and actionable. It also has a polite tone. However, the correctness score is not perfect as it doesn't explicitly mention that the duplicate charge might be an authorization that will drop off. The reply is also concise and well-grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0180"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's question, provides accurate information, and is fully supported by the context and retrieved evidence. The reply is actionable, concise, and has a polite tone.",
+    "gold_id": "gold_0185"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. It is concise, polite, and professional. The tone is empathetic and supportive.",
+    "gold_id": "gold_0179"
+  },
+  {
+    "relevance": 4,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, factually accurate, and grounded in the context. It provides clear next steps and a polite tone. However, it could be more actionable by providing a specific link or reference to the previous conversation.",
+    "gold_id": "gold_0184"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "If you're still unable to find it within 36 hours of the delivery scan"
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally relevant and correct, but the claim about the 36-hour timeframe is not supported by the retrieved evidence. The tone is polite and professional, but the actionability could be improved by providing a more specific next step, such as a direct link to a form or a phone number to contact.",
+    "gold_id": "gold_0186"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not address the customer's concern about the \u00a313.30 charge being applied three times, rather than just multiple times for the same order."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is relevant and addresses the customer's concern, but it does not fully address the specific issue of the \u00a313.30 charge being applied three times. The tone is polite and professional, but the conciseness could be improved by providing a more direct answer.",
+    "gold_id": "gold_0183"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and supported by the context and retrieved evidence.",
+    "gold_id": "gold_0187"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The reply directly addresses the customer's concern about the tracking status, provides accurate information, and offers clear next steps. The tone is polite and professional. The only minor deduction in correctness is due to the phrase 'it's possible that there might be an issue with the delivery', which is a mild speculation rather than a definitive statement.",
+    "gold_id": "gold_0189"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0190"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 3,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Our team is working on this and will provide an update as soon as possible."
+    ],
+    "overall_score": 4.0,
+    "evaluation_rationale": "The reply is generally relevant and correct, but the claim about the team working on the order and providing an update as soon as possible is not supported by the historical evidence, which suggests that the team may not always provide updates in a timely manner. The reply could be improved by providing a more specific action or next step for the customer.",
+    "gold_id": "gold_0191"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.83,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides a clear next step, and maintains a polite tone. However, it does not explicitly state the correct Amazon policy regarding refunds for wrong items, which is why the correctness score is 4.",
+    "gold_id": "gold_0193"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The reply does not explicitly state that the customer should check their statement to see if one of the charges is pending or processing, although it is implied."
+    ],
+    "overall_score": 4.33,
+    "evaluation_rationale": "The reply is generally accurate and provides a clear next step, but it could be more concise and directly address the customer's concern. The tone is polite and professional, but the claim about the customer needing to check their statement is not explicitly stated.",
+    "gold_id": "gold_0181"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The claim that our team can't access order details through Twitter is partially true, but it's not the main reason for the lack of update.",
+      "The claim that our support team can assist better through the provided link is not necessarily true, as the customer's previous experience suggests"
+    ],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded, but it could be improved by providing a more direct and accurate explanation for the lack of update. The tone is polite and professional, but the conciseness could be improved by avoiding repetitive filler.",
+    "gold_id": "gold_0188"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, providing clear next steps and a polite tone. It's concise and actionable, making it an effective response to the customer's inquiry.",
+    "gold_id": "gold_0192"
+  },
+  {
+    "relevance": 5,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 5,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "escalation to a dedicated returns specialist is not explicitly mentioned in the retrieved evidence"
+    ],
+    "overall_score": 4.5,
+    "evaluation_rationale": "The reply is generally relevant, correct, and actionable, but the claim about escalation to a dedicated returns specialist is not supported by the retrieved evidence. The tone is polite and professional, but the conciseness could be improved by removing the phrase 'Please allow 24-48 hours for them to review your case and get back to you'.",
+    "gold_id": "gold_0195"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The generated assistant reply directly addresses the customer's concern, provides accurate information, and offers a clear next step. The tone is polite and professional. The reply is concise and grounded in the context and retrieved evidence.",
+    "gold_id": "gold_0196"
+  },
+  {
+    "relevance": 2,
+    "correctness": 4,
+    "groundedness": 2,
+    "actionability": 2,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "Requesting the order number again, despite having it in the conversation history"
+    ],
+    "overall_score": 3.17,
+    "evaluation_rationale": "The generated assistant reply is polite and empathetic, but it fails to directly address the customer's specific concern about the delayed delivery and lack of updates. It also requests the order number again, which is unnecessary given the context. The reply is factually accurate according to general Amazon policies, but it lacks grounding in the specific conversation history.",
+    "gold_id": "gold_0198"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 4,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.17,
+    "evaluation_rationale": "The reply is generally relevant, correct, and grounded, but could be more specific in its response. It provides a clear next step for the customer to check the order status, but doesn't directly address the issue of no tracking information. The tone is polite and professional.",
+    "gold_id": "gold_0199"
+  },
+  {
+    "relevance": 4,
+    "correctness": 4,
+    "groundedness": 2,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [
+      "The URL provided is not a valid tracking link, as it's not specific to the customer's order"
+    ],
+    "overall_score": 3.83,
+    "evaluation_rationale": "The reply is relevant to the customer's concern, but it doesn't directly address the urgency of the situation. The correctness is high, but the groundedness is low due to the unsupported claim about the URL. The actionability is good, conciseness is good, and tone is excellent.",
+    "gold_id": "gold_0200"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 4,
+    "conciseness": 4,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 4.67,
+    "evaluation_rationale": "The reply effectively addresses the customer's concern, provides a clear next step, and maintains a polite tone. However, it could be more concise and provide a more specific timeline for when the customer can expect the correct item to be delivered.",
+    "gold_id": "gold_0197"
+  },
+  {
+    "relevance": 5,
+    "correctness": 5,
+    "groundedness": 5,
+    "actionability": 5,
+    "conciseness": 5,
+    "tone": 5,
+    "unsupported_claims": [],
+    "overall_score": 5.0,
+    "evaluation_rationale": "The reply is highly relevant, correct, and grounded, with clear next steps and a polite tone. It effectively addresses the customer's concern and provides a solution.",
+    "gold_id": "gold_0194"
+  }
+]

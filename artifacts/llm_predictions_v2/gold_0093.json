@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "DIGITAL_SERVICES_AND_PRIME"
+  ],
+  "intents": [
+    "DIGITAL_CONTENT_ACCESS"
+  ],
+  "primary_intent": "DIGITAL_CONTENT_ACCESS",
+  "is_multi_intent": false,
+  "states": [
+    "INITIAL_INQUIRY"
+  ],
+  "confidence": 0.95,
+  "reasoning": "The customer is inquiring about accessing Amazon Prime Video on their Sony Bravia with Android TV, which falls under the Digital Services and Prime category and specifically relates to digital content access."
+}

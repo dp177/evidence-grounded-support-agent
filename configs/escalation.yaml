@@ -1,0 +1,134 @@
+# Phase 10: Deterministic Escalation Policy Configuration
+# All decision rules are configurable here — no hardcoded thresholds in Python code.
+
+version: "1.0"
+policy_name: "amazon_support_deterministic_escalation_v1"
+
+# ---------------------------------------------------------------------------
+# 1. Classification Safety Gates
+# ---------------------------------------------------------------------------
+classification:
+  # Minimum classifier confidence required for direct automated resolution.
+  # Below this threshold, policy forces clarification or human review.
+  min_confidence: 0.70
+
+  # When classification status is AMBIGUOUS:
+  # If true, allows an automated clarification-only response if grounding passes.
+  # If false, immediately escalates to human review.
+  allow_ambiguous_clarification: true
+
+  # When classification status is OUT_OF_SCOPE:
+  # Always blocks auto-handling and escalates to human review.
+  block_out_of_scope: true
+
+# ---------------------------------------------------------------------------
+# 2. Security & Fraud Risk Triggers
+# ---------------------------------------------------------------------------
+security_and_fraud:
+  # Customer intents requiring mandatory human specialist review
+  high_risk_intents:
+    - "ACCOUNT_ACCESS_RECOVERY"
+    - "PAYMENT_AND_BILLING_DISPUTES"
+
+  # Severe risk keywords in customer message that require human intervention
+  risk_keywords:
+    - "fraud"
+    - "scam"
+    - "police"
+    - "hacked"
+    - "unauthorized"
+    - "stolen"
+    - "compromised"
+    - "identity theft"
+    - "impersonat"
+
+  # If true, any match in risk_keywords immediately escalates to human review
+  escalate_on_risk_keywords: true
+
+# ---------------------------------------------------------------------------
+# 3. Grounding Hard Blockers
+# ---------------------------------------------------------------------------
+grounding:
+  # Must pass grounding verification (grounded == True)
+  require_grounded: true
+
+  # Maximum permitted contradicted claims (must be 0)
+  max_contradicted_claims: 0
+
+  # Maximum permitted unsupported claims (must be 0)
+  max_unsupported_claims: 0
+
+  # Block if response asserts unconfirmed current-case actions
+  block_unsupported_current_actions: true
+
+  # Block if evidence validation detected invented document IDs
+  block_invalid_evidence_ids: true
+
+# ---------------------------------------------------------------------------
+# 4. Retrieval Quality Signals
+# ---------------------------------------------------------------------------
+retrieval:
+  # Minimum reranked score for the top evidence item.
+  # If top evidence score is below this and the response is not a harmless clarification,
+  # auto-handling is blocked due to low retrieval confidence.
+  min_top_evidence_score: 0.45
+
+  # Whether to require evidence for informational responses
+  require_evidence_for_resolution: true
+
+# ---------------------------------------------------------------------------
+# 5. Operational State Inconsistency Rules
+# ---------------------------------------------------------------------------
+state_inconsistency:
+  # When customer already checked tracking:
+  # Block responses that redundantly tell them to check tracking again.
+  TRACKING_ALREADY_CHECKED:
+    blocked_response_patterns:
+      - "(?:please\\s+)?(?:check|track|view|monitor)\\s+(?:the\\s+)?(?:tracking|order\\s+status|parcel|shipment)"
+      - "tracking\\s+(?:link|page|details|number|information)"
+    reason_code: "INCONSISTENT_WITH_STATE"
+    message: "Response tells customer to check tracking when tracking was already verified."
+
+  # When customer already contacted carrier:
+  # Block responses that redundantly redirect them to the carrier.
+  CARRIER_ALREADY_CONTACTED:
+    blocked_response_patterns:
+      - "(?:please\\s+)?(?:contact|call|reach\\s+out\\s+to|speak\\s+with)\\s+(?:the\\s+)?(?:carrier|courier|delivery\\s+company|driver)"
+    reason_code: "INCONSISTENT_WITH_STATE"
+    message: "Response redirects customer to carrier when carrier was already contacted."
+
+  # When customer already provided order or issue details:
+  # Block responses that redundantly request the identical details.
+  DETAILS_ALREADY_PROVIDED:
+    blocked_response_patterns:
+      - "(?:please\\s+|can\\s+you\\s+)?provide\\s+(?:your\\s+)?(?:order\\s+number|details|account\\s+details|email)"
+      - "share\\s+(?:your\\s+)?(?:order\\s+number|details)"
+    reason_code: "INCONSISTENT_WITH_STATE"
+    message: "Response asks for order/case details that were already provided in the conversation."
+
+  # When expected delivery window has already elapsed:
+  # Block responses that merely advise waiting without providing an alternative.
+  WAITING_WINDOW_EXCEEDED:
+    blocked_response_patterns:
+      - "(?:please\\s+|just\\s+)?wait\\s+(?:a\\s+bit|patiently|few\\s+days|a\\s+few\\s+more\\s+days)"
+    reason_code: "INCONSISTENT_WITH_STATE"
+    message: "Response merely asks customer to wait when the waiting window is already exceeded."
+
+# ---------------------------------------------------------------------------
+# 6. Permissible Reason Codes
+# ---------------------------------------------------------------------------
+reason_codes:
+  - "SAFE_TO_AUTO_HANDLE"
+  - "SAFE_CLARIFICATION"
+  - "GROUNDING_FAILURE"
+  - "CONTRADICTED_RESPONSE"
+  - "UNSUPPORTED_CURRENT_ACTION"
+  - "HIGH_RISK_SECURITY"
+  - "FRAUD_CONCERN"
+  - "OUT_OF_SCOPE"
+  - "AMBIGUOUS_CLASSIFICATION"
+  - "LOW_CLASSIFICATION_CONFIDENCE"
+  - "INSUFFICIENT_EVIDENCE"
+  - "INCONSISTENT_WITH_STATE"
+  - "MALFORMED_RESPONSE"
+  - "INVALID_EVIDENCE_IDS"

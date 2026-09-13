@@ -1,0 +1,16 @@
+{
+  "classification_status": "NORMAL",
+  "areas": [
+    "RETURNS_AND_REPLACEMENTS"
+  ],
+  "intents": [
+    "RETURN_PICKUP_ISSUE"
+  ],
+  "primary_intent": "RETURN_PICKUP_ISSUE",
+  "is_multi_intent": false,
+  "states": [
+    "DETAILS_ALREADY_PROVIDED"
+  ],
+  "confidence": 0.95,
+  "reasoning": "Customer is upset about not receiving a refund after returning an item, and mentions that the support is pathetic."
+}
