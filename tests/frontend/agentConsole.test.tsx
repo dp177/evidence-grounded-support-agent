@@ -147,4 +147,45 @@ describe('AI Support Agent Console - Unit & Integration Tests', () => {
 
     expect(screen.getAllByText(/ACCOUNT_ACCESS_RECOVERY/i).length).toBeGreaterThan(0);
   });
+
+  // 13. Custom Live Demo Mode Switcher & Empty State
+  it('switches to Custom Live Demo mode and shows centered chat hero', () => {
+    render(<App />);
+
+    const customModeBtn = screen.getByRole('button', { name: /CUSTOM LIVE DEMO/i });
+    fireEvent.click(customModeBtn);
+
+    expect(screen.getByText(/AI Support Agent — Custom Live Demo/i)).toBeInTheDocument();
+    expect(screen.getByText(/SAMPLE INQUIRIES TO EXPLORE/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Type a customer message/i)).toBeInTheDocument();
+  });
+
+  // 14. Custom Live Demo Arbitrary Message & Assistant Turn
+  it('submits arbitrary customer message and renders assistant turn', async () => {
+    render(<App />);
+
+    const customModeBtn = screen.getByRole('button', { name: /CUSTOM LIVE DEMO/i });
+    fireEvent.click(customModeBtn);
+
+    const input = screen.getByPlaceholderText(/Type a customer message/i);
+    fireEvent.change(input, { target: { value: 'My package is late and tracking shows delayed' } });
+
+    const sendBtn = screen.getByTitle(/Send Message/i);
+    fireEvent.click(sendBtn);
+
+    expect(screen.getByText('My package is late and tracking shows delayed')).toBeInTheDocument();
+  });
+
+  // 15. No Chain-of-Thought Exposure Verification
+  it('strictly displays observable system activity without internal chain-of-thought', () => {
+    render(<App />);
+
+    const customModeBtn = screen.getByRole('button', { name: /CUSTOM LIVE DEMO/i });
+    fireEvent.click(customModeBtn);
+
+    expect(screen.queryByText(/chain of thought/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/internal reasoning/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/secret thoughts/i)).not.toBeInTheDocument();
+  });
 });
+

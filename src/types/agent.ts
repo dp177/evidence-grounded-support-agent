@@ -1,4 +1,4 @@
-export type MessageRole = 'CUSTOMER' | 'AGENT' | 'SYSTEM';
+export type MessageRole = 'CUSTOMER' | 'AGENT' | 'ASSISTANT' | 'SYSTEM';
 
 export interface ConversationMessage {
   id: string;
