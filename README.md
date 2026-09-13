@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <!--                         HERO SECTION                              -->
@@ -564,4 +564,3 @@ This project is part of the Hiver SDE Intern Assignment submission.
 <sub>Every response is grounded. Every decision is auditable. Every unsafe case is caught.</sub>
 
 </div>
-]]>
