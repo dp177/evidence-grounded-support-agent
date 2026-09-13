@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useCustomChat } from '../../hooks/useCustomChat';
 import { CustomChatMessage } from './CustomChatMessage';
 import { CustomComposer } from './CustomComposer';
-import { Bot, Sparkles, MessageSquare, ArrowDown } from 'lucide-react';
+import { Bot, ArrowDown } from 'lucide-react';
 
 export const CustomLiveChat: React.FC = () => {
   const {
@@ -51,8 +51,8 @@ export const CustomLiveChat: React.FC = () => {
   };
 
   const samplePrompts = [
-    'My package says delivered but I never received it, and I already talked to the carrier.',
-    'Someone hacked my account and made an unauthorized charge for $450.',
+    'my package says delivered but I never got it and I already contacted the carrier twice',
+    'someone hacked my amazon account and used my credit card',
     'I returned my item 4 days ago, when will my refund post to my card?',
   ];
 
@@ -85,7 +85,7 @@ export const CustomLiveChat: React.FC = () => {
           }}
         >
           {messages.length === 0 ? (
-            /* Empty State Hero (Claude / ChatGPT style) */
+            /* Clean Centered Empty State */
             <div
               style={{
                 display: 'flex',
@@ -122,7 +122,7 @@ export const CustomLiveChat: React.FC = () => {
                     letterSpacing: '-0.02em',
                   }}
                 >
-                  AI Support Agent — Custom Live Demo
+                  AI Support Agent
                 </h1>
                 <p
                   style={{
@@ -133,7 +133,7 @@ export const CustomLiveChat: React.FC = () => {
                     lineHeight: '1.5',
                   }}
                 >
-                  Type any Amazon customer message. Watch the agent dynamically classify intent, retrieve precedent cases, verify claims, and evaluate safety policies in real time.
+                  Type a customer-support message to start.
                 </p>
               </div>
 

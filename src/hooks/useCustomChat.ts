@@ -7,14 +7,16 @@ const generateCustomConversationId = (): string => {
   return `custom_${Math.random().toString(36).substring(2, 8)}`;
 };
 
+// Exact 8-stage pipeline requested for live execution
 const INITIAL_STEPS_TEMPLATE: Omit<AgentActivityStepInfo, 'id'>[] = [
-  { stage: 'Conversation', label: 'Reading conversation & context', status: 'RUNNING' },
-  { stage: 'Classify', label: 'Identifying support intent & state', status: 'IDLE' },
+  { stage: 'Conversation', label: 'Conversation loaded', status: 'COMPLETED' },
+  { stage: 'Classify', label: 'Analyzing conversation', status: 'RUNNING' },
+  { stage: 'State', label: 'Updating conversation state', status: 'IDLE' },
   { stage: 'Retrieve', label: 'Searching historical support cases', status: 'IDLE' },
-  { stage: 'Rerank', label: 'Selecting strongest precedents', status: 'IDLE' },
-  { stage: 'Generate', label: 'Drafting grounded response', status: 'IDLE' },
-  { stage: 'Ground', label: 'Checking response claims against evidence', status: 'IDLE' },
-  { stage: 'Decide', label: 'Evaluating safety & escalation rules', status: 'IDLE' },
+  { stage: 'Rerank', label: 'Selecting relevant precedents', status: 'IDLE' },
+  { stage: 'Generate', label: 'Drafting response', status: 'IDLE' },
+  { stage: 'Ground', label: 'Checking grounding', status: 'IDLE' },
+  { stage: 'Decide', label: 'Making support decision', status: 'IDLE' },
 ];
 
 export const useCustomChat = () => {
@@ -60,7 +62,7 @@ export const useCustomChat = () => {
       setMessages((prev) => [...prev, newCustomerMsg, newAssistantMsg]);
       setIsRunning(true);
 
-      // Build payload for API
+      // Build payload for API preserving full multi-turn conversation
       const conversationHistory: ConversationMessage[] = [
         ...messages
           .filter((m) => m.text)
@@ -72,8 +74,8 @@ export const useCustomChat = () => {
         { id: customerMsgId, role: 'CUSTOMER' as const, text },
       ];
 
-      // Simulated progressive activity transitions while backend runs
-      let stepIdx = 0;
+      // Simulated progressive activity transitions across the 8 stages
+      let stepIdx = 1;
       const stepInterval = setInterval(() => {
         stepIdx++;
         if (stepIdx < initialSteps.length) {
@@ -83,13 +85,13 @@ export const useCustomChat = () => {
               const updatedSteps = msg.activitySteps.map((st, i) => {
                 if (i < stepIdx) return { ...st, status: 'COMPLETED' as const };
                 if (i === stepIdx) return { ...st, status: 'RUNNING' as const };
-                return st;
+                return { ...st, status: 'IDLE' as const };
               });
               return { ...msg, activitySteps: updatedSteps };
             })
           );
         }
-      }, 70);
+      }, 55);
 
       try {
         const result = await agentApi.runAgent(conversationId, conversationHistory);
@@ -98,6 +100,8 @@ export const useCustomChat = () => {
         setMessages((prev) =>
           prev.map((msg) => {
             if (msg.id !== assistantMsgId || !msg.activitySteps) return msg;
+
+            // Structured completed steps conforming to requirement specifications
             const completedSteps: AgentActivityStepInfo[] = [
               {
                 id: 's0',
@@ -109,43 +113,50 @@ export const useCustomChat = () => {
               {
                 id: 's1',
                 stage: 'Classify',
-                label: `Intent: ${result.classification.primary_intent}`,
+                label: 'Classification completed',
                 status: 'COMPLETED',
-                detail: `${(result.classification.confidence * 100).toFixed(0)}% confidence`,
+                detail: `${result.classification.primary_intent} (${(result.classification.confidence * 100).toFixed(0)}% conf)`,
               },
               {
                 id: 's2',
-                stage: 'Retrieve',
-                label: 'Historical cases retrieved',
+                stage: 'State',
+                label: 'State updated',
                 status: 'COMPLETED',
-                detail: `${result.retrieved_evidence.length} candidates`,
+                detail: result.classification.states.join(', ') || 'Normal',
               },
               {
                 id: 's3',
+                stage: 'Retrieve',
+                label: 'Retrieved historical cases',
+                status: 'COMPLETED',
+                detail: `${result.retrieved_evidence.length} precedents`,
+              },
+              {
+                id: 's4',
                 stage: 'Rerank',
-                label: 'Precedents selected',
+                label: 'Reranked evidence',
                 status: 'COMPLETED',
                 detail: `${result.reranking.unique_conversations} threads`,
               },
               {
-                id: 's4',
+                id: 's5',
                 stage: 'Generate',
-                label: 'Response drafted',
+                label: 'Response generated',
                 status: 'COMPLETED',
               },
               {
-                id: 's5',
+                id: 's6',
                 stage: 'Ground',
-                label: `Grounding verified (${result.grounding.supported_claims}/${result.grounding.total_claims} claims)`,
+                label: 'Grounding verified',
                 status: result.grounding.status === 'GROUNDED' ? 'COMPLETED' : 'WARNING',
-                detail: result.grounding.revision_count > 0 ? `revised ${result.grounding.revision_count}x` : undefined,
+                detail: `${result.grounding.supported_claims}/${result.grounding.total_claims} claims`,
               },
               {
-                id: 's6',
+                id: 's7',
                 stage: 'Decide',
-                label: `Policy Gate: ${result.escalation.decision}`,
+                label: 'Decision completed',
                 status: result.escalation.decision === 'AUTO_HANDLE' ? 'COMPLETED' : 'WARNING',
-                detail: result.escalation.action,
+                detail: result.escalation.decision,
               },
             ];
 
@@ -166,11 +177,20 @@ export const useCustomChat = () => {
             if (msg.id !== assistantMsgId) return msg;
             return {
               ...msg,
-              text: 'A temporary error occurred while processing this customer message. Please retry or transfer to a human operator.',
+              text: '', // Never fabricate a response on failure
               activityStatus: 'FAILED',
-              activitySteps: msg.activitySteps?.map((st) =>
-                st.status === 'RUNNING' ? { ...st, status: 'FAILED' } : st
-              ),
+              activitySteps: [
+                ...(msg.activitySteps?.map((st) =>
+                  st.status === 'RUNNING' ? { ...st, status: 'FAILED' as const } : st
+                ) || []),
+                {
+                  id: 'err_step',
+                  stage: 'Decide',
+                  label: '⚠ Agent could not complete the request',
+                  status: 'FAILED',
+                  detail: `Reason: ${errMsg}`,
+                },
+              ],
             };
           })
         );

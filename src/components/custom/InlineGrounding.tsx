@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GroundingResult } from '../../types/agent';
-import { ShieldCheck, ChevronDown, ChevronUp, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { ChevronDown, ChevronUp, CheckCircle2, AlertTriangle } from 'lucide-react';
 
 interface InlineGroundingProps {
   grounding: GroundingResult;
@@ -9,6 +9,17 @@ interface InlineGroundingProps {
 export const InlineGrounding: React.FC<InlineGroundingProps> = ({ grounding }) => {
   const [expanded, setExpanded] = useState(false);
   const isGrounded = grounding.status === 'GROUNDED';
+  const isRevised = grounding.revision_count > 0;
+
+  const getHeaderTitle = () => {
+    if (!isGrounded) {
+      return '⚠ Response needs revision';
+    }
+    if (isRevised) {
+      return `Revised after grounding check · Revision ${grounding.revision_count} · Grounded ✓`;
+    }
+    return `Grounded ✓ · ${grounding.total_claims} claims checked`;
+  };
 
   return (
     <div
@@ -40,27 +51,11 @@ export const InlineGrounding: React.FC<InlineGroundingProps> = ({ grounding }) =
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           {isGrounded ? <CheckCircle2 size={12} /> : <AlertTriangle size={12} />}
-          <span style={{ fontWeight: 600 }}>
-            {isGrounded
-              ? `Grounding Verified (${grounding.supported_claims}/${grounding.total_claims} claims supported)`
-              : 'Grounding Verification Warning'}
-          </span>
-          {grounding.revision_count > 0 && (
-            <span
-              style={{
-                backgroundColor: 'rgba(0, 0, 0, 0.06)',
-                padding: '1px 5px',
-                borderRadius: '2px',
-                fontSize: '10px',
-              }}
-            >
-              revised ({grounding.revision_count})
-            </span>
-          )}
+          <span style={{ fontWeight: 600 }}>{getHeaderTitle()}</span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span>{expanded ? 'Hide claims' : 'View claims'}</span>
+          <span>{expanded ? 'Hide verification details' : 'Inspect claims'}</span>
           {expanded ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
         </div>
       </button>
@@ -72,19 +67,45 @@ export const InlineGrounding: React.FC<InlineGroundingProps> = ({ grounding }) =
             borderTop: '1px solid rgba(0, 0, 0, 0.08)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '6px',
+            gap: '8px',
             backgroundColor: '#ffffff',
             fontSize: '11px',
+            fontFamily: 'var(--font-mono)',
           }}
         >
+          {/* Claim Summary Stats Bar */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '4px 8px',
+              backgroundColor: '#f8fafc',
+              borderRadius: '2px',
+              fontSize: '10px',
+            }}
+          >
+            <span>{grounding.total_claims} claims checked</span>
+            <span style={{ color: 'var(--deep-enterprise-green)', fontWeight: 600 }}>
+              {grounding.supported_claims} supported
+            </span>
+            <span style={{ color: grounding.unsupported_claims > 0 ? 'var(--coral)' : 'var(--slate)' }}>
+              {grounding.unsupported_claims} unsupported
+            </span>
+            <span style={{ color: grounding.contradicted_claims > 0 ? 'var(--error-red)' : 'var(--slate)' }}>
+              {grounding.contradicted_claims} contradicted
+            </span>
+          </div>
+
+          {/* Individual Claim Breakdown */}
           {grounding.claims.map((claim) => (
             <div
               key={claim.id}
               style={{
                 padding: '6px 8px',
                 borderRadius: 'var(--radius-xs)',
-                backgroundColor: '#fafafb',
-                border: '1px solid var(--card-border)',
+                backgroundColor: claim.status === 'UNSUPPORTED' ? '#fff1f2' : '#fafafb',
+                border: `1px solid ${claim.status === 'UNSUPPORTED' ? '#fecdd3' : 'var(--card-border)'}`,
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '2px',
@@ -93,24 +114,26 @@ export const InlineGrounding: React.FC<InlineGroundingProps> = ({ grounding }) =
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span
                   style={{
-                    fontFamily: 'var(--font-mono)',
                     fontSize: '9px',
                     fontWeight: 600,
                     color:
                       claim.status === 'UNSUPPORTED'
                         ? 'var(--coral)'
+                        : claim.status === 'CONTRADICTED'
+                        ? 'var(--error-red)'
                         : 'var(--deep-enterprise-green)',
                   }}
                 >
-                  {claim.status}
+                  {claim.status === 'UNSUPPORTED' ? '⚠ UNSUPPORTED CLAIM' : `✓ ${claim.status}`}
                 </span>
-                {claim.supporting_ref && (
-                  <span style={{ color: 'var(--muted-slate)', fontSize: '9px' }}>
-                    Ref: {claim.supporting_ref}
-                  </span>
-                )}
+                <span style={{ fontSize: '9px', color: 'var(--slate)' }}>
+                  source: {claim.supporting_ref || claim.source_type}
+                </span>
               </div>
-              <div style={{ color: 'var(--ink)' }}>{claim.text}</div>
+
+              <div style={{ color: 'var(--ink)', fontSize: '11px', lineHeight: '1.4' }}>
+                "{claim.text}"
+              </div>
             </div>
           ))}
         </div>

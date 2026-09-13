@@ -4,7 +4,7 @@ export type ActivityStepStatus = 'IDLE' | 'RUNNING' | 'COMPLETED' | 'WARNING' | 
 
 export interface AgentActivityStepInfo {
   id: string;
-  stage: StageName;
+  stage: StageName | 'State';
   label: string;
   status: ActivityStepStatus;
   detail?: string;

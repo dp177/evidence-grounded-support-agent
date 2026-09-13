@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { AgentActivityStepInfo } from '../../types/customChat';
 import { AgentActivityStep } from './AgentActivityStep';
-import { Sparkles, ChevronDown, ChevronUp, CheckCheck, AlertOctagon } from 'lucide-react';
+import { Sparkles, ChevronDown, ChevronUp, AlertOctagon } from 'lucide-react';
+import { agentApi } from '../../services/agentApi';
 
 interface AgentActivityMessageProps {
   steps: AgentActivityStepInfo[];
@@ -15,6 +16,7 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
   isEscalated = false,
 }) => {
   const [expanded, setExpanded] = useState(isRunning);
+  const isMock = agentApi.isMock();
 
   // Auto-collapse when finished, keep open when running
   React.useEffect(() => {
@@ -25,12 +27,21 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
 
   if (!steps || steps.length === 0) return null;
 
+  const hasFailed = steps.some((s) => s.status === 'FAILED');
+
+  const getTitle = () => {
+    if (hasFailed) return 'Agent activity · Execution Issue';
+    if (isRunning) return 'Agent activity · In progress';
+    if (isEscalated) return 'Agent activity · Human Review Required';
+    return 'Agent activity · Completed';
+  };
+
   return (
     <div
       style={{
         borderRadius: 'var(--radius-sm)',
-        border: '1px solid var(--card-border)',
-        backgroundColor: '#fafafb',
+        border: `1px solid ${hasFailed ? 'rgba(179, 0, 0, 0.3)' : 'var(--card-border)'}`,
+        backgroundColor: hasFailed ? 'rgba(179, 0, 0, 0.04)' : '#fafafb',
         overflow: 'hidden',
         fontSize: '13px',
         margin: 'var(--space-8) 0',
@@ -54,15 +65,29 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
           color: 'var(--slate)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Sparkles size={12} color="var(--deep-enterprise-green)" />
-          <span style={{ fontWeight: 600, color: 'var(--ink)' }}>
-            {isRunning
-              ? 'Agent activity · In Progress'
-              : isEscalated
-              ? 'Agent activity · Human Review Required'
-              : 'Agent activity · Completed'}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {hasFailed ? (
+            <AlertOctagon size={13} color="var(--error-red)" />
+          ) : (
+            <Sparkles size={12} color="var(--deep-enterprise-green)" />
+          )}
+          <span style={{ fontWeight: 600, color: hasFailed ? 'var(--error-red)' : 'var(--ink)' }}>
+            ✦ {getTitle()}
           </span>
+
+          {isMock && (
+            <span
+              style={{
+                fontSize: '9px',
+                padding: '1px 5px',
+                borderRadius: '2px',
+                backgroundColor: 'rgba(0, 0, 0, 0.06)',
+                color: 'var(--slate)',
+              }}
+            >
+              Simulated pipeline activity
+            </span>
+          )}
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>

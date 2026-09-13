@@ -155,7 +155,8 @@ describe('AI Support Agent Console - Unit & Integration Tests', () => {
     const customModeBtn = screen.getByRole('button', { name: /CUSTOM LIVE DEMO/i });
     fireEvent.click(customModeBtn);
 
-    expect(screen.getByText(/AI Support Agent — Custom Live Demo/i)).toBeInTheDocument();
+    expect(screen.getByText(/^AI Support Agent$/i)).toBeInTheDocument();
+    expect(screen.getByText(/Type a customer-support message to start/i)).toBeInTheDocument();
     expect(screen.getByText(/SAMPLE INQUIRIES TO EXPLORE/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Type a customer message/i)).toBeInTheDocument();
   });

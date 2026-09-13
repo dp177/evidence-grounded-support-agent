@@ -10,7 +10,9 @@ const isMockMode = (): boolean => {
       return stored === 'true';
     }
   }
-  // Default to true for deterministic frontend independence as specified in requirements
+  if (import.meta.env.VITE_USE_MOCK_AGENT !== undefined) {
+    return import.meta.env.VITE_USE_MOCK_AGENT === 'true';
+  }
   return true;
 };
 
@@ -18,7 +20,7 @@ export class ProductionAgentApi implements IAgentApi {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = import.meta.env.VITE_AGENT_API_URL || 'http://localhost:8000/api/v1';
+    this.baseUrl = import.meta.env.VITE_AGENT_API_URL || '/api';
   }
 
   isMock(): boolean {
@@ -33,9 +35,13 @@ export class ProductionAgentApi implements IAgentApi {
       return mockAgentApi.runAgent(conversationId, messages);
     }
 
-    // Live endpoint execution
+    // Live endpoint execution per requirement specification: POST /api/agent/message
     try {
-      const response = await fetch(`${this.baseUrl}/agent/run`, {
+      const endpoint = this.baseUrl.endsWith('/')
+        ? `${this.baseUrl}agent/message`
+        : `${this.baseUrl}/agent/message`;
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
