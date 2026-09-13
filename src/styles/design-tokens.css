@@ -1,0 +1,74 @@
+:root {
+  /* Brand & Accent */
+  --cohere-black: #000000;
+  --near-black-primary: #17171c;
+  --deep-enterprise-green: #003c33;
+  --dark-navy: #071829;
+  --action-blue: #1863dc;
+  --coral: #ff7759;
+  --soft-coral: #ffad9b;
+  --coral-tint: rgba(255, 119, 89, 0.08);
+
+  /* Surface & Background */
+  --canvas-white: #ffffff;
+  --soft-stone: #eeece7;
+  --pale-green-wash: #edfce9;
+  --pale-blue-wash: #f1f5ff;
+  --card-border: #f2f2f2;
+  --surface-hover: #f9f9fa;
+  --surface-active: #f1f1f3;
+
+  /* Text & Rules */
+  --ink: #212121;
+  --muted-slate: #93939f;
+  --slate: #75758a;
+  --hairline: #d9d9dd;
+  --border-light: #e5e7eb;
+
+  /* Semantic */
+  --focus-blue: #4c6ee6;
+  --form-focus-violet: #9b60aa;
+  --error-red: #b30000;
+  --error-tint: rgba(179, 0, 0, 0.06);
+  --success-green: #0d7a55;
+  --success-tint: rgba(13, 122, 85, 0.08);
+  --warning-amber: #b45309;
+  --warning-tint: rgba(180, 83, 9, 0.08);
+
+  /* Typography Families */
+  --font-display: "Space Grotesk", "CohereText", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", "Unica77 Cohere Web", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "CohereMono", monospace, monospace;
+
+  /* Radius Scale */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-pill: 32px;
+  --radius-full: 9999px;
+
+  /* Spacing Scale */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-22: 22px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+
+  /* Elevation (Flat hierarchy) */
+  --elevation-border: 1px solid var(--border-light);
+  --elevation-hairline: 1px solid var(--hairline);
+  --elevation-dark-border: 1px solid rgba(255, 255, 255, 0.12);
+}

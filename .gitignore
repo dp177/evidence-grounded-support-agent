@@ -28,6 +28,12 @@ wheels/
 .installed.cfg
 *.egg
 
+# Node & Frontend
+node_modules/
+dist/
+.vitest/
+
+
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
