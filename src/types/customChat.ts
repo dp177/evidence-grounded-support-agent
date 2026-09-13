@@ -1,4 +1,4 @@
-import { AgentResponse, StageName } from './agent';
+import { AgentResponse, ClassificationResult, RetrievalEvidence, RerankingResult, GroundingResult, EscalationResult, StageName } from './agent';
 
 export type ActivityStepStatus = 'IDLE' | 'RUNNING' | 'COMPLETED' | 'WARNING' | 'FAILED';
 
@@ -20,6 +20,14 @@ export interface CustomChatMessage {
   activitySteps?: AgentActivityStepInfo[];
   agentResponse?: AgentResponse;
   isLatest?: boolean;
+  thoughtDuration?: number;
+  elapsedSeconds?: number;
+  // Progressive partial state: populated as SSE stage events arrive
+  partialClassification?: ClassificationResult;
+  partialEvidence?: RetrievalEvidence[];
+  partialReranking?: RerankingResult;
+  partialGrounding?: GroundingResult;
+  partialEscalation?: EscalationResult;
 }
 
 export type AppMode = 'DEMO_SCENARIOS' | 'CUSTOM_LIVE';

@@ -1,25 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CustomChatMessage as ICustomChatMessage } from '../../types/customChat';
 import { AgentActivityMessage } from './AgentActivityMessage';
 import { InlineClassification } from './InlineClassification';
 import { InlineEvidence } from './InlineEvidence';
 import { InlineGrounding } from './InlineGrounding';
 import { HumanHandoffMessage } from './HumanHandoffMessage';
-import { Bot, Copy, Check, Send, CheckCircle2, ChevronDown, ChevronUp, AlertOctagon } from 'lucide-react';
+import { Bot, Copy, Check, Send, CheckCircle2, ChevronDown, ChevronUp, AlertOctagon, Terminal } from 'lucide-react';
 
 interface CustomChatMessageProps {
   message: ICustomChatMessage;
+  turnIndex?: number;
+  totalTurns?: number;
   onSendResponse?: (text: string) => void;
   onTakeOver?: () => void;
+  onRetry?: () => void;
+  onSwitchToDemo?: () => void;
 }
 
 export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
   message,
+  turnIndex = 1,
+  totalTurns = 1,
   onSendResponse,
   onTakeOver,
+  onRetry,
+  onSwitchToDemo,
 }) => {
   const [copied, setCopied] = useState(false);
   const [showTrace, setShowTrace] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+
+  // Smooth streaming token / typewriter reveal for assistant responses
+  const [displayedText, setDisplayedText] = useState<string>(() => message.text || '');
+  const [isStreaming, setIsStreaming] = useState(false);
+  const streamRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!message.text) {
+      setDisplayedText('');
+      setIsStreaming(false);
+      return;
+    }
+
+    if (displayedText === message.text) {
+      return;
+    }
+
+    // Stream words smoothly over ~500-800ms
+    const fullText = message.text;
+    const words = fullText.split(' ');
+    let currentWordIdx = 0;
+    const chunkSize = Math.max(2, Math.ceil(words.length / 28));
+    setIsStreaming(true);
+
+    if (streamRef.current) clearInterval(streamRef.current);
+    streamRef.current = setInterval(() => {
+      currentWordIdx += chunkSize;
+      if (currentWordIdx >= words.length) {
+        setDisplayedText(fullText);
+        setIsStreaming(false);
+        if (streamRef.current) {
+          clearInterval(streamRef.current);
+          streamRef.current = null;
+        }
+      } else {
+        setDisplayedText(words.slice(0, currentWordIdx).join(' '));
+      }
+    }, 20);
+
+    return () => {
+      if (streamRef.current) {
+        clearInterval(streamRef.current);
+        streamRef.current = null;
+      }
+    };
+  }, [message.text]);
 
   const isCustomer = message.role === 'CUSTOMER';
   const resp = message.agentResponse;
@@ -128,10 +183,14 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
             steps={message.activitySteps}
             isRunning={message.activityStatus === 'RUNNING'}
             isEscalated={isEscalated}
+            thoughtDuration={message.thoughtDuration}
+            elapsedSeconds={message.elapsedSeconds}
+            onRetry={onRetry}
+            onSwitchToDemo={onSwitchToDemo}
           />
         )}
 
-        {/* 2. Failure Error Message if pipeline threw */}
+        {/* 2. Failure Error Banner */}
         {message.activityStatus === 'FAILED' && (
           <div
             style={{
@@ -143,30 +202,37 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
               fontSize: '12px',
               fontFamily: 'var(--font-mono)',
               display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
+              flexDirection: 'column',
+              gap: '6px',
             }}
           >
-            <AlertOctagon size={14} />
-            <span>⚠ Agent could not complete the request. Human operator takeover recommended.</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+              <AlertOctagon size={14} />
+              <span>LIVE AGENT UNAVAILABLE</span>
+            </div>
+            <p style={{ margin: 0, fontSize: '11px', color: '#7f1d1d' }}>
+              The live backend pipeline did not respond or returned a connection error. No canned/mock response was fabricated.
+            </p>
           </div>
         )}
 
-        {/* 3. Inline Classification summary */}
-        {resp?.classification && (
-          <InlineClassification classification={resp.classification} />
+        {/* 3. Inline Classification summary — shown as soon as classify event arrives */}
+        {(resp?.classification || message.partialClassification) && (
+          <InlineClassification classification={(resp?.classification || message.partialClassification)!} />
         )}
 
-        {/* 4. Inline Historical Evidence & Reranking */}
-        {resp?.retrieved_evidence && resp.retrieved_evidence.length > 0 && (
+        {/* 4. Inline Historical Evidence & Reranking — shown as soon as rerank event arrives */}
+        {((resp?.retrieved_evidence && resp.retrieved_evidence.length > 0) ||
+          (message.partialEvidence && message.partialEvidence.length > 0)) && (
           <InlineEvidence
-            evidenceList={resp.retrieved_evidence}
-            reranking={resp.reranking}
+            evidenceList={(resp?.retrieved_evidence || message.partialEvidence)!}
+            reranking={resp?.reranking || message.partialReranking}
+            classification={resp?.classification || message.partialClassification}
           />
         )}
 
-        {/* 5. Assistant Response Text */}
-        {message.text && (
+        {/* 5. Assistant Response Text — shown as soon as generate event arrives */}
+        {(displayedText || message.text || isStreaming) && (
           <div
             style={{
               padding: '14px 18px',
@@ -178,19 +244,22 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
               color: 'var(--ink)',
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
+              boxShadow: isStreaming ? '0 2px 12px rgba(13, 122, 85, 0.08)' : 'none',
+              transition: 'box-shadow 300ms ease',
             }}
           >
-            {message.text}
+            {displayedText || message.text}
+            {isStreaming && <span className="typewriter-cursor" />}
           </div>
         )}
 
-        {/* 6. Inline Grounding Status */}
-        {resp?.grounding && (
-          <InlineGrounding grounding={resp.grounding} />
+        {/* 6. Inline Grounding Status — shown as soon as ground event arrives */}
+        {(resp?.grounding || message.partialGrounding) && (
+          <InlineGrounding grounding={(resp?.grounding || message.partialGrounding)!} />
         )}
 
-        {/* 7. Inline Decision Status */}
-        {isAutoHandle && resp && (
+        {/* 7. Inline Decision Status — shown as soon as decide event arrives */}
+        {(isAutoHandle || message.partialEscalation?.decision === 'AUTO_HANDLE') && (resp || message.partialEscalation) && (
           <div
             style={{
               display: 'flex',
@@ -206,12 +275,12 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
               AUTO-HANDLE
             </span>
             <span style={{ color: 'var(--slate)' }}>•</span>
-            <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{resp.escalation.action}</span>
+            <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{(resp?.escalation.action || message.partialEscalation?.action)}</span>
           </div>
         )}
 
         {/* 8. Human Review / Handoff package if escalated */}
-        {isEscalated && resp && (
+        {(isEscalated || message.partialEscalation?.decision === 'HUMAN_REVIEW') && resp && (
           <HumanHandoffMessage
             response={resp}
             customerMessage={resp.retrieval_query.customer_query}
@@ -219,7 +288,7 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
           />
         )}
 
-        {/* 9. Action Bar & Send Button Safety */}
+        {/* 9. Action Bar, Telemetry & Debug Triggers */}
         {message.text && (
           <div
             style={{
@@ -252,6 +321,19 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
                 >
                   <span>View agent trace</span>
                   {showTrace ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
+                </button>
+              )}
+
+              {resp && (
+                <button
+                  type="button"
+                  onClick={() => setShowDebug(!showDebug)}
+                  className="btn-secondary"
+                  style={{ padding: '0', fontSize: '11px', color: 'var(--slate)', display: 'flex', alignItems: 'center', gap: '4px' }}
+                >
+                  <Terminal size={11} />
+                  <span>Technical details</span>
+                  {showDebug ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
                 </button>
               )}
             </div>
@@ -345,6 +427,80 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
             <span style={{ color: 'var(--deep-enterprise-green)', fontWeight: 600 }}>
               Decision (Total: {resp.trace.total_ms}ms)
             </span>
+          </div>
+        )}
+
+        {/* 11. Debug Panel (Requirement 22): LIVE REQUEST & LIVE RESPONSE */}
+        {showDebug && resp && (
+          <div
+            style={{
+              padding: '12px 14px',
+              backgroundColor: '#17171c',
+              color: '#f4f4f5',
+              borderRadius: 'var(--radius-xs)',
+              fontSize: '11px',
+              fontFamily: 'var(--font-mono)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+            }}
+          >
+            <div>
+              <div style={{ color: '#38bdf8', fontWeight: 600, marginBottom: '4px' }}>
+                LIVE REQUEST
+              </div>
+              <div style={{ color: '#a1a1aa' }}>
+                POST /api/agent/message
+              </div>
+              <div style={{ color: '#a1a1aa' }}>
+                conversation_id: <span style={{ color: '#ffffff' }}>{resp.conversation_id}</span>
+              </div>
+              <div style={{ color: '#a1a1aa' }}>
+                message_count: <span style={{ color: '#ffffff' }}>{totalTurns}</span>
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid #27272f', paddingTop: '8px' }}>
+              <div style={{ color: '#4ade80', fontWeight: 600, marginBottom: '4px' }}>
+                LIVE RESPONSE
+              </div>
+              <pre
+                style={{
+                  margin: 0,
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  color: '#e4e4e7',
+                  maxHeight: '260px',
+                  overflowY: 'auto',
+                }}
+              >
+                {JSON.stringify(
+                  {
+                    conversation_id: resp.conversation_id,
+                    classification: resp.classification,
+                    retrieval_query: resp.retrieval_query,
+                    evidence_count: resp.retrieved_evidence.length,
+                    grounding: {
+                      status: resp.grounding.status,
+                      score: resp.grounding.score,
+                      total_claims: resp.grounding.total_claims,
+                      supported_claims: resp.grounding.supported_claims,
+                      unsupported_claims: resp.grounding.unsupported_claims,
+                      revision_count: resp.grounding.revision_count,
+                    },
+                    escalation: {
+                      decision: resp.escalation.decision,
+                      action: resp.escalation.action,
+                      reason_codes: resp.escalation.reason_codes,
+                      blocker_reasons: resp.escalation.blocker_reasons,
+                    },
+                    trace: resp.trace,
+                  },
+                  null,
+                  2
+                )}
+              </pre>
+            </div>
           </div>
         )}
       </div>

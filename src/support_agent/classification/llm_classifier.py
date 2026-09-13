@@ -65,14 +65,47 @@ Your task is to classify customer support inquiries against the FROZEN TAXONOMY 
 
 {INTENT_DEFINITIONS}
 
+DECISION ORDER & CLASSIFICATION PRINCIPLE:
+The classifier answers TWO questions in strict order:
+QUESTION A: "Does this message contain an actionable customer-support issue?"
+QUESTION B: "If yes, which taxonomy intent(s) describe that issue?"
+
+Follow this decision order:
+STEP 1: Read the complete current conversation.
+STEP 2: Determine whether there is an actionable support issue.
+STEP 3: If no actionable issue (greeting, acknowledgement, vague request for help):
+    status = "AMBIGUOUS"
+    areas = []
+    intents = []
+    primary_intent = null
+STEP 4: If clearly outside the supported domain:
+    status = "OUT_OF_SCOPE"
+    areas = []
+    intents = []
+    primary_intent = null
+STEP 5: Otherwise (actionable retail support issue present):
+    status = "NORMAL"
+    classify into one or more valid taxonomy leaf intents.
+STEP 6: Infer current conversation states independently.
+
 STRICT CLASSIFICATION RULES:
 1. Return ONLY valid labels from the taxonomy above. NEVER invent new intent names or hybrid combination labels.
-2. AMBIGUOUS rule: If the customer message is too vague to know what they want (e.g., "help please", "check your DM", "terrible service"), set classification_status to "AMBIGUOUS", areas to [], intents to [], and primary_intent to null.
-3. OUT_OF_SCOPE rule: If the message is social banter, marketing praise, stock availability inquiries, or non-retail merchant support (e.g. Seller Central), set classification_status to "OUT_OF_SCOPE", areas to [], intents to [], and primary_intent to null.
-4. NORMAL rule: If the customer expresses an actionable support need, set classification_status to "NORMAL".
-5. Multi-intent rule: If the customer expresses TWO OR MORE distinct actionable issues in one inquiry (e.g., package delayed AND wants a refund), set is_multi_intent to true, list all applicable leaf intents in "intents", and choose the single most operationally urgent intent as "primary_intent".
-6. State rule: Select the most accurate conversation state from the 5 allowed states based on what the customer has already done.
-7. Output format: Respond ONLY with a valid JSON object matching this schema:
+2. DO NOT FORCE A BUSINESS INTENT:
+   - Do not force a business intent when the customer has not expressed an actionable support problem.
+   - If the message is only a greeting, acknowledgement, vague request for help, or otherwise lacks sufficient information to identify a support issue, return AMBIGUOUS with no intent.
+   - Only assign a leaf intent when the conversation contains evidence for that intent.
+   - AMBIGUOUS is a classification status, not a leaf intent. Do NOT invent a "GREETING" intent.
+3. GREETINGS AND CONVERSATIONAL OPENINGS:
+   - Pure greetings or vague help requests ("hi", "hello", "hey", "can you help me?", "please help", "anyone there?", "good morning", "I need help with something") must be classified as AMBIGUOUS with areas: [], intents: [], primary_intent: null, states: ["INITIAL_INQUIRY"]. The classifier must NOT invent a support issue.
+   - ACTIONABLE GREETINGS: The existence of a greeting does NOT make the whole message ambiguous if an actionable issue is present. For example: "hi, my package is late" -> status: "NORMAL", intents: ["DELIVERY_DELAYED"], primary_intent: "DELIVERY_DELAYED". The actionable support issue takes priority!
+4. MULTI-TURN RECOMPUTATION:
+   - Classification must consider the FULL current conversation. Ambiguity is not a permanent conversation state; it is recomputed on every turn. If Turn 1 is "hi" (AMBIGUOUS) and Turn 2 is "my package is late", Turn 2 is NORMAL (DELIVERY_DELAYED).
+5. DO NOT CONFUSE AMBIGUOUS WITH OUT_OF_SCOPE:
+   - AMBIGUOUS: Unclear or greeting within retail support context ("hi", "can you help me?", "terrible service", "check your DM").
+   - OUT_OF_SCOPE: Clearly outside Amazon retail support (e.g. "tell me today's weather in Delhi", social banter, non-retail merchant/seller central, stock inquiries).
+6. Multi-intent rule: If the customer expresses TWO OR MORE distinct actionable issues in one inquiry (e.g., package delayed AND wants a refund), set is_multi_intent to true, list all applicable leaf intents in "intents", and choose the single most operationally urgent intent as "primary_intent".
+7. State rule: Select the most accurate conversation state from the 5 allowed states based on what the customer has already done.
+8. Output format: Respond ONLY with a valid JSON object matching this schema:
 
 {{
   "classification_status": "NORMAL" | "AMBIGUOUS" | "OUT_OF_SCOPE",
@@ -277,12 +310,12 @@ class LLMIntentClassifier:
                 else:
                     logger.error(f"All {max_attempts} attempts failed for {gold_id}: {e}")
                     parsed = {
-                        "classification_status": "NORMAL",
-                        "intents": ["DELIVERY_DELAYED"],
-                        "primary_intent": "DELIVERY_DELAYED",
+                        "classification_status": "AMBIGUOUS",
+                        "intents": [],
+                        "primary_intent": None,
                         "is_multi_intent": False,
                         "states": ["INITIAL_INQUIRY"],
-                        "confidence": 0.50,
+                        "confidence": 0.0,
                         "reasoning": f"Fallback due to model call error: {e}",
                     }
 

@@ -41,19 +41,31 @@ export const InlineClassification: React.FC<InlineClassificationProps> = ({
           <Target size={12} color="var(--deep-enterprise-green)" />
           <span style={{ color: 'var(--slate)', fontWeight: 600 }}>Understanding:</span>
           
-          {/* Primary Intent */}
-          <span
-            style={{
-              backgroundColor: 'var(--coral)',
-              color: '#ffffff',
-              padding: '1px 6px',
-              borderRadius: '2px',
-              fontSize: '10px',
-              fontWeight: 700,
-            }}
-          >
-            {classification.primary_intent}
-          </span>
+          {/* Primary Intent / Ambiguous status */}
+          {classification.status === 'AMBIGUOUS' || !classification.primary_intent ? (
+            <span
+              style={{
+                color: 'var(--slate)',
+                fontStyle: 'italic',
+                fontSize: '11px',
+              }}
+            >
+              No specific support issue identified yet.
+            </span>
+          ) : (
+            <span
+              style={{
+                backgroundColor: 'var(--coral)',
+                color: '#ffffff',
+                padding: '1px 6px',
+                borderRadius: '2px',
+                fontSize: '10px',
+                fontWeight: 700,
+              }}
+            >
+              {classification.primary_intent}
+            </span>
+          )}
 
           {/* States */}
           {classification.states.map((st) => (
@@ -113,7 +125,7 @@ export const InlineClassification: React.FC<InlineClassificationProps> = ({
           <div>
             <span className="mono-label" style={{ fontSize: '9px' }}>Domain Area</span>
             <div style={{ color: 'var(--ink)', fontSize: '11px', marginTop: '1px' }}>
-              {classification.areas.join(' • ')}
+              {classification.areas.length > 0 ? classification.areas.join(' • ') : 'None (Ambiguous / Unclassified)'}
             </div>
           </div>
 

@@ -215,7 +215,11 @@ export const App: React.FC = () => {
                 evidenceList={response?.retrieved_evidence || []}
                 retrievalQuery={response?.retrieval_query}
               />
-              <RerankingPanel reranking={response?.reranking} />
+              <RerankingPanel
+                reranking={response?.reranking}
+                classification={response?.classification}
+                retrievedEvidence={response?.retrieved_evidence}
+              />
             </>
           }
           responseCol={

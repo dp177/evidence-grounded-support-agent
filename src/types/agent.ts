@@ -9,10 +9,10 @@ export interface ConversationMessage {
 }
 
 export interface ClassificationResult {
-  status: 'NORMAL' | 'AMBIGUOUS' | 'HIGH_RISK';
+  status: 'NORMAL' | 'AMBIGUOUS' | 'HIGH_RISK' | 'OUT_OF_SCOPE';
   areas: string[];
   intents: string[];
-  primary_intent: string;
+  primary_intent: string | null;
   states: string[];
   confidence: number; // 0.00 - 1.00 (MODEL CONFIDENCE)
   multi_intent: boolean;
@@ -23,17 +23,28 @@ export interface RetrievalEvidence {
   case_id: string;
   conversation_id: string;
   turn_index: number;
+  rank?: number;
   similarity: number;
   customer_message: string;
   relevant_context: string;
   brand_response: string;
   doc_id?: string;
+  semantic_score?: number | null;
+  lexical_score?: number | null;
+  intent_score?: number | null;
+  state_score?: number | null;
+  action_usefulness?: number | null;
+  action_penalty_flag?: number | null;
+  final_score?: number | null;
+  rerank_score?: number | null;
 }
 
 export interface RerankingSignal {
   name: string;
   label: string;
-  score: number; // 0 - 100
+  score?: number | null; // feature score, or null if uncomputed
+  weight?: number;
+  description?: string;
 }
 
 export interface RerankingResult {
@@ -42,6 +53,7 @@ export interface RerankingResult {
   unique_conversations: number;
   signals: RerankingSignal[];
   ranked_cases: RetrievalEvidence[];
+  weights?: Record<string, number>;
 }
 
 export interface GeneratedResponse {
@@ -150,3 +162,18 @@ export interface DemoScenario {
   };
   responsePayload: AgentResponse;
 }
+
+// ---------------------------------------------------------------------------
+// Streaming event types emitted by the backend /api/agent/stream endpoint
+// ---------------------------------------------------------------------------
+export type AgentStreamEvent =
+  | { type: 'conversation'; status: 'COMPLETED'; turn_count: number; customer_message: string }
+  | { type: 'classify'; status: 'COMPLETED'; latency_ms: number; classification: ClassificationResult }
+  | { type: 'retrieve'; status: 'COMPLETED'; latency_ms: number; candidate_count: number; query_text: string }
+  | { type: 'rerank'; status: 'COMPLETED'; latency_ms: number; retrieved_evidence: RetrievalEvidence[]; reranking: RerankingResult }
+  | { type: 'generate'; status: 'COMPLETED'; latency_ms: number; reply: string; draft_reply: string; revision_count: number }
+  | { type: 'ground'; status: 'COMPLETED'; latency_ms: number; grounding: GroundingResult }
+  | { type: 'decide'; status: 'COMPLETED'; escalation: EscalationResult }
+  | { type: 'complete'; status: 'COMPLETED'; response: AgentResponse }
+  | { type: 'error'; error: string };
+

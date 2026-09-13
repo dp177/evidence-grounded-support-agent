@@ -11,6 +11,8 @@ export const CustomLiveChat: React.FC = () => {
     isRunning,
     sendMessage,
     newConversation,
+    switchToDemoMode,
+    retryLastMessage,
   } = useCustomChat();
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -176,12 +178,16 @@ export const CustomLiveChat: React.FC = () => {
             </div>
           ) : (
             /* Message Thread */
-            messages.map((msg) => (
+            messages.map((msg, idx) => (
               <CustomChatMessage
                 key={msg.id}
                 message={msg}
+                turnIndex={idx + 1}
+                totalTurns={messages.length}
                 onSendResponse={(text) => alert(`Message sent to customer: "${text}"`)}
                 onTakeOver={() => alert(`Session ${conversationId} transferred to human tier.`)}
+                onRetry={retryLastMessage}
+                onSwitchToDemo={switchToDemoMode}
               />
             ))
           )}

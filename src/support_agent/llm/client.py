@@ -22,7 +22,11 @@ logger = logging.getLogger(__name__)
 
 def load_env(path: Optional[Path | str] = None) -> None:
     """Load environment variables from a .env file if present."""
-    env_file = Path(path) if path else Path(".env")
+    if path:
+        env_file = Path(path)
+    else:
+        root_env = Path(__file__).resolve().parents[3] / ".env"
+        env_file = root_env if root_env.exists() else Path(".env")
     if not env_file.exists():
         return
     try:

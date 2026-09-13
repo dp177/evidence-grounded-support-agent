@@ -142,38 +142,41 @@ class CandidateReranker:
         scored_candidates = []
         for i, c in enumerate(candidates):
             semantic_score = c.get("score", 0.0)
-            lexical_score = lexical_scores[i]
+            lexical_score = lexical_scores[i] if i < len(lexical_scores) else 0.0
             
             metadata = c.get("metadata", {})
             # Extract historical labels (they may not exist, which is fine)
-            hist_intents = metadata.get("intents", [])
-            hist_areas = metadata.get("areas", [])
-            hist_state = metadata.get("state", [])  # Might be string or list or missing
+            raw_intents = metadata.get("intents")
+            raw_areas = metadata.get("areas")
+            raw_state = metadata.get("state")
             
-            intent_score = self._check_overlap(predicted_intents, hist_intents)
-            area_score = self._check_overlap(predicted_areas, hist_areas)
-            state_score = self._check_overlap(predicted_states, hist_state)
+            intent_score = self._check_overlap(predicted_intents, raw_intents) if raw_intents is not None else None
+            area_score = self._check_overlap(predicted_areas, raw_areas) if raw_areas is not None else None
+            state_score = self._check_overlap(predicted_states, raw_state) if raw_state is not None else None
             
             brand_response = c.get("brand_response", "")
             action_penalty_flag = self._compute_action_penalty(brand_response)
+            action_usefulness = 1.0 - action_penalty_flag
 
             final_score = (
                 self.weights["semantic"] * semantic_score
-                + self.weights["lexical"] * lexical_score
-                + self.weights["intent"] * intent_score
-                + self.weights["area"] * area_score
-                + self.weights["state"] * state_score
+                + self.weights["lexical"] * (lexical_score if lexical_score is not None else 0.0)
+                + self.weights["intent"] * (intent_score if intent_score is not None else 0.0)
+                + self.weights["area"] * (area_score if area_score is not None else 0.0)
+                + self.weights["state"] * (state_score if state_score is not None else 0.0)
                 + self.weights["action_penalty"] * action_penalty_flag
             )
 
             scored_candidates.append({
                 **c,
+                "final_score": final_score,
                 "rerank_score": final_score,
                 "semantic_score": semantic_score,
                 "lexical_score": lexical_score,
                 "intent_score": intent_score,
                 "area_score": area_score,
                 "state_score": state_score,
+                "action_usefulness": action_usefulness,
                 "action_penalty_flag": action_penalty_flag,
             })
 
@@ -196,5 +199,8 @@ class CandidateReranker:
             
             if len(final_results) >= top_k:
                 break
+
+        for idx, res in enumerate(final_results):
+            res["rank"] = idx + 1
 
         return final_results

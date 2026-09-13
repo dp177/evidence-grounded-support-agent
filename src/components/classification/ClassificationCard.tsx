@@ -125,9 +125,22 @@ export const ClassificationCard: React.FC<ClassificationCardProps> = ({
               </div>
             ))}
           </div>
-        ) : (
+        ) : classification.primary_intent ? (
           <div>
             <IntentBadge intent={classification.primary_intent} isPrimary={true} />
+          </div>
+        ) : (
+          <div
+            style={{
+              padding: '6px 10px',
+              backgroundColor: 'var(--soft-stone)',
+              borderRadius: 'var(--radius-xs)',
+              fontSize: '12px',
+              color: 'var(--slate)',
+              fontStyle: 'italic',
+            }}
+          >
+            No specific support issue identified yet.
           </div>
         )}
       </div>
@@ -146,7 +159,7 @@ export const ClassificationCard: React.FC<ClassificationCardProps> = ({
             fontWeight: 500,
           }}
         >
-          {classification.areas.join(' • ')}
+          {classification.areas.length > 0 ? classification.areas.join(' • ') : 'None (Ambiguous / Unclassified)'}
         </div>
       </div>
 

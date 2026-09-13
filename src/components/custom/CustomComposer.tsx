@@ -51,16 +51,17 @@ export const CustomComposer: React.FC<CustomComposerProps> = ({
       >
         {/* Input box */}
         <div
+          className={isRunning ? 'composer-running-glow' : undefined}
           style={{
             position: 'relative',
             display: 'flex',
             alignItems: 'flex-end',
             backgroundColor: '#ffffff',
-            border: '1px solid var(--hairline)',
+            border: isRunning ? '1px solid rgba(13, 122, 85, 0.4)' : '1px solid var(--hairline)',
             borderRadius: '24px',
             padding: '10px 16px',
-            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
-            transition: 'border-color 0.15s ease',
+            boxShadow: isRunning ? '0 2px 12px rgba(13, 122, 85, 0.12)' : '0 2px 6px rgba(0, 0, 0, 0.04)',
+            transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
           }}
         >
           <textarea
@@ -69,7 +70,7 @@ export const CustomComposer: React.FC<CustomComposerProps> = ({
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isRunning}
-            placeholder="Type a customer message... (e.g. My package says delivered but I never received it)"
+            placeholder={isRunning ? 'Agent is thinking and synthesizing response...' : 'Type a customer message... (e.g. My package says delivered but I never received it)'}
             rows={1}
             style={{
               flex: 1,
@@ -95,8 +96,8 @@ export const CustomComposer: React.FC<CustomComposerProps> = ({
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              backgroundColor: input.trim() && !isRunning ? 'var(--near-black-primary)' : 'var(--card-border)',
-              color: input.trim() && !isRunning ? '#ffffff' : 'var(--muted-slate)',
+              backgroundColor: isRunning ? 'rgba(13, 122, 85, 0.15)' : input.trim() ? 'var(--near-black-primary)' : 'var(--card-border)',
+              color: isRunning ? 'var(--deep-enterprise-green)' : input.trim() ? '#ffffff' : 'var(--muted-slate)',
               border: 'none',
               display: 'flex',
               alignItems: 'center',
@@ -107,7 +108,7 @@ export const CustomComposer: React.FC<CustomComposerProps> = ({
             }}
           >
             {isRunning ? (
-              <Loader2 size={15} className="spin-animation" />
+              <Loader2 size={15} className="spin-animation" color="var(--deep-enterprise-green)" />
             ) : (
               <ArrowUp size={16} />
             )}
@@ -144,9 +145,22 @@ export const CustomComposer: React.FC<CustomComposerProps> = ({
             ＋ New conversation
           </button>
 
-          <span>
-            {isRunning ? 'Agent is working...' : 'Press Enter to send • Shift + Enter for new line'}
-          </span>
+          {isRunning ? (
+            <span
+              style={{
+                color: 'var(--deep-enterprise-green)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontWeight: 600,
+              }}
+            >
+              <span className="thinking-live-dot" />
+              <span>Agent is thinking...</span>
+            </span>
+          ) : (
+            <span>Press Enter to send • Shift + Enter for new line</span>
+          )}
         </div>
       </div>
     </div>

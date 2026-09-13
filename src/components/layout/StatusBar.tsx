@@ -3,7 +3,7 @@ import React from 'react';
 interface StatusBarProps {
   conversationId: string;
   turnCount: number;
-  primaryIntent?: string;
+  primaryIntent?: string | null;
   confidence?: number;
   decision?: string;
 }
