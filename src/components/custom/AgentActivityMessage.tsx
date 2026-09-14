@@ -11,7 +11,6 @@ interface AgentActivityMessageProps {
   thoughtDuration?: number;
   elapsedSeconds?: number;
   onRetry?: () => void;
-  onSwitchToDemo?: () => void;
 }
 
 // Dedicated micro-component for the live timer:
@@ -31,7 +30,7 @@ const ThinkingTimer: React.FC<{ isRunning: boolean; elapsedSeconds?: number }> =
     return () => clearInterval(timer);
   }, [isRunning]);
 
-  const displaySec = elapsedSeconds !== undefined ? elapsedSeconds : liveElapsed;
+  const displaySec = isRunning ? liveElapsed : (elapsedSeconds ?? 0);
   return <>✦ Thinking ({displaySec.toFixed(1)}s)</>;
 };
 
@@ -42,7 +41,6 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
   thoughtDuration,
   elapsedSeconds,
   onRetry,
-  onSwitchToDemo,
 }) => {
   const [expanded, setExpanded] = useState(isRunning);
   const [justCompleted, setJustCompleted] = useState(false);
@@ -237,17 +235,6 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
                   >
                     <RotateCw size={11} />
                     Retry
-                  </button>
-                )}
-
-                {onSwitchToDemo && (
-                  <button
-                    type="button"
-                    onClick={onSwitchToDemo}
-                    className="btn-primary"
-                    style={{ fontSize: '11px', padding: '4px 12px', backgroundColor: 'var(--coral)' }}
-                  >
-                    Switch to Demo Mode
                   </button>
                 )}
               </div>

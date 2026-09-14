@@ -333,15 +333,6 @@ export const useCustomChat = () => {
     [conversationId, isRunning, messages]
   );
 
-  const switchToDemoMode = useCallback(() => {
-    agentApi.setMockMode(true);
-    if (lastFailedText) {
-      // Remove the failed assistant message and retry with mock
-      setMessages((prev) => prev.filter((m) => m.activityStatus !== 'FAILED'));
-      sendMessage(lastFailedText);
-    }
-  }, [lastFailedText, sendMessage]);
-
   const retryLastMessage = useCallback(() => {
     if (lastFailedText) {
       setMessages((prev) => prev.filter((m) => m.activityStatus !== 'FAILED'));
@@ -355,7 +346,6 @@ export const useCustomChat = () => {
     isRunning,
     sendMessage,
     newConversation,
-    switchToDemoMode,
     retryLastMessage,
   };
 };

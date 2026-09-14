@@ -119,7 +119,7 @@ STRICT CLASSIFICATION RULES:
   "primary_intent": "INTENT_NAME" or null,
   "is_multi_intent": false or true,
   "states": ["STATE_NAME"],
-  "confidence": 0.95,
+  "confidence": <float between 0.0 and 1.0>,
   "reasoning": "brief explanation"
 }}
 """

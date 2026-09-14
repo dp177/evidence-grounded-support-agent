@@ -2,23 +2,7 @@ import { AgentResponse, AgentStreamEvent, ConversationMessage } from '../types/a
 import { IAgentApi } from './apiTypes';
 import { mockAgentApi } from './mockAgentApi';
 
-// Determine initial mode strictly from environment or user setting
 const getInitialMockMode = (): boolean => {
-  if (typeof window !== 'undefined') {
-    const stored = localStorage.getItem('HIVIER_USE_MOCK_AGENT');
-    if (stored !== null) {
-      return stored === 'true';
-    }
-  }
-  // If explicitly configured via VITE_USE_MOCK_AGENT
-  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_USE_MOCK_AGENT !== undefined) {
-    return import.meta.env.VITE_USE_MOCK_AGENT === 'true';
-  }
-  // In test environment default to true for deterministic mock isolation
-  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'test') {
-    return true;
-  }
-  // Default to live backend
   return false;
 };
 
@@ -32,13 +16,7 @@ export class ProductionAgentApi implements IAgentApi {
   }
 
   isMock(): boolean {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('HIVIER_USE_MOCK_AGENT');
-      if (stored !== null) {
-        return stored === 'true';
-      }
-    }
-    return this.mockMode;
+    return false;
   }
 
   setMockMode(enableMock: boolean): void {
@@ -68,12 +46,7 @@ export class ProductionAgentApi implements IAgentApi {
     conversationId: string,
     messages: ConversationMessage[]
   ): Promise<AgentResponse> {
-    // 1. Explicit Mock Mode
-    if (this.isMock()) {
-      return mockAgentApi.runAgent(conversationId, messages);
-    }
-
-    // 2. Real Live Mode -> POST /api/agent/message
+    // Real Live Mode -> POST /api/agent/message
     const endpoint = this._buildEndpoint('/agent/message');
     const payload = {
       conversation_id: conversationId,
@@ -111,11 +84,6 @@ export class ProductionAgentApi implements IAgentApi {
     messages: ConversationMessage[],
     onEvent: (event: AgentStreamEvent) => void
   ): Promise<AgentResponse> {
-    // Mock mode: delegate to mockAgentApi
-    if (this.isMock()) {
-      return mockAgentApi.runAgentStream(conversationId, messages, onEvent);
-    }
-
     // Live mode: POST /api/agent/stream and parse SSE
     const endpoint = this._buildEndpoint('/agent/stream');
     const payload = {

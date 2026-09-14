@@ -14,7 +14,6 @@ interface CustomChatMessageProps {
   onSendResponse?: (text: string) => void;
   onTakeOver?: () => void;
   onRetry?: () => void;
-  onSwitchToDemo?: () => void;
 }
 
 export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
@@ -24,7 +23,6 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
   onSendResponse,
   onTakeOver,
   onRetry,
-  onSwitchToDemo,
 }) => {
   const [copied, setCopied] = useState(false);
   const [showTrace, setShowTrace] = useState(false);
@@ -186,7 +184,6 @@ export const CustomChatMessage: React.FC<CustomChatMessageProps> = ({
             thoughtDuration={message.thoughtDuration}
             elapsedSeconds={message.elapsedSeconds}
             onRetry={onRetry}
-            onSwitchToDemo={onSwitchToDemo}
           />
         )}
 

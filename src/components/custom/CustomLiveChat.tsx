@@ -11,7 +11,6 @@ export const CustomLiveChat: React.FC = () => {
     isRunning,
     sendMessage,
     newConversation,
-    switchToDemoMode,
     retryLastMessage,
   } = useCustomChat();
 
@@ -193,16 +192,16 @@ export const CustomLiveChat: React.FC = () => {
                     fontFamily: 'var(--font-display)',
                     fontSize: '24px',
                     fontWeight: 600,
-                    color: 'var(--cohere-black)',
+                    color: '#0f1111',
                     letterSpacing: '-0.02em',
                   }}
                 >
-                  AI Support Agent
+                  AmazonHelp Support
                 </h1>
                 <p
                   style={{
                     fontSize: '14px',
-                    color: 'var(--slate)',
+                    color: '#565959',
                     marginTop: 'var(--space-6)',
                     maxWidth: '480px',
                     lineHeight: '1.5',
@@ -260,7 +259,6 @@ export const CustomLiveChat: React.FC = () => {
                 onSendResponse={(text) => alert(`Message sent to customer: "${text}"`)}
                 onTakeOver={() => alert(`Session ${conversationId} transferred to human tier.`)}
                 onRetry={retryLastMessage}
-                onSwitchToDemo={switchToDemoMode}
               />
             ))
           )}
