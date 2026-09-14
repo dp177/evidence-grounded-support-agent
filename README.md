@@ -192,63 +192,69 @@ Multi-intent is handled as **multi-label classification**, not a new combinatori
 
 ## 4.1 Pipeline Overview
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│                    INCOMING CUSTOMER MESSAGE                         │
-│              (+ conversation history if multi-turn)                  │
-└──────────────────────┬───────────────────────────────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│  STAGE 1: SEMANTIC TRIAGE & STATE EXTRACTION                         │
-│  ┌─────────────────────┐  ┌────────────────────────────────────┐    │
-│  │ LLM Classifier       │  │ Deterministic StateExtractor       │    │
-│  │ → status             │  │ → conversation_states              │    │
-│  │ → areas              │  │   (TRACKING_ALREADY_CHECKED,       │    │
-│  │ → intents (multi)    │  │    CARRIER_ALREADY_CONTACTED, ...) │    │
-│  │ → primary_intent     │  │                                    │    │
-│  └─────────────────────┘  └────────────────────────────────────┘    │
-└──────────────────────┬───────────────────────────────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│  STAGE 2: HYBRID EVIDENCE RETRIEVAL (RAG + RRF)                      │
-│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐   │
-│  │ Dense Embeddings  │  │ Sparse BM25      │  │ RRF Fusion       │   │
-│  │ (MiniLM-L6-v2)   │  │ (lexical match)  │  │ (k=60) → Top-5  │   │
-│  │ → Top-30          │  │ → Top-30         │  │                  │   │
-│  └──────────────────┘  └──────────────────┘  └──────────────────┘   │
-│  ⚠️ Hard gating: zero retrieval on AMBIGUOUS / OUT_OF_SCOPE         │
-└──────────────────────┬───────────────────────────────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│  STAGE 3: GROUNDED GENERATION + NLI VERIFICATION LOOP                │
-│  ┌───────────────────┐  ┌──────────────────────────────────────┐    │
-│  │ LLM Generator      │  │ Claim-Level NLI Grounding Grader    │    │
-│  │ → draft response   │  │ → decompose into atomic claims       │    │
-│  │                     │  │ → verify each vs evidence + context  │    │
-│  │                     │  │ → if CONTRADICTED → revise (max 2)   │    │
-│  │                     │  │ → if still fails → GROUNDING_FAILURE │    │
-│  └───────────────────┘  └──────────────────────────────────────┘    │
-└──────────────────────┬───────────────────────────────────────────────┘
-                       │
-                       ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│  STAGE 4: DETERMINISTIC 4-GATE SAFETY ESCALATION ENGINE              │
-│  ┌─────────────────────────────────────────────────────────────┐    │
-│  │ Gate 1a: Triage Gating (confidence < 0.55 → escalate)       │    │
-│  │ Gate 1b: High-Risk Overrides (security/misconduct regex)    │    │
-│  │ Gate 2:  NLI Grounding Failure → escalate                   │    │
-│  │ Gate 3:  State Inconsistency → escalate                     │    │
-│  │ Gate 4:  Out-of-Scope → polite auto-decline (no human cost) │    │
-│  └─────────────────────────────────────────────────────────────┘    │
-└──────────────────────┬───────────────────────────────────────────────┘
-                       │
-              ┌────────┴────────┐
-              ▼                 ▼
-       ✅ AUTO-HANDLE     🚨 ESCALATE TO HUMAN
-       (grounded reply)   (with structured reason)
+```mermaid
+flowchart TD
+    A["**INCOMING CUSTOMER MESSAGE**\n(+ conversation history if multi-turn)"] --> B
+    
+    subgraph S1 ["STAGE 1: SEMANTIC TRIAGE & STATE EXTRACTION"]
+        direction LR
+        B1["**LLM Classifier**\n→ status\n→ areas\n→ intents (multi)\n→ primary_intent"]
+        B2["**Deterministic StateExtractor**\n→ conversation_states\n(TRACKING_ALREADY_CHECKED,\nCARRIER_ALREADY_CONTACTED, ...)"]
+        B1 ~~~ B2
+    end
+    B --> S1
+    S1 --> C
+
+    subgraph S2 ["STAGE 2: HYBRID EVIDENCE RETRIEVAL (RAG + RRF)"]
+        direction LR
+        C1["**Dense Embeddings**\n(MiniLM-L6-v2)\n→ Top-30"]
+        C2["**Sparse BM25**\n(lexical match)\n→ Top-30"]
+        C3["**RRF Fusion**\n(k=60) → Top-5"]
+        C1 --> C3
+        C2 --> C3
+    end
+    C --> S2
+    
+    S2 --> D["⚠️ **Hard gating:** zero retrieval on AMBIGUOUS / OUT_OF_SCOPE"]
+    D --> E
+
+    subgraph S3 ["STAGE 3: GROUNDED GENERATION + NLI VERIFICATION LOOP"]
+        direction LR
+        E1["**LLM Generator**\n→ draft response"]
+        E2["**Claim-Level NLI Grounding Grader**\n→ decompose into atomic claims\n→ verify each vs evidence + context\n→ if CONTRADICTED → revise (max 2)\n→ if still fails → GROUNDING_FAILURE"]
+        E1 --> E2
+    end
+    E --> S3
+    S3 --> F
+
+    subgraph S4 ["STAGE 4: DETERMINISTIC 4-GATE SAFETY ESCALATION ENGINE"]
+        direction TB
+        F1["**Gate 1a:** Triage Gating (confidence < 0.55 → escalate)\n**Gate 1b:** High-Risk Overrides (security/misconduct regex)"]
+        F2["**Gate 2:** NLI Grounding Failure → escalate"]
+        F3["**Gate 3:** State Inconsistency → escalate"]
+        F4["**Gate 4:** Out-of-Scope → polite auto-decline (no human cost)"]
+        F1 --> F2 --> F3 --> F4
+    end
+    F --> S4
+    
+    S4 -->|All gates pass| G["✅ **AUTO-HANDLE**\n(grounded reply)"]
+    S4 -->|Any gate fails| H["🚨 **ESCALATE TO HUMAN**\n(with structured reason)"]
+
+    style A fill:#1a1a2e,stroke:#7c8db0,color:#c9d1d9
+    style S1 fill:#1a1a2e,stroke:#a855f7,color:#c9d1d9
+    style S2 fill:#1a1a2e,stroke:#3b82f6,color:#c9d1d9
+    style S3 fill:#1a1a2e,stroke:#06b6d4,color:#c9d1d9
+    style S4 fill:#1a1a2e,stroke:#f59e0b,color:#c9d1d9
+    style D fill:#1a1a2e,stroke:#f59e0b,color:#c9d1d9
+    style G fill:#064e3b,stroke:#22c55e,color:#c9d1d9
+    style H fill:#4a1d1d,stroke:#ef4444,color:#c9d1d9
+    style B1 fill:#2a2a4e,stroke:#a855f7,color:#fff
+    style B2 fill:#2a2a4e,stroke:#a855f7,color:#fff
+    style C1 fill:#2a2a4e,stroke:#3b82f6,color:#fff
+    style C2 fill:#2a2a4e,stroke:#3b82f6,color:#fff
+    style C3 fill:#2a2a4e,stroke:#3b82f6,color:#fff
+    style E1 fill:#2a2a4e,stroke:#06b6d4,color:#fff
+    style E2 fill:#2a2a4e,stroke:#06b6d4,color:#fff
 ```
 
 ## 4.2 Stage 1: Semantic Triage & State Extraction
