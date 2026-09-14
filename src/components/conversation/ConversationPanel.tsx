@@ -24,11 +24,35 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({
   onReset,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const isUserScrolledUpRef = useRef(false);
+  const prevMessagesLengthRef = useRef(messages.length);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    isUserScrolledUpRef.current = (scrollHeight - scrollTop - clientHeight) > 60;
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (e.deltaY < 0) {
+      isUserScrolledUpRef.current = true;
+    } else if (e.deltaY > 0 && scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+      if (scrollHeight - scrollTop - clientHeight <= 60) {
+        isUserScrolledUpRef.current = false;
+      }
+    }
+  };
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (!scrollRef.current) return;
+    const isNewMessage = messages.length > prevMessagesLengthRef.current;
+    prevMessagesLengthRef.current = messages.length;
+
+    if (isUserScrolledUpRef.current && !isNewMessage) {
+      return;
     }
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages]);
 
   const customerMessages = messages.filter((m) => m.role === 'CUSTOMER');
@@ -57,6 +81,8 @@ export const ConversationPanel: React.FC<ConversationPanelProps> = ({
       {/* 2. Scrollable Timeline */}
       <div
         ref={scrollRef}
+        onScroll={handleScroll}
+        onWheel={handleWheel}
         style={{
           flex: 1,
           overflowY: 'auto',

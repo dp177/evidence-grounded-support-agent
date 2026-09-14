@@ -87,7 +87,7 @@ describe('AI Support Agent Console - Unit & Integration Tests', () => {
 
     expect(screen.getByText(/Why these cases\?/i)).toBeInTheDocument();
     expect(screen.getAllByText(/30/i)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/Semantic Similarity/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/semantic candidates/i)[0]).toBeInTheDocument();
   });
 
   // 7. Grounding Panel - Passed
@@ -246,62 +246,60 @@ describe('AI Support Agent Console - Unit & Integration Tests', () => {
     expect(screen.getByText(/Type a customer-support message to start/i)).toBeInTheDocument();
   });
 
-  // 18. Reranking Signal Explanation & Honesty Footer
-  it('renders interactive "How is this calculated?" expanders, decimal scores, and honesty limitation footer', async () => {
+  // 18. RRF Reranker Pipeline Flow, Formula, & Honesty Footer
+  it('renders RRF RERANKER badge, formula toggle, why-it-ranked-high explanation, and honesty footer', async () => {
     const reranking = DEMO_SCENARIOS[0].responsePayload.reranking;
     render(<RerankingPanel reranking={reranking} />);
 
-    // Honesty footer must be present
-    expect(screen.getByText(/These scores are ranking signals used to order historical evidence/i)).toBeInTheDocument();
+    // RRF Reranker badge must be present
+    expect(screen.getByText(/RRF RERANKER/i)).toBeInTheDocument();
 
-    // Reranking signal badge must be present
-    expect(screen.getAllByText(/Reranking signal/i).length).toBeGreaterThan(0);
+    // Flow diagram must be present
+    expect(screen.getByText(/semantic candidates/i)).toBeInTheDocument();
+    expect(screen.getByText(/lexical candidates/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Reciprocal Rank Fusion/i)[0]).toBeInTheDocument();
 
-    // Expand "How is this calculated?" on the first signal
-    const calcBtns = screen.getAllByText(/How is this calculated\?/i);
-    expect(calcBtns.length).toBeGreaterThan(0);
-    fireEvent.click(calcBtns[0]);
+    // Honesty footer must be present and state it is not a calibrated probability
+    expect(screen.getByText(/These scores are reciprocal rank fusion values/i)).toBeInTheDocument();
+    expect(screen.getByText(/not calibrated probabilities/i)).toBeInTheDocument();
 
-    // Check that explanation sections appear
-    expect(screen.getByText(/WHAT IT MEANS/i)).toBeInTheDocument();
-    expect(screen.getByText(/HOW WE CALCULATE IT/i)).toBeInTheDocument();
-    expect(screen.getByText(/Important limitation:/i)).toBeInTheDocument();
+    // Expand RRF Formula & Math
+    const formulaBtn = screen.getByText(/RRF Formula & Math/i);
+    fireEvent.click(formulaBtn);
 
-    // Check "Why this case was selected" checklist is present
-    expect(screen.getByText(/WHY THIS CASE WAS SELECTED/i)).toBeInTheDocument();
+    // Verify formula appears
+    expect(screen.getByText(/RECIPROCAL RANK FUSION FORMULA/i)).toBeInTheDocument();
+    expect(screen.getByText(/RRF\(d\) = 1 \/ \(60 \+ semantic_rank\(d\)\) \+ 1 \/ \(60 \+ lexical_rank\(d\)\)/i)).toBeInTheDocument();
 
-    // Check Candidate Reranking Breakdown table is present
-    expect(screen.getByText(/CANDIDATE RERANKING BREAKDOWN/i)).toBeInTheDocument();
-    expect(screen.getByText('Final')).toBeInTheDocument();
+    // Check "Why this case ranked high" card is present
+    expect(screen.getByText(/WHY THIS CASE RANKED HIGH/i)).toBeInTheDocument();
+    expect(screen.getByText(/Semantic position:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Lexical position:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Combined RRF score:/i)).toBeInTheDocument();
   });
 
-  // 19. Candidate Reranking Breakdown Table Truthful Values
-  it('renders truthful candidate table columns, N/A tooltips for uncomputed features, and distinct weights', () => {
+  // 19. RRF Candidate Table: Rank | Case | Semantic Rank | Lexical Rank | RRF Score
+  it('renders RRF candidate table columns, 5-decimal RRF scores, and dashes for missing ranks', () => {
     const reranking = DEMO_SCENARIOS[0].responsePayload.reranking;
     const retrievedEvidence = DEMO_SCENARIOS[0].responsePayload.retrieved_evidence;
     render(<RerankingPanel reranking={reranking} retrievedEvidence={retrievedEvidence} />);
 
-    // Check all required column headers: Rank, Case, Semantic, Lexical, Intent, State, Action, Final
+    // Check all required RRF column headers: Rank, Case, Semantic Rank, Lexical Rank, RRF Score
     expect(screen.getByText('Rank')).toBeInTheDocument();
     expect(screen.getByText('Case')).toBeInTheDocument();
-    expect(screen.getAllByText('Semantic')[0]).toBeInTheDocument();
-    expect(screen.getAllByText('Lexical')[0]).toBeInTheDocument();
-    expect(screen.getAllByText('Intent')[0]).toBeInTheDocument();
-    expect(screen.getAllByText('State')[0]).toBeInTheDocument();
-    expect(screen.getAllByText('Action')[0]).toBeInTheDocument();
-    expect(screen.getByText('Final')).toBeInTheDocument();
+    expect(screen.getByText('Semantic Rank')).toBeInTheDocument();
+    expect(screen.getByText('Lexical Rank')).toBeInTheDocument();
+    expect(screen.getByText('RRF Score')).toBeInTheDocument();
 
-    // Check uncomputed values display N/A with tooltip "Not computed for this candidate."
-    const naElements = screen.getAllByText('N/A');
-    expect(naElements.length).toBeGreaterThan(0);
-    expect(naElements[0]).toHaveAttribute('title', 'Not computed for this candidate.');
+    // Verify #1 rank and case ID
+    expect(screen.getAllByText(/#1/)[0]).toBeInTheDocument();
+    expect(screen.getByText('case_amz_49182')).toBeInTheDocument();
 
-    // Expand weights and verify weights are distinct from candidate scores
-    const weightToggle = screen.getByText(/Reranking Configuration Weights/i);
-    fireEvent.click(weightToggle);
-    expect(screen.getByText(/Semantic Weight:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Action Penalty:/i)).toBeInTheDocument();
+    // Verify missing rank displays as dash '—' (from #5 case_amz_99182 which has lexical_rank: null)
+    const dashes = screen.getAllByText('—');
+    expect(dashes.length).toBeGreaterThan(0);
   });
+
 
   // 20. Continuous Thinking UI & Elapsed Timer Display
   it('renders dynamic thinking indicator, elapsed timer, and thought duration badge', () => {

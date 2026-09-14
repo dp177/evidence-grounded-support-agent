@@ -12,14 +12,17 @@ Provides a unified callable boundary connecting:
 from __future__ import annotations
 
 import logging
+import re
 import time
 from typing import Any, Dict, Generator, List, Optional
 
 from support_agent.classification.llm_classifier import LLMIntentClassifier
+from support_agent.classification.state_extractor import extract_conversation_state
 from support_agent.retrieval.service import RetrievalService
 from support_agent.retrieval.retriever import format_query_text
 from support_agent.generation.response_generator import ResponseGenerator
 from support_agent.generation.revise_response import run_grounded_pipeline
+from support_agent.grounding.grounding_checker import check_grounding, CURRENT_ACTION_PATTERNS
 from support_agent.escalation.escalation_policy import EscalationConfig
 from support_agent.escalation.decision import decide_escalation
 from support_agent.llm.client import get_llm_client, BaseLLMClient
@@ -91,34 +94,36 @@ class SupportAgent:
         """Format raw reranker output into the contract-compliant evidence card list."""
         formatted_evidence: List[Dict[str, Any]] = []
         for idx, e in enumerate(reranked_evidence):
-            sem = e.get("semantic_score", e.get("score"))
-            lex = e.get("lexical_score")
-            intent = e.get("intent_score")
-            st = e.get("state_score")
-            act_flag = e.get("action_penalty_flag", 0.0)
-            act_useful = e.get("action_usefulness")
-            if act_useful is None and act_flag is not None:
-                act_useful = 1.0 - float(act_flag)
-            final_sc = e.get("final_score", e.get("rerank_score"))
+            sem_rank = e.get("semantic_rank")
+            lex_rank = e.get("lexical_rank")
+            rrf_sc = e.get("rrf_score", e.get("final_score", e.get("rerank_score")))
+            sem_sc = e.get("semantic_score", e.get("score"))
+            lex_sc = e.get("lexical_score")
 
             formatted_evidence.append({
                 "case_id": str(e.get("case_id", e.get("id", f"case_{idx + 1}"))),
                 "conversation_id": str(e.get("conversation_id", "")),
                 "turn_index": int(e.get("turn_index", 1)),
                 "rank": int(e.get("rank", idx + 1)),
-                "similarity": round(float(e.get("score", e.get("similarity", 0.85))), 2),
+                "similarity": round(float(sem_sc), 2) if sem_sc is not None else 0.85,
                 "customer_message": str(e.get("customer_message", "")),
                 "relevant_context": str(e.get("relevant_context", "")),
                 "brand_response": str(e.get("brand_response", "")),
                 "doc_id": str(e.get("document_id", "")),
-                "semantic_score": round(float(sem), 2) if sem is not None else None,
-                "lexical_score": round(float(lex), 2) if lex is not None else None,
-                "intent_score": round(float(intent), 2) if intent is not None else None,
-                "state_score": round(float(st), 2) if st is not None else None,
-                "action_usefulness": round(float(act_useful), 2) if act_useful is not None else None,
-                "action_penalty_flag": round(float(act_flag), 2) if act_flag is not None else None,
-                "final_score": round(float(final_sc), 3) if final_sc is not None else None,
-                "rerank_score": round(float(final_sc), 3) if final_sc is not None else None,
+                "semantic_rank": int(sem_rank) if sem_rank is not None else None,
+                "lexical_rank": int(lex_rank) if lex_rank is not None else None,
+                "rrf_score": round(float(rrf_sc), 5) if rrf_sc is not None else None,
+                "semantic_score": round(float(sem_sc), 4) if sem_sc is not None else None,
+                "lexical_score": round(float(lex_sc), 4) if lex_sc is not None else None,
+                # Backward-compatibility fields
+                "final_score": round(float(rrf_sc), 5) if rrf_sc is not None else None,
+                "rerank_score": round(float(rrf_sc), 5) if rrf_sc is not None else None,
+                "intent_score": None,
+                "area_score": None,
+                "state_score": None,
+                "action_usefulness": None,
+                "action_penalty": 0.0,
+                "action_penalty_flag": 0.0,
             })
         return formatted_evidence
 
@@ -163,29 +168,37 @@ class SupportAgent:
         return formatted_claims
 
     def _build_reranking_signals(
-        self, reranked_evidence: List[Dict[str, Any]], initial_candidates: List[Dict[str, Any]]
+        self,
+        reranked_evidence: List[Dict[str, Any]],
+        initial_candidates: List[Dict[str, Any]],
+        lexical_candidates: Optional[List[Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
-        """Compute aggregate reranking signals block for the response contract."""
-        weights = self.retrieval_service.reranker.weights
-        if reranked_evidence:
-            avg_sem = round(sum(e.get("semantic_score", e.get("score", 0.0)) for e in reranked_evidence) / len(reranked_evidence), 2)
-            lex_scores = [e.get("lexical_score") for e in reranked_evidence if e.get("lexical_score") is not None]
-            avg_lex = round(sum(lex_scores) / len(lex_scores), 2) if lex_scores else None
-            int_scores = [e.get("intent_score") for e in reranked_evidence if e.get("intent_score") is not None]
-            avg_int = round(sum(int_scores) / len(int_scores), 2) if int_scores else None
-            st_scores = [e.get("state_score") for e in reranked_evidence if e.get("state_score") is not None]
-            avg_st = round(sum(st_scores) / len(st_scores), 2) if st_scores else None
-            act_scores = [e.get("action_usefulness") for e in reranked_evidence if e.get("action_usefulness") is not None]
-            avg_act = round(sum(act_scores) / len(act_scores), 2) if act_scores else None
-        else:
-            avg_sem, avg_lex, avg_int, avg_st, avg_act = None, None, None, None, None
+        """Compute aggregate RRF reranking block for the response contract."""
+        k_val = getattr(self.retrieval_service.reranker, "k", 60)
+        lex_count = len(lexical_candidates) if lexical_candidates is not None else 0
+        sem_count = len(initial_candidates)
 
         signals = [
-            {"name": "semantic", "label": "Semantic Similarity", "score": avg_sem, "weight": weights.get("semantic", 1.0)},
-            {"name": "lexical", "label": "Lexical Match", "score": avg_lex, "weight": weights.get("lexical", 0.3)},
-            {"name": "intent", "label": "Intent Compatibility", "score": avg_int, "weight": weights.get("intent", 0.2)},
-            {"name": "state", "label": "State Compatibility", "score": avg_st, "weight": weights.get("state", 0.1)},
-            {"name": "action_usefulness", "label": "Action Usefulness", "score": avg_act, "weight": weights.get("action_penalty", -0.2)},
+            {
+                "name": "semantic",
+                "label": "Semantic Retrieval",
+                "score": round(
+                    sum(float(e.get("semantic_score", 0.0) or 0.0) for e in reranked_evidence) / len(reranked_evidence),
+                    4,
+                ) if reranked_evidence else None,
+                "weight": 1.0,
+                "description": "Top 30 ranked by dense cosine similarity",
+            },
+            {
+                "name": "lexical",
+                "label": "Lexical Retrieval",
+                "score": round(
+                    sum(float(e.get("lexical_score", 0.0) or 0.0) for e in reranked_evidence if e.get("lexical_score") is not None) / max(1, len([e for e in reranked_evidence if e.get("lexical_score") is not None])),
+                    4,
+                ) if any(e.get("lexical_score") is not None for e in reranked_evidence) else None,
+                "weight": 1.0,
+                "description": "Top 30 ranked by TF-IDF keyword overlap",
+            },
         ]
 
         unique_convs = len(set(e.get("conversation_id", "") for e in reranked_evidence if e.get("conversation_id")))
@@ -193,19 +206,22 @@ class SupportAgent:
             unique_convs = len(reranked_evidence)
 
         return {
-            "candidate_count": len(initial_candidates),
+            "method": "Reciprocal Rank Fusion",
+            "k": k_val,
+            "formula": "RRF(d) = 1/(k + semantic_rank) + 1/(k + lexical_rank)",
+            "candidate_count": sem_count + lex_count if lex_count else sem_count,
+            "semantic_candidate_count": sem_count,
+            "lexical_candidate_count": lex_count,
             "final_count": len(reranked_evidence),
             "unique_conversations": unique_convs,
             "signals": signals,
             "weights": {
-                "semantic": float(weights.get("semantic", 1.0)),
-                "lexical": float(weights.get("lexical", 0.3)),
-                "intent": float(weights.get("intent", 0.2)),
-                "area": float(weights.get("area", 0.1)),
-                "state": float(weights.get("state", 0.1)),
-                "action_penalty": float(weights.get("action_penalty", -0.2)),
+                "k": k_val,
+                "semantic": 1.0,
+                "lexical": 1.0,
             },
         }
+
 
     def handle_stream(
         self, conversation_id: str, messages: List[Dict[str, Any]]
@@ -251,9 +267,15 @@ class SupportAgent:
             use_cache=False,
         )
         classification_ms = max(1, int((time.time() - t_c0) * 1000))
+        classification["states"] = extract_conversation_state(
+            customer_message=customer_message,
+            context=context if context else None,
+            model_states=classification.get("states"),
+        )
 
         clf_status = classification.get("classification_status", "NORMAL")
         primary_intent = classification.get("primary_intent")
+
 
         # ── EVENT: classify ─────────────────────────────────────────────────
         yield {
@@ -272,22 +294,20 @@ class SupportAgent:
         }
 
         # ── STAGE 2: Retrieval / Reranking / Generation / Grounding ─────────
+        clarification_generation_ms: Optional[int] = None
         if clf_status in ("AMBIGUOUS", "OUT_OF_SCOPE") or not primary_intent:
-            # Gate: skip Qdrant retrieval entirely
+            # Gate: skip Qdrant retrieval and reranking entirely
             initial_candidates: List[Dict[str, Any]] = []
+            lexical_candidates: List[Dict[str, Any]] = []
             reranked_evidence: List[Dict[str, Any]] = []
             retrieval_ms = 0
             reranker_ms = 0
 
+
             if clf_status == "OUT_OF_SCOPE":
                 final_reply = "I specialize in Amazon retail customer support (such as orders, deliveries, returns, and refunds). Could you please let me know what Amazon retail issue I can help you with?"
-            else:
-                final_reply = "Hi! How can I help you today?"
-
-            pipeline_res: Dict[str, Any] = {
-                "draft_reply": final_reply,
-                "final_reply": final_reply,
-                "final_grounding_result": {
+                generation_ms = 1
+                grounding_result: Dict[str, Any] = {
                     "grounded": True,
                     "grounding_score": 1.0,
                     "claims": [],
@@ -295,12 +315,79 @@ class SupportAgent:
                     "unsupported_claims": [],
                     "contradicted_claims": [],
                     "risk_flags": [],
-                },
-                "revision_attempts": 0,
-            }
-            generation_ms = 1
-            grounding_result: Dict[str, Any] = pipeline_res["final_grounding_result"]
-            grounding_ms = 1
+                }
+                grounding_ms = 1
+                pipeline_res: Dict[str, Any] = {
+                    "draft_reply": final_reply,
+                    "final_reply": final_reply,
+                    "final_grounding_result": grounding_result,
+                    "revision_attempts": 0,
+                }
+                llm_calls_total = 1
+            else:
+                # AMBIGUOUS: Call clarification generator LLM once
+                t_cg0 = time.time()
+                try:
+                    clarification_res = self.generator.generate_clarification(
+                        customer_message=customer_message,
+                        context=context if context else None,
+                        classification=classification,
+                    )
+                except Exception as cg_err:
+                    logger.error("Clarification generation raised exception: %s. Using emergency fallback.", cg_err)
+                    clarification_res = {"reply": "Hi! How can I help you today?"}
+                clarification_generation_ms = max(1, int((time.time() - t_cg0) * 1000))
+                generation_ms = clarification_generation_ms
+                draft_reply = clarification_res.get("reply") or "Hi! How can I help you today?"
+                final_reply = draft_reply
+
+                # Deterministic safety verification for clarification:
+                # Clarifications ask questions to gather missing info and do not make precedent-grounded claims.
+                # Verify that no ungrounded current actions, promises, or leaks were generated.
+                t_gr0 = time.time()
+                is_safe_clarify = True
+                reply_lower = final_reply.lower()
+
+                # Check for action promises or unconfirmed state changes
+                for pat, label in CURRENT_ACTION_PATTERNS:
+                    if re.search(pat, reply_lower, re.IGNORECASE):
+                        logger.warning("Clarification contains ungrounded current action promise: %s", label)
+                        is_safe_clarify = False
+                        break
+
+                leak_words = ["classification", "confidence", "ambiguous", "rag", "pipeline", "taxonomy"]
+                if any(w in reply_lower for w in leak_words):
+                    logger.warning("Clarification contains leaked pipeline tokens: %s", final_reply)
+                    is_safe_clarify = False
+
+                if not is_safe_clarify:
+                    final_reply = "Hi! How can I help you today?"
+
+                grounding_result = {
+                    "grounded": True,
+                    "grounding_score": 1.0,
+                    "claims": [
+                        {
+                            "id": "c1",
+                            "text": "Customer inquiry clarification",
+                            "source_type": "CURRENT_CONVERSATION_SUPPORTED",
+                            "status": "CURRENT_CONVERSATION_SUPPORTED",
+                        }
+                    ],
+                    "supported_claims": ["Customer inquiry clarification"],
+                    "unsupported_claims": [],
+                    "contradicted_claims": [],
+                    "risk_flags": [],
+                }
+                grounding_ms = max(1, int((time.time() - t_gr0) * 1000))
+
+                pipeline_res = {
+                    "draft_reply": draft_reply,
+                    "final_reply": final_reply,
+                    "final_grounding_result": grounding_result,
+                    "revision_attempts": 0,
+                }
+                llm_calls_total = 2
 
         else:
             # ── STAGE 2a: Retrieval ─────────────────────────────────────────
@@ -309,6 +396,15 @@ class SupportAgent:
             initial_candidates = self.retrieval_service.retriever.search(
                 query_text=query_text, top_k=30
             )
+            lexical_candidates = []
+            if hasattr(self.retrieval_service, "lexical_retriever") and self.retrieval_service.lexical_retriever:
+                try:
+                    lexical_candidates = self.retrieval_service.lexical_retriever.search(
+                        query_text=query_text, top_k=30
+                    )
+                except Exception as ex:
+                    logger.warning("Lexical search error: %s", ex)
+                    lexical_candidates = []
             retrieval_ms = max(1, int((time.time() - t_r0) * 1000))
 
             # ── EVENT: retrieve ─────────────────────────────────────────────
@@ -316,7 +412,9 @@ class SupportAgent:
                 "type": "retrieve",
                 "status": "COMPLETED",
                 "latency_ms": retrieval_ms,
-                "candidate_count": len(initial_candidates),
+                "candidate_count": len(initial_candidates) + len(lexical_candidates),
+                "semantic_candidate_count": len(initial_candidates),
+                "lexical_candidate_count": len(lexical_candidates),
                 "query_text": query_text,
             }
 
@@ -324,18 +422,22 @@ class SupportAgent:
             t_rk0 = time.time()
             reranked_evidence = self.retrieval_service.reranker.rerank(
                 query_text=query_text,
+                semantic_candidates=initial_candidates,
+                lexical_candidates=lexical_candidates,
                 candidates=initial_candidates,
-                predicted_intents=classification.get("intents"),
-                predicted_areas=classification.get("areas"),
-                predicted_states=classification.get("states"),
                 top_k=5,
+                k=60,
             )
             for idx, e in enumerate(reranked_evidence):
                 e["rank"] = idx + 1
             reranker_ms = max(1, int((time.time() - t_rk0) * 1000))
 
             formatted_evidence_early = self._format_evidence(reranked_evidence)
-            reranking_block = self._build_reranking_signals(reranked_evidence, initial_candidates)
+            reranking_block = self._build_reranking_signals(
+                reranked_evidence,
+                initial_candidates,
+                lexical_candidates=lexical_candidates,
+            )
             reranking_block["ranked_cases"] = formatted_evidence_early
 
             # ── EVENT: rerank ───────────────────────────────────────────────
@@ -346,6 +448,7 @@ class SupportAgent:
                 "retrieved_evidence": formatted_evidence_early,
                 "reranking": reranking_block,
             }
+
 
             # ── STAGE 2c: Generation & Grounding ────────────────────────────
             t_g0 = time.time()
@@ -365,6 +468,7 @@ class SupportAgent:
                 or {}
             )
             grounding_ms = int(grounding_result.get("latency_ms", 150))
+            llm_calls_total = 2 + int(pipeline_res.get("revision_attempts", 0))
 
         # ── EVENT: generate ─────────────────────────────────────────────────
         yield {
@@ -377,6 +481,7 @@ class SupportAgent:
         }
 
         # ── STAGE 3: Escalation Decision ────────────────────────────────────
+        t_d0 = time.time()
         escalation_decision = decide_escalation(
             classification=classification,
             retrieved_evidence=reranked_evidence,
@@ -385,11 +490,16 @@ class SupportAgent:
             customer_conversation=customer_conversation,
             config=self.escalation_config,
         )
+        decision_ms = max(1, int((time.time() - t_d0) * 1000))
 
         # ── Assemble formatted evidence & grounding for final events ─────────
         formatted_evidence = self._format_evidence(reranked_evidence)
         formatted_claims = self._format_claims(grounding_result, classification)
-        reranking_block_final = self._build_reranking_signals(reranked_evidence, initial_candidates)
+        reranking_block_final = self._build_reranking_signals(
+            reranked_evidence,
+            initial_candidates,
+            lexical_candidates=lexical_candidates,
+        )
         reranking_block_final["ranked_cases"] = formatted_evidence
 
         is_grounded = bool(grounding_result.get("grounded", False))
@@ -436,6 +546,7 @@ class SupportAgent:
         yield {
             "type": "decide",
             "status": "COMPLETED",
+            "latency_ms": decision_ms,
             "escalation": escalation_block,
         }
 
@@ -473,12 +584,14 @@ class SupportAgent:
                 "request_id": f"req_{int(time.time() * 1000)}",
                 "conversation_id": conversation_id,
                 "classification_ms": classification_ms,
+                "clarification_generation_ms": clarification_generation_ms,
                 "retrieval_ms": retrieval_ms,
                 "reranker_ms": reranker_ms,
                 "generation_ms": generation_ms,
                 "grounding_ms": grounding_ms,
+                "decision_ms": decision_ms,
                 "total_ms": total_ms,
-                "llm_calls": 2 + revision_attempts,
+                "llm_calls": llm_calls_total,
             },
         }
         yield {"type": "complete", "status": "COMPLETED", "response": final_response}

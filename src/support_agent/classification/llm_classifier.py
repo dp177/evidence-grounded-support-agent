@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Optional, Set
 import yaml
 
 from support_agent.llm.client import BaseLLMClient, get_llm_client
+from support_agent.classification.state_extractor import extract_conversation_state
 
 logger = logging.getLogger(__name__)
 
@@ -96,16 +97,20 @@ STRICT CLASSIFICATION RULES:
    - Only assign a leaf intent when the conversation contains evidence for that intent.
    - AMBIGUOUS is a classification status, not a leaf intent. Do NOT invent a "GREETING" intent.
 3. GREETINGS AND CONVERSATIONAL OPENINGS:
-   - Pure greetings or vague help requests ("hi", "hello", "hey", "can you help me?", "please help", "anyone there?", "good morning", "I need help with something") must be classified as AMBIGUOUS with areas: [], intents: [], primary_intent: null, states: ["INITIAL_INQUIRY"]. The classifier must NOT invent a support issue.
+   - Pure greetings or vague help requests ("hi", "hello", "hey", "can you help me?", "please help", "anyone there?", "good morning", "I have a question", "I need help", "I need help with something") must be classified as AMBIGUOUS with areas: [], intents: [], primary_intent: null, states: ["INITIAL_INQUIRY"]. The classifier must NOT invent a support issue.
    - ACTIONABLE GREETINGS: The existence of a greeting does NOT make the whole message ambiguous if an actionable issue is present. For example: "hi, my package is late" -> status: "NORMAL", intents: ["DELIVERY_DELAYED"], primary_intent: "DELIVERY_DELAYED". The actionable support issue takes priority!
-4. MULTI-TURN RECOMPUTATION:
+4. RECOGNIZABLE SUPPORT ISSUES IN HOSTILE, EMOTIONAL, OR POORLY PHRASED MESSAGES:
+   - If a customer message contains a recognizable operational support problem, classify that problem even when the wording is emotional, abusive, incomplete, or poorly phrased. Do not use AMBIGUOUS merely because the message is hostile or missing secondary details. Safety and escalation will be handled separately by the security layer.
+   - For example: "i will kill you give me instant refund" -> status: "NORMAL", intents: ["REFUND_STATUS_INQUIRY"], primary_intent: "REFUND_STATUS_INQUIRY", areas: ["REFUNDS_AND_BILLING"]. The operational problem is clearly a refund request.
+   - For example: "give me my money back right now you thieves" -> status: "NORMAL", intents: ["REFUND_STATUS_INQUIRY"], primary_intent: "REFUND_STATUS_INQUIRY".
+5. MULTI-TURN RECOMPUTATION:
    - Classification must consider the FULL current conversation. Ambiguity is not a permanent conversation state; it is recomputed on every turn. If Turn 1 is "hi" (AMBIGUOUS) and Turn 2 is "my package is late", Turn 2 is NORMAL (DELIVERY_DELAYED).
-5. DO NOT CONFUSE AMBIGUOUS WITH OUT_OF_SCOPE:
+6. DO NOT CONFUSE AMBIGUOUS WITH OUT_OF_SCOPE:
    - AMBIGUOUS: Unclear or greeting within retail support context ("hi", "can you help me?", "terrible service", "check your DM").
    - OUT_OF_SCOPE: Clearly outside Amazon retail support (e.g. "tell me today's weather in Delhi", social banter, non-retail merchant/seller central, stock inquiries).
-6. Multi-intent rule: If the customer expresses TWO OR MORE distinct actionable issues in one inquiry (e.g., package delayed AND wants a refund), set is_multi_intent to true, list all applicable leaf intents in "intents", and choose the single most operationally urgent intent as "primary_intent".
-7. State rule: Select the most accurate conversation state from the 5 allowed states based on what the customer has already done.
-8. Output format: Respond ONLY with a valid JSON object matching this schema:
+7. Multi-intent rule: If the customer expresses TWO OR MORE distinct actionable issues in one inquiry (e.g., package delayed AND wants a refund), set is_multi_intent to true, list all applicable leaf intents in "intents", and choose the single most operationally urgent intent as "primary_intent".
+8. State rule: Select the most accurate conversation state from the 5 allowed states based on what the customer has already done.
+9. Output format: Respond ONLY with a valid JSON object matching this schema:
 
 {{
   "classification_status": "NORMAL" | "AMBIGUOUS" | "OUT_OF_SCOPE",
@@ -279,9 +284,12 @@ class LLMIntentClassifier:
                 try:
                     with open(cache_file, "r", encoding="utf-8") as f:
                         cached = json.load(f)
-                    return self._sanitize_output(cached)
+                    res = self._sanitize_output(cached)
+                    res["states"] = extract_conversation_state(customer_message, context, res.get("states"))
+                    return res
                 except Exception as e:
                     logger.warning(f"Failed to read cache for {gold_id}: {e}")
+
 
         # 2. Invoke OpenRouter LLM with retry loop
         prompt = self._build_user_prompt(customer_message, context)
@@ -309,17 +317,44 @@ class LLMIntentClassifier:
                     time.sleep(2.0 * attempt)
                 else:
                     logger.error(f"All {max_attempts} attempts failed for {gold_id}: {e}")
-                    parsed = {
-                        "classification_status": "AMBIGUOUS",
-                        "intents": [],
-                        "primary_intent": None,
-                        "is_multi_intent": False,
-                        "states": ["INITIAL_INQUIRY"],
-                        "confidence": 0.0,
-                        "reasoning": f"Fallback due to model call error: {e}",
-                    }
+                    import re
+                    msg_lower = f"{context or ''} {customer_message}".lower()
+                    if re.search(r"\b(?:refund|money back|reimburse|credit back)\b", msg_lower):
+                        parsed = {
+                            "classification_status": "NORMAL",
+                            "areas": ["REFUNDS_AND_BILLING"],
+                            "intents": ["REFUND_STATUS_INQUIRY"],
+                            "primary_intent": "REFUND_STATUS_INQUIRY",
+                            "is_multi_intent": False,
+                            "states": ["INITIAL_INQUIRY"],
+                            "confidence": 0.85,
+                            "reasoning": "Determined from customer operational refund request keywords after LLM error",
+                        }
+                    elif re.search(r"\b(?:late|delayed|not arrived|hasn't arrived|where is (?:my )?(?:order|package|delivery|item))\b", msg_lower):
+                        parsed = {
+                            "classification_status": "NORMAL",
+                            "areas": ["DELIVERY_AND_FULFILLMENT"],
+                            "intents": ["DELIVERY_DELAYED"],
+                            "primary_intent": "DELIVERY_DELAYED",
+                            "is_multi_intent": False,
+                            "states": ["INITIAL_INQUIRY"],
+                            "confidence": 0.85,
+                            "reasoning": "Determined from customer operational delivery keywords after LLM error",
+                        }
+                    else:
+                        parsed = {
+                            "classification_status": "AMBIGUOUS",
+                            "areas": [],
+                            "intents": [],
+                            "primary_intent": None,
+                            "is_multi_intent": False,
+                            "states": ["INITIAL_INQUIRY"],
+                            "confidence": 0.0,
+                            "reasoning": f"Fallback due to model call error: {e}",
+                        }
 
         sanitized = self._sanitize_output(parsed)
+        sanitized["states"] = extract_conversation_state(customer_message, context, sanitized.get("states"))
 
         # 3. Save to local cache
         if cache_file:
@@ -330,6 +365,7 @@ class LLMIntentClassifier:
                 logger.warning(f"Failed to write cache for {gold_id}: {e}")
 
         return sanitized
+
 
     def classify_batch(
         self,

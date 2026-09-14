@@ -1,42 +1,98 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { AgentActivityStepInfo } from '../../types/customChat';
-import { Check, Loader2, AlertTriangle, XCircle, Circle } from 'lucide-react';
+import { Check, AlertTriangle, XCircle } from 'lucide-react';
 
 interface AgentActivityStepProps {
   step: AgentActivityStepInfo;
 }
 
-export const AgentActivityStep: React.FC<AgentActivityStepProps> = ({ step }) => {
-  const getIcon = () => {
-    switch (step.status) {
-      case 'COMPLETED':
-        return <Check size={12} color="var(--deep-enterprise-green)" />;
+export const AgentActivityStep: React.FC<AgentActivityStepProps> = memo(({ step }) => {
+  const [displayStatus, setDisplayStatus] = useState<AgentActivityStepInfo['status']>(step.status);
+  const [isStoppingSpinner, setIsStoppingSpinner] = useState(false);
+  const [isRevealingCheck, setIsRevealingCheck] = useState(false);
+  const prevStatusRef = useRef<AgentActivityStepInfo['status']>(step.status);
+
+  useEffect(() => {
+    const prev = prevStatusRef.current;
+    prevStatusRef.current = step.status;
+
+    // Smooth completion sequence: rotating spinner -> slows/stops -> checkmark reveals
+    if (prev === 'RUNNING' && step.status === 'COMPLETED') {
+      setIsStoppingSpinner(true);
+      const timer1 = setTimeout(() => {
+        setIsStoppingSpinner(false);
+        setDisplayStatus('COMPLETED');
+        setIsRevealingCheck(true);
+        const timer2 = setTimeout(() => {
+          setIsRevealingCheck(false);
+        }, 300);
+        return () => clearTimeout(timer2);
+      }, 120);
+      return () => clearTimeout(timer1);
+    } else {
+      setDisplayStatus(step.status);
+      setIsStoppingSpinner(false);
+      setIsRevealingCheck(false);
+    }
+  }, [step.status]);
+
+  // Determine row CSS modifier
+  const getRowClass = () => {
+    if (displayStatus === 'RUNNING') return 'agent-stage-row agent-stage-row--active';
+    if (displayStatus === 'COMPLETED') return 'agent-stage-row agent-stage-row--complete';
+    if (displayStatus === 'WARNING') return 'agent-stage-row agent-stage-row--warning';
+    if (displayStatus === 'FAILED') return 'agent-stage-row agent-stage-row--failed';
+    return 'agent-stage-row agent-stage-row--pending';
+  };
+
+  const renderIcon = () => {
+    if (isStoppingSpinner) {
+      return (
+        <span className="agent-stage-spinner agent-stage-spinner--stopping" aria-label="Finishing">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none">
+            <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="2" strokeOpacity="0.2" />
+            <path d="M14 8a6 6 0 0 0-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </span>
+      );
+    }
+
+    switch (displayStatus) {
       case 'RUNNING':
-        return <Loader2 size={12} className="spin-animation" color="var(--action-blue)" />;
+        return (
+          <span className="agent-stage-spinner agent-stage-spinner--active" aria-label="Running">
+            <svg viewBox="0 0 16 16" width="13" height="13" fill="none">
+              <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="2" strokeOpacity="0.2" />
+              <path d="M14 8a6 6 0 0 0-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </span>
+        );
+      case 'COMPLETED':
+        return (
+          <span
+            className={`agent-stage-check ${isRevealingCheck ? 'agent-stage-check--revealing' : ''}`}
+            aria-label="Completed"
+          >
+            <Check size={12} strokeWidth={2.4} />
+          </span>
+        );
       case 'WARNING':
         return <AlertTriangle size={12} color="var(--warning-amber)" />;
       case 'FAILED':
         return <XCircle size={12} color="var(--error-red)" />;
       default:
-        return <Circle size={8} color="var(--muted-slate)" />;
+        return (
+          <span className="agent-stage-pending-icon" aria-label="Pending">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.2" />
+            </svg>
+          </span>
+        );
     }
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        fontSize: '12px',
-        color: step.status === 'IDLE' ? 'var(--muted-slate)' : 'var(--ink)',
-        fontFamily: 'var(--font-mono)',
-        padding: step.status === 'RUNNING' ? '4px 8px' : '2px 8px',
-        backgroundColor: step.status === 'RUNNING' ? 'rgba(13, 122, 85, 0.06)' : 'transparent',
-        borderRadius: 'var(--radius-xs)',
-        transition: 'all 200ms ease',
-      }}
-    >
+    <div className={getRowClass()}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-8)' }}>
         <span
           style={{
@@ -48,12 +104,12 @@ export const AgentActivityStep: React.FC<AgentActivityStepProps> = ({ step }) =>
             flexShrink: 0,
           }}
         >
-          {getIcon()}
+          {renderIcon()}
         </span>
         <span
           style={{
-            fontWeight: step.status === 'RUNNING' ? 600 : step.status === 'COMPLETED' ? 500 : 400,
-            color: step.status === 'RUNNING' ? 'var(--deep-enterprise-green)' : undefined,
+            fontWeight: displayStatus === 'RUNNING' ? 600 : displayStatus === 'COMPLETED' ? 500 : 400,
+            transition: 'color 200ms ease, font-weight 200ms ease',
           }}
         >
           {step.label}
@@ -64,8 +120,9 @@ export const AgentActivityStep: React.FC<AgentActivityStepProps> = ({ step }) =>
         <span
           style={{
             fontSize: '11px',
-            color: step.status === 'RUNNING' ? 'var(--deep-enterprise-green)' : 'var(--slate)',
-            fontStyle: step.status === 'RUNNING' ? 'italic' : 'normal',
+            color: displayStatus === 'RUNNING' ? 'var(--deep-enterprise-green)' : 'var(--slate)',
+            fontStyle: displayStatus === 'RUNNING' ? 'italic' : 'normal',
+            transition: 'color 200ms ease',
           }}
         >
           {step.detail}
@@ -73,4 +130,5 @@ export const AgentActivityStep: React.FC<AgentActivityStepProps> = ({ step }) =>
       )}
     </div>
   );
-};
+});
+

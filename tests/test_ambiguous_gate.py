@@ -29,17 +29,30 @@ class DummyLLMClient(BaseLLMClient):
 
     def generate(self, prompt: str, system_prompt: str = "", **kwargs) -> LLMResponse:
         p_lower = prompt.lower()
+        sys_lower = system_prompt.lower()
+
+        # Grounding check calls
+        if "grounding" in sys_lower:
+            return self._make_resp(
+                '{"grounded": true, "grounding_score": 1.0, "claims": [], "risk_flags": [], "supported_claims": [], "unsupported_claims": [], "contradicted_claims": []}'
+            )
+
+        # Clarification generation calls
+        if "clarif" in sys_lower or "status: ambiguous" in p_lower or "\ninstruction\n" in p_lower:
+            return self._make_resp(
+                '{"reply": "Hello! Could you please provide your order ID or more details about what you need help with?"}'
+            )
 
         # Development Cases A-C: Greetings / vague requests
-        if 'current customer message:\n"hi"' in p_lower:
+        if 'current customer message:\n"hi"' in p_lower or 'customer message: "hi"' in p_lower:
             return self._make_resp(
                 '{"classification_status": "AMBIGUOUS", "areas": [], "intents": [], "primary_intent": null, "states": ["INITIAL_INQUIRY"], "confidence": 0.95, "reasoning": "Greeting without actionable support issue"}'
             )
-        if 'current customer message:\n"hello"' in p_lower:
+        if 'current customer message:\n"hello"' in p_lower or 'customer message: "hello"' in p_lower:
             return self._make_resp(
                 '{"classification_status": "AMBIGUOUS", "areas": [], "intents": [], "primary_intent": null, "states": ["INITIAL_INQUIRY"], "confidence": 0.95, "reasoning": "Greeting without actionable support issue"}'
             )
-        if 'current customer message:\n"can you help me?"' in p_lower:
+        if 'current customer message:\n"can you help me?"' in p_lower or 'customer message: "can you help me?"' in p_lower:
             return self._make_resp(
                 '{"classification_status": "AMBIGUOUS", "areas": [], "intents": [], "primary_intent": null, "states": ["INITIAL_INQUIRY"], "confidence": 0.95, "reasoning": "Vague help request without details"}'
             )
@@ -66,6 +79,18 @@ class DummyLLMClient(BaseLLMClient):
         if 'current customer message:\n"tell me the weather"' in p_lower:
             return self._make_resp(
                 '{"classification_status": "OUT_OF_SCOPE", "areas": [], "intents": [], "primary_intent": null, "states": ["INITIAL_INQUIRY"], "confidence": 0.95, "reasoning": "Weather is outside Amazon support"}'
+            )
+
+        # Refund request
+        if 'i need my refund' in p_lower:
+            return self._make_resp(
+                '{"classification_status": "NORMAL", "areas": ["REFUNDS_AND_BILLING"], "intents": ["REFUND_STATUS_INQUIRY"], "primary_intent": "REFUND_STATUS_INQUIRY", "states": ["INITIAL_INQUIRY"], "confidence": 0.95, "reasoning": "Customer requesting refund"}'
+            )
+
+        # Threatening message with refund request
+        if 'kill' in p_lower and 'refund' in p_lower:
+            return self._make_resp(
+                '{"classification_status": "NORMAL", "areas": ["REFUNDS_AND_BILLING"], "intents": ["REFUND_STATUS_INQUIRY"], "primary_intent": "REFUND_STATUS_INQUIRY", "states": ["INITIAL_INQUIRY"], "confidence": 0.95, "reasoning": "Hostile language with actionable refund request"}'
             )
 
         # Fallback response for generation / grounding
@@ -201,10 +226,12 @@ def test_retrieval_mock_gate_ambiguous(mock_agent):
     assert resp["classification"]["primary_intent"] is None
     assert resp["retrieved_evidence"] == []
     assert resp["reranking"]["final_count"] == 0
-    assert resp["generated_reply"]["reply"] == "Hi! How can I help you today?"
+    assert resp["generated_reply"]["reply"] == "Hello! Could you please provide your order ID or more details about what you need help with?"
     assert resp["escalation"]["decision"] == "AUTO_HANDLE"
     assert resp["escalation"]["action"] == "CLARIFY"
     assert "SAFE_CLARIFICATION" in resp["escalation"]["reason_codes"]
+    assert resp["trace"]["clarification_generation_ms"] > 0
+    assert resp["trace"]["llm_calls"] == 2
 
 
 def test_retrieval_mock_gate_normal(mock_agent):
@@ -315,4 +342,99 @@ def test_multi_turn_ambiguous_then_normal(mock_agent):
     # Search called ONCE now on Turn 2
     assert agent.retrieval_service.retriever.search.call_count == 1
     assert len(turn2_resp["retrieved_evidence"]) > 0
+
+
+# ===========================================================================
+# 4. Clarification Generation & Hostile Safety Escalation Tests
+# ===========================================================================
+
+@pytest.mark.parametrize("msg", ["hi", "hello", "can you help me?"])
+def test_ambiguous_clarification_natural_generation(mock_agent, msg):
+    """Test that genuinely vague messages produce natural clarification and skip retrieval."""
+    agent = mock_agent
+    agent.retrieval_service.retriever.search.reset_mock()
+
+    resp = agent.handle(
+        conversation_id="test_clarify_gen",
+        messages=[{"role": "customer", "text": msg}],
+    )
+
+    assert agent.retrieval_service.retriever.search.call_count == 0
+    assert resp["classification"]["status"] == "AMBIGUOUS"
+    assert resp["classification"]["primary_intent"] is None
+    reply = resp["generated_reply"]["reply"]
+    assert reply and len(reply) > 10
+    assert "?" in reply
+    assert resp["escalation"]["decision"] == "AUTO_HANDLE"
+    assert resp["escalation"]["action"] == "CLARIFY"
+    assert resp["trace"]["llm_calls"] == 2
+
+
+def test_actionable_refund_not_ambiguous(mock_agent):
+    """Test that 'I need my refund' is classified as NORMAL with REFUND_STATUS_INQUIRY and triggers retrieval."""
+    agent = mock_agent
+    agent.retrieval_service.retriever.search.reset_mock()
+    agent.retrieval_service.retriever.search.return_value = [
+        {
+            "id": "cand_ref",
+            "document_id": "doc_ref",
+            "case_id": "case_ref",
+            "customer_message": "I need my refund",
+            "brand_response": "Refunds are processed within 3-5 business days.",
+            "score": 0.88,
+            "intents": ["REFUND_STATUS_INQUIRY"],
+            "states": ["INITIAL_INQUIRY"],
+            "action_penalty_flag": 0.0,
+            "semantic_score": 0.88,
+            "lexical_score": 0.85,
+            "intent_score": 1.0,
+            "state_score": 1.0,
+            "rerank_score": 0.90,
+        }
+    ]
+
+    resp = agent.handle(
+        conversation_id="test_refund_not_ambiguous",
+        messages=[{"role": "customer", "text": "I need my refund"}],
+    )
+
+    assert resp["classification"]["status"] == "NORMAL"
+    assert resp["classification"]["primary_intent"] == "REFUND_STATUS_INQUIRY"
+    assert agent.retrieval_service.retriever.search.call_count == 1
+    assert resp["generated_reply"]["reply"] != ""
+
+
+def test_hostile_message_with_support_issue_escalates_safety(mock_agent):
+    """Test that 'i will kill you give me instant refund' classifies as NORMAL refund but escalates via SAFETY_THREAT."""
+    agent = mock_agent
+    agent.retrieval_service.retriever.search.reset_mock()
+    agent.retrieval_service.retriever.search.return_value = []
+
+    resp = agent.handle(
+        conversation_id="test_threat_refund",
+        messages=[{"role": "customer", "text": "i will kill you give me instant refund"}],
+    )
+
+    assert resp["classification"]["status"] == "NORMAL"
+    assert resp["classification"]["primary_intent"] == "REFUND_STATUS_INQUIRY"
+    assert resp["escalation"]["decision"] == "HUMAN_REVIEW"
+    assert resp["escalation"]["action"] == "ESCALATE"
+    assert any(code in resp["escalation"]["reason_codes"] for code in ["SAFETY_THREAT", "HIGH_RISK_SECURITY"])
+
+
+def test_ambiguous_clarification_fallback_on_error(mock_agent):
+    """Test that if clarification generation fails or raises, emergency fallback 'Hi! How can I help you today?' is returned."""
+    agent = mock_agent
+
+    with patch.object(agent.generator, "generate_clarification", side_effect=RuntimeError("LLM down")):
+        resp = agent.handle(
+            conversation_id="test_fallback_error",
+            messages=[{"role": "customer", "text": "hi"}],
+        )
+
+        assert resp["classification"]["status"] == "AMBIGUOUS"
+        assert resp["generated_reply"]["reply"] == "Hi! How can I help you today?"
+        assert resp["escalation"]["decision"] == "AUTO_HANDLE"
+        assert resp["escalation"]["action"] == "CLARIFY"
+
 

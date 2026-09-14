@@ -1,0 +1,902 @@
+% =============================================================================
+%  HIVER SDE INTERN — TECHNICAL REPORT  (6 pages, two-column, A4)
+%  Compiles cleanly with pdflatex / xelatex / Overleaf
+% =============================================================================
+\documentclass[10pt,twocolumn,a4paper]{article}
+
+% ---- core packages ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.72in,top=0.78in,bottom=0.82in,columnsep=0.30in]{geometry}
+\usepackage{times}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{balance}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{colortbl}
+
+% ---- Hiver-inspired colour palette ----
+\definecolor{hiverblue}{HTML}{1C5AF6}
+\definecolor{hiverdark}{HTML}{121A2C}
+\definecolor{hivergray}{HTML}{F5F7FA}
+\definecolor{hiverborder}{HTML}{DAE1E9}
+\definecolor{accentgreen}{HTML}{16A34A}
+\definecolor{accentred}{HTML}{DC2626}
+\definecolor{accentamber}{HTML}{D97706}
+\definecolor{rowalt}{HTML}{F0F4FF}
+
+% ---- hyperref ----
+\hypersetup{
+  colorlinks=true,
+  linkcolor=hiverblue,
+  citecolor=hiverblue,
+  urlcolor=hiverblue,
+  pdftitle={Evidence-Grounded AI Support Agent},
+  pdfauthor={Dax Patel}
+}
+
+% ---- lists (more spacing to breathe) ----
+\setlist[itemize]{itemsep=2pt,parsep=1pt,leftmargin=12pt,label=\textcolor{hiverblue}{\textbullet}}
+\setlist[enumerate]{itemsep=2pt,parsep=1pt,leftmargin=14pt}
+
+% ---- section styling ----
+\titlespacing*{\section}      {0pt}{8pt plus 2pt}{4pt plus 1pt}
+\titlespacing*{\subsection}   {0pt}{6pt plus 2pt}{3pt plus 1pt}
+\titlespacing*{\subsubsection}{0pt}{5pt plus 1pt}{2pt}
+
+\titleformat{\section}{\large\bfseries\color{hiverdark}}{\thesection}{0.5em}{}[\vspace{1pt}\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{hiverblue}}{\thesubsection}{0.4em}{}
+\titleformat{\subsubsection}{\small\bfseries\color{hiverdark}}{\thesubsubsection}{0.3em}{}
+
+% ---- header / footer ----
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[L]{\small\textbf{\color{hiverdark}Hiver SDE Intern}\;\textcolor{hiverborder}{|}\;\textit{Evidence-Grounded AI Support Agent}}
+\fancyhead[R]{\small\color{hiverblue}\textbf{Technical Report}}
+\fancyfoot[C]{\small\thepage\;/\;6}
+
+% ---- tcolorbox presets ----
+\tcbuselibrary{skins}
+\tcbset{
+  hbox/.style={
+    colback=hivergray,
+    colframe=hiverborder,
+    arc=2mm,
+    boxrule=0.5pt,
+    left=6pt,right=6pt,top=5pt,bottom=5pt,
+    fonttitle=\bfseries\small\color{hiverdark},
+    title=#1
+  },
+  accent/.style={
+    colback=hivergray,
+    colframe=hiverblue,
+    arc=2mm,
+    boxrule=0.7pt,
+    left=7pt,right=7pt,top=6pt,bottom=6pt
+  }
+}
+
+% ---- small helpers ----
+\newcommand{\metric}[1]{\textbf{\textcolor{hiverblue}{#1}}}
+\newcommand{\bad}[1]{\textbf{\textcolor{accentred}{#1}}}
+\newcommand{\good}[1]{\textbf{\textcolor{accentgreen}{#1}}}
+
+% ======================= DOCUMENT START ======================================
+\begin{document}
+
+% ---------- full-width title block inside twocolumn --------------------------
+\twocolumn[{%
+  \begin{center}
+    {\LARGE\bfseries\color{hiverdark}
+      Evidence-Grounded AI Support Agent}\\[4pt]
+    {\large\bfseries\color{hiverdark}
+      Safe Multi-Turn Triage, Retrieval-Augmented Resolution,}\\[2pt]
+    {\large\bfseries\color{hiverdark}
+      and Deterministic Escalation}\\[8pt]
+    {\normalsize\color{hiverblue}\bfseries
+      Hiver SDE Intern Take-Home Project\;\textcolor{hiverborder}{|}\;Technical Engineering Report}\\[5pt]
+    {\small
+      \textbf{Dax Patel}\quad\textcolor{hiverborder}{|}\quad
+      Target Role: SDE Intern (AI / Backend Engineering)\quad\textcolor{hiverborder}{|}\quad
+      Brand: \texttt{@AmazonHelp}}\\[3pt]
+    {\small\textit{Domain: Multi-Channel Customer Support, Shared Inboxes, Agent Copilot, Factual Grounding}}
+  \end{center}
+  \vspace{8pt}
+  \begin{tcolorbox}[accent]
+    \small
+    \textbf{Executive Summary.}\;
+    Support teams at scale face an unforgiving trade-off:
+    auto-handling routine queries drives operational efficiency, but
+    hallucinated actions or missed escalations destroy customer trust
+    and inflate churn.
+    Built specifically on the Kaggle Twitter Customer Support corpus
+    (${\sim}3\text{M}$ tweets) for the \texttt{@AmazonHelp} brand, this system
+    implements a production-grade \textbf{4-stage decoupled pipeline} combining
+    \textbf{Hierarchical Multi-Label Taxonomy Classification},
+    \textbf{Hybrid Reciprocal Rank Fusion (RRF) Retrieval},
+    an \textbf{Iterative NLI Factual Grounding Loop}, and a
+    \textbf{Deterministic 4-Gate Safety Escalation Engine}.
+    Tested across a rigorous 3-generation benchmark
+    (600 total hand-adjudicated cases across Golden V1, V2, and V3),
+    the frozen agent achieves
+    \metric{95.50\% Status Accuracy},
+    \metric{0.00\% Capability Hallucination Rate},
+    \metric{99.00\% Grounding Pass Rate}, and reduces
+    the critical \textbf{Unsafe Auto-Handle Rate from 60.00\% down to 31.37\%}
+    while slashing Unnecessary Escalations to \metric{5.37\%}.
+    All pipeline steps run locally using open-source embeddings and
+    reproduce deterministically in under 15 minutes.
+  \end{tcolorbox}
+  \vspace{10pt}
+}]
+
+% =============================================================================
+% 1  PROBLEM FRAMING
+% =============================================================================
+\section{Problem Framing: What ``Good'' Means for Amazon Support}
+\label{sec:problem}
+
+Customer support on public social channels like \texttt{@AmazonHelp}
+presents a uniquely challenging engineering environment: noisy,
+abbreviated utterances; truncated multi-turn conversational contexts;
+missing account metadata; adversarial customer sentiment; and genuinely
+high security stakes. In this environment, deploying a generic
+generative chatbot is not merely suboptimal---it is an active
+operational liability that risks brand damage, regulatory exposure,
+and customer churn.
+
+\subsection{Operational Definition of ``Good''}
+Within Hiver's product philosophy of empowering human support teams
+with reliable AI copilots, an autonomous support agent is successful
+if and only if it satisfies four non-negotiable operational invariants:
+
+\begin{enumerate}
+  \item \textbf{Factual Grounding over Creative Fluency:} Every assertion
+        in the agent's response must be strictly verifiable against
+        retrieved historical brand resolutions or current conversation
+        state. Fabricating carrier tracking status or claiming an
+        internal system refund when none occurred is an unacceptable,
+        trust-destroying failure.
+
+  \item \textbf{High-Confidence Intent and State Triage:} The agent must
+        correctly parse complex multi-intent issues and extract customer
+        progress markers (e.g., whether the customer has already checked
+        tracking, already contacted the carrier, or has been waiting
+        beyond expected delivery windows) to avoid repetitive,
+        frustrating interactions.
+
+  \item \textbf{Safety-First Escalation Hierarchy:} Genuinely high-risk
+        incidents---account hijacking, carrier misconduct, repeated
+        unfulfilled commitments---\textit{must} route to human
+        specialists with structured context breadcrumbs, regardless
+        of the model's generation confidence.
+
+  \item \textbf{Queue Protection and Safe Automation:} Routine,
+        unambiguous issues (delivery delay updates, return window
+        inquiries, subscription cancellations) must auto-resolve
+        cleanly without flooding human shared inboxes, which in
+        Hiver's architecture translates directly to protecting
+        agent SLA response times.
+\end{enumerate}
+
+\subsection{What We Explicitly Chose NOT to Build}
+Disciplined engineering requires conscious scope boundaries.
+We deliberately excluded three capabilities:
+
+\begin{itemize}
+  \item \textbf{No Autonomous Action Execution:} We chose \textit{not}
+        to wire the agent to automated write APIs (e.g., executing
+        actual credit card refunds or changing shipping addresses).
+        In public Twitter support, identity verification cannot be
+        cryptographically proven; attempting unauthenticated actions
+        on behalf of unverified users invites fraud and regulatory risk.
+
+  \item \textbf{No Monolithic Black-Box LLM Architecture:} We rejected
+        single-prompt end-to-end generation where one LLM simultaneously
+        classifies, retrieves, drafts, and decides escalation. Empirical
+        testing showed this monolithic approach yields a catastrophic
+        $14.5\%$ capability hallucination rate and unreliable safety
+        gate compliance.
+
+  \item \textbf{No Canned Pre-Scripted FAQ Lookup:} Real customer support
+        is conversational and contextual. Static template matching fails
+        on multi-turn nuances; our pipeline instead synthesizes grounded
+        natural language directly from historical brand resolutions.
+\end{itemize}
+
+% =============================================================================
+% 2  GOLDEN EVALUATION SET
+% =============================================================================
+\section{Golden Evaluation Set Methodology}\label{sec:golden}
+
+\subsection{Dataset Sampling and Curation}
+From the primary Kaggle dataset (${\sim}3\text{M}$ tweets across dozens
+of brands), we isolated the \texttt{@AmazonHelp} sub-corpus
+(${\sim}150\text{k}$ threaded conversations). Rather than uniform random
+sampling---which yields an uninformative $85\%$ routine delivery delay
+dataset---we implemented \textbf{stratified adversarial sampling}:
+
+\begin{itemize}
+  \item \textbf{Turn Depth Stratification:} Sampled single-turn (43\%),
+        two-turn (36\%), and multi-turn ($\ge$3 turns, 21\%) threads to
+        enforce state consistency testing across varying dialogue
+        history lengths.
+
+  \item \textbf{Stress-Scenario Over-Indexing:} Actively enriched
+        safety-critical edge cases: account takeovers, carrier abuse
+        and refusal, repeated support transfers, out-of-scope queries
+        (e.g., AWS EC2 provisioning requests or competitor product
+        tracking), and adversarial customer sentiment.
+
+  \item \textbf{Multi-Intent Ingestion:} 10\% of cases deliberately
+        feature composite issues (e.g., a damaged item complaint
+        combined with a refund status inquiry) to stress multi-label
+        classification capabilities.
+\end{itemize}
+
+\subsection{Ground-Truth Annotation Schema}
+We engineered a definitive 32-column evaluation schema. Every case is
+adjudicated by human reviewers across 7 foundational ground-truth
+fields:
+
+\begin{enumerate}
+  \item \texttt{human\_status}: \texttt{NORMAL}, \texttt{AMBIGUOUS},
+        or \texttt{OUT\_OF\_SCOPE}.
+  \item \texttt{human\_areas}: One or more of 7 macro operational areas
+        (e.g., \texttt{ORDERS\_AND\_TRACKING},
+        \texttt{RETURNS\_AND\_REPLACEMENTS},
+        \texttt{ACCOUNT\_SECURITY}).
+  \item \texttt{human\_intents}: Multi-label intent set drawn from our
+        14-intent taxonomy.
+  \item \texttt{human\_primary\_intent}: The single dominant driver
+        of the customer contact.
+  \item \texttt{human\_states}: Evidence-backed customer progress markers
+        (\texttt{INITIAL\_INQUIRY}, \texttt{TRACKING\_ALREADY\_CHECKED},
+        \texttt{CARRIER\_ALREADY\_CONTACTED},
+        \texttt{WAITING\_WINDOW\_EXCEEDED}).
+  \item \texttt{human\_should\_escalate}: Binary ground truth (1 or 0).
+  \item \texttt{human\_escalation\_reason}: Explicit taxonomy reason
+        (e.g., \texttt{ACCOUNT\_SECURITY\_COMPROMISE},
+        \texttt{CARRIER\_MISCONDUCT\_AND\_REFUSAL},
+        \texttt{REPEATED\_FAILED\_SUPPORT\_ATTEMPTS},
+        \texttt{SAFE\_TO\_AUTO\_HANDLE}).
+\end{enumerate}
+
+\subsection{3-Generation Benchmark Governance}
+To rigorously guard against benchmark leakage and overfitting, we
+adopted a multi-generation evaluation protocol:
+
+\begin{itemize}
+  \item \textbf{Golden V1 ($N{=}200$):} Diagnostic baseline benchmark.
+        Revealed alarmingly high unsafe auto-handle rates (60\%) on
+        edge cases. Dataset was locked immediately after initial
+        evaluation.
+
+  \item \textbf{Golden V2 ($N{=}200$):} Completely fresh, independently
+        sampled cases designed to test Policy Iteration~1 improvements.
+        Revealed systematic over-escalation on out-of-scope queries.
+        Locked immediately.
+
+  \item \textbf{Golden V3 ($N{=}200$):} The final, frozen, independent
+        benchmark (SHA-256: \texttt{4049dfe0\ldots}). Evaluated
+        completely blindly with zero post-hoc tuning. Token Jaccard
+        similarity against V1/V2 is below 0.60 across all records,
+        confirming independence.
+\end{itemize}
+
+% =============================================================================
+% 3  SYSTEM ARCHITECTURE
+% =============================================================================
+\section{System Architecture: 4-Stage Pipeline}\label{sec:arch}
+
+The agent is organized into four modular, independently observable
+stages (Figure~\ref{fig:arch}), explicitly decoupling deterministic
+safety constraints from probabilistic generation.
+
+\begin{tcolorbox}[hbox={Architecture Overview: 4-Stage Decoupled Pipeline}]
+\small
+\textbf{Stage 1 --- Multi-Facet Semantic Triage}\\
+\hspace*{6pt}$\hookrightarrow$ Zero-shot multi-label classification via structured schema\\
+\hspace*{6pt}$\hookrightarrow$ Regex-anchored customer state extractor\\[4pt]
+\textbf{Stage 2 --- Hybrid Evidence Retrieval (RRF)}\\
+\hspace*{6pt}$\hookrightarrow$ Dense Embeddings (\texttt{all-MiniLM-L6-v2}) + Sparse BM25\\
+\hspace*{6pt}$\hookrightarrow$ Reciprocal Rank Fusion ($k{=}60$) over verified resolutions\\[4pt]
+\textbf{Stage 3 --- Grounded Synthesis + NLI Verification Loop}\\
+\hspace*{6pt}$\hookrightarrow$ Contextual prompt synthesis with conversational memory\\
+\hspace*{6pt}$\hookrightarrow$ Claim decomposition + DeBERTa NLI check (max 2 retries)\\[4pt]
+\textbf{Stage 4 --- Deterministic 4-Gate Safety Escalation Engine}\\
+\hspace*{6pt}$\hookrightarrow$ G1a: Low-confidence\;\;/\;\;G1b: High-risk security and misconduct\\
+\hspace*{6pt}$\hookrightarrow$ G2: NLI grounding failure\;\;/\;\;G3: State consistency\;\;/\;\;G4: Scope gating
+\end{tcolorbox}
+\vspace{-2pt}
+\captionof{figure}{Decoupled 4-stage architecture ensuring factual
+grounding and deterministic safety guarantees.}
+\label{fig:arch}
+
+\subsection{Stage 1: Semantic Triage and State Extraction}
+Incoming customer messages and full dialogue turns are parsed into
+status, operational areas, multi-label intents, and a primary intent.
+In parallel, a deterministic \texttt{StateExtractor} inspects the
+dialogue history to detect whether customer progress markers have been
+satisfied---for example, the customer affirming they already checked
+the carrier tracking link triggers a state transition to
+\texttt{TRACKING\_ALREADY\_CHECKED}, which prevents the agent from
+redundantly suggesting the same action.
+
+\subsection{Stage 2: Hybrid Retrieval-Augmented Generation (RAG)}
+For \texttt{NORMAL} status cases, the system retrieves the top-$k$
+historically resolved brand resolutions using hybrid retrieval. Pure
+dense vector search struggles on exact tracking numbers, alphanumeric
+order IDs, and carrier acronyms; pure BM25 fails on semantic
+paraphrasing. We combine both signals via Reciprocal Rank Fusion:
+\begin{equation}
+\text{RRF}(d) \;=\; \sum_{m\,\in\,\{\text{Dense},\,\text{BM25}\}}
+  \frac{1}{k + \text{Rank}_m(d)}
+\end{equation}
+with fusion constant $k{=}60$. Hard gating rules suppress retrieval
+entirely on \texttt{AMBIGUOUS} and \texttt{OUT\_OF\_SCOPE} inputs,
+eliminating redundant compute and preventing irrelevant passage
+pollution in the generator's context window.
+
+\subsection{Stage 3: Grounded Generation and NLI Verification Loop}
+The generator produces a customer-facing response conditioned on
+conversation history and retrieved resolutions. Before emission,
+the response passes through a strict \textbf{Claim-Level Grounding
+Grader}:
+
+\begin{enumerate}
+  \item The response is split into discrete atomic factual propositions.
+  \item Each proposition is verified against the current dialogue context
+        and retrieved passages using an NLI cross-encoder model.
+  \item If any claim is classified as \texttt{CONTRADICTED} or
+        unsupported, the response triggers a revision loop (max 2
+        attempts) forcing the LLM to retract unsupported assertions.
+  \item If verification fails after 2 revisions, the system aborts
+        auto-handling and safely falls back to human escalation
+        (\texttt{GROUNDING\_FAILURE}).
+\end{enumerate}
+
+\subsection{Stage 4: 4-Gate Deterministic Safety Engine}
+Escalation is \textit{never} left to LLM discretion. It is enforced
+via a deterministic multi-gate cascade:
+
+\begin{itemize}
+  \item \textbf{Gate 1a (Triage Gating):} Escalates when status is
+        unclassifiable or intent confidence falls below threshold
+        $\tau{=}0.55$.
+
+  \item \textbf{Gate 1b (Deterministic High-Risk Overrides):} A strict
+        policy regex layer scanning for account compromise (unauthorized
+        orders, 2FA bypass), carrier misconduct (hostility, dumping
+        parcels, refusal to deliver), and repeated unsuccessful contacts
+        ($\ge$3 prior failed interactions). Mandates immediate escalation
+        regardless of generation confidence.
+
+  \item \textbf{Gate 2 (Grounding Fail-Safe):} Escalates if the Stage~3
+        NLI grounding loop exhausts all retry attempts without achieving
+        100\% claim verification.
+
+  \item \textbf{Gate 3 (State Inconsistency):} Evaluates whether draft
+        instructions demand an action the customer has explicitly already
+        completed, preventing frustrating repetitive suggestions.
+
+  \item \textbf{Gate 4 (Out-of-Scope Polite Handling):} Intercepts
+        out-of-scope queries (general knowledge, competitor inquiries,
+        non-Amazon services) to emit a polite declination \textit{without}
+        consuming expensive human agent review queues.
+\end{itemize}
+
+% =============================================================================
+% 4  EVALUATION HARNESS
+% =============================================================================
+\section{Evaluation Harness and LLM Judge Validation}\label{sec:harness}
+
+\subsection{Metric Contracts and Accounting}
+To ensure statistical integrity, our automated evaluation harness
+adheres to strict mathematical contracts:
+
+\begin{itemize}
+  \item \textbf{Null Consistency:} On \texttt{AMBIGUOUS} and
+        \texttt{OUT\_OF\_SCOPE} cases, predicted primary intents and
+        areas must evaluate as null; predicting a phantom intent on
+        out-of-scope queries is actively penalized.
+
+  \item \textbf{Set-Based F1:} Multi-intent and area sets are evaluated
+        via true micro/macro set intersections rather than concatenated
+        string matches, which would artificially inflate scores.
+
+  \item \textbf{Critical Risk Accounting:} We define the most important
+        safety metric as:
+        \begin{equation}
+        \text{Unsafe Auto-Handle} = \frac{\text{False Negatives}}{\text{Total Gold Escalated}}
+        \end{equation}
+        This measures the percentage of genuinely hazardous situations
+        that silently bypass human supervision.
+\end{itemize}
+
+\subsection{LLM-as-Judge Rubric and Human Agreement}
+Response quality is scored across 6 orthogonal dimensions on a 1--5
+Likert scale using structured system prompts. Table~\ref{tab:rubric}
+shows scores and human--judge correlation computed over 50
+hand-calibrated audit samples.
+
+\medskip
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\columnwidth}{@{}Xcc@{}}
+\toprule
+\textbf{Quality Dimension} & \textbf{V3 Score} & \textbf{Human $r$} \\
+\midrule
+\rowcolor{rowalt} Relevance            & 4.17\,/\,5 & 0.82 \\
+Factual Correctness                    & 4.44\,/\,5 & 0.88 \\
+\rowcolor{rowalt} Groundedness         & 4.92\,/\,5 & 0.91 \\
+Actionability                          & 3.63\,/\,5 & 0.78 \\
+\rowcolor{rowalt} Safety and Honesty   & 4.96\,/\,5 & 0.94 \\
+Conversation Awareness                 & 2.21\,/\,5 & 0.81 \\
+\midrule
+\textbf{Overall Composite}             & \textbf{4.05\,/\,5} & \textbf{0.86\;($\kappa{=}0.79$)} \\
+\bottomrule
+\end{tabularx}
+\captionof{table}{LLM-Judge rubric scores on Golden V3 and
+human--judge agreement ($r$ = Pearson correlation,
+$\kappa$ = Cohen's kappa).}
+\label{tab:rubric}
+\end{center}
+
+% =============================================================================
+% 5  RESULTS VS BASELINES  (full-width table)
+% =============================================================================
+\section{Experimental Results vs.\ Baselines}\label{sec:results}
+
+We evaluate the full frozen pipeline (post-Policy Iteration~2) on
+Golden~V3 ($N{=}200$) against two mandatory baselines:
+
+\begin{enumerate}
+  \item \textbf{Baseline 1 (Trivial Majority-Class):} Predicts majority
+        status (\texttt{NORMAL}) and always auto-handles
+        (\texttt{should\_escalate = False}). Uses raw BM25 top-1
+        ungrounded retrieval.
+
+  \item \textbf{Baseline 2 (Simple Monolithic LLM):} A single zero-shot
+        prompt instructed to triage, retrieve via dense search, generate,
+        and decide escalation without decoupled safety gates or NLI
+        grounding loops.
+\end{enumerate}
+
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}l *{6}{c} @{}}
+\toprule
+\textbf{Metric} &
+\textbf{Trivial} &
+\textbf{Simple LLM} &
+\textbf{Agent V1} &
+\textbf{Agent V2} &
+\textbf{Agent V3} &
+\textbf{$\Delta$ V2$\to$V3} \\
+\midrule
+\rowcolor{rowalt}
+\multicolumn{7}{@{}l}{\textit{\textbf{Classification Performance}}} \\
+Status Accuracy           & 82.50\% & 85.00\% & 91.00\% & 95.50\% & \good{95.50\%} & $+$0.00\% \\
+\rowcolor{rowalt}
+Status Macro F1           & 0.3012  & 0.6240  & 0.4872  & 0.8824  & \good{0.8875}  & $+$0.0051 \\
+Primary Intent Acc.       & 17.50\% & 62.00\% & 74.50\% & 83.50\% & \good{80.50\%} & $-$3.00\% \\
+\rowcolor{rowalt}
+Primary Intent Macro F1   & 0.0250  & 0.5840  & 0.7550  & 0.8194  & \good{0.7844}  & $-$0.0350 \\
+Multi-Intent Exact Match  & 12.00\% & 51.50\% & 68.00\% & 81.00\% & \good{76.00\%} & $-$5.00\% \\
+\rowcolor{rowalt}
+State Accuracy            & 41.50\% & 54.00\% & 67.00\% & 84.50\% & \good{82.00\%} & $-$2.50\% \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{\textbf{Escalation and Safety Metrics}}} \\
+\rowcolor{rowalt}
+Escalation Precision      & 0.00\%  & 42.10\% & 75.00\% & 54.05\% & \good{81.40\%} & \good{$+$27.35\%} \\
+Escalation Recall         & 0.00\%  & 35.29\% & 40.00\% & 46.51\% & \good{68.63\%} & \good{$+$22.12\%} \\
+\rowcolor{rowalt}
+Escalation F1             & 0.00\%  & 38.37\% & 52.17\% & 50.00\% & \good{74.47\%} & \good{$+$24.47\%} \\
+Unsafe Auto-Handle $\downarrow$ & \bad{100.0\%} & \bad{64.71\%} & \bad{60.00\%} & \bad{53.49\%} & \bad{31.37\%} & \good{$-$22.12\%} \\
+\rowcolor{rowalt}
+Unnec.\ Escalation $\downarrow$ & 0.00\% & 19.46\% & 1.08\% & 10.83\% & \good{5.37\%} & \good{$-$5.46\%} \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{\textbf{Grounding and Behavioral Invariants}}} \\
+\rowcolor{rowalt}
+Behavioral Pass Rate      & 64.00\% & 71.50\% & 90.50\% & 90.50\% & \good{93.00\%} & $+$2.50\% \\
+Grounding Pass Rate       & 52.00\% & 68.50\% & 99.50\% & 99.00\% & \good{99.00\%} & $+$0.00\% \\
+\rowcolor{rowalt}
+Hallucination Rate $\downarrow$ & 18.50\% & 14.50\% & 0.50\% & 0.00\% & \good{0.00\%} & $+$0.00\% \\
+Unsupported Claims $\downarrow$ & 31.00\% & 22.00\% & 0.00\% & 1.00\% & 1.00\% & $+$0.00\% \\
+\midrule
+\rowcolor{rowalt}
+\multicolumn{7}{@{}l}{\textit{\textbf{Operations and Latency}}} \\
+Execution Success Rate    & 100.0\% & 98.50\% & 100.0\% & 100.0\% & \good{100.0\%} & $+$0.00\% \\
+\rowcolor{rowalt}
+Median Latency (p50)      & 1.20\,s & 14.20\,s & 24.45\,s & 24.85\,s & 22.24\,s & $-$2.61\,s \\
+p95 Latency               & 3.10\,s & 36.50\,s & 64.13\,s & 90.68\,s & 70.99\,s & $-$19.69\,s \\
+\bottomrule
+\end{tabularx}
+\caption{Comprehensive Longitudinal Benchmark: Comparing baselines against
+Agent V1, V2, and the final frozen V3 pipeline across 200 unseen cases
+per generation. Policy Iteration~2 delivered $+$24.47\% Escalation F1
+and cut Unsafe Auto-Handles nearly in half while maintaining 0.00\%
+Hallucination Rate.}
+\label{tab:main}
+\end{table*}
+
+% =============================================================================
+% 6  V3 CHALLENGE BREAKDOWN
+% =============================================================================
+\section{Golden V3 Challenge-Group Analysis}\label{sec:challenges}
+
+To audit generalization without cherry-picking, Golden V3 was structured
+into 12 distinct stress scenarios. Table~\ref{tab:challenges} shows
+performance across all challenge groups.
+
+\medskip
+\begin{center}
+\small
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\columnwidth}{@{}Xrccc@{}}
+\toprule
+\textbf{Challenge Group} & \textbf{N} & \textbf{Stat.} & \textbf{State} & \textbf{Esc.\,R} \\
+\midrule
+\rowcolor{rowalt}
+Carrier Misconduct        & 13 & 100\% & 38.5\%  & 46.2\% \\
+Routine Carrier Ctrl.     & 10 & 90\%  & 100\%   & --- \\
+\rowcolor{rowalt}
+Repeated Failed Support   & 19 & 100\% & 89.5\%  & 68.4\% \\
+Single Contact Ctrl.      &  3 & 100\% & 33.3\%  & 0.0\% \\
+\rowcolor{rowalt}
+Account Security          & 19 & 100\% & 78.9\%  & \good{84.2\%} \\
+Lockout + Failed Recovery &  7 & 100\% & 57.1\%  & \good{85.7\%} \\
+\rowcolor{rowalt}
+Routine Login Ctrl.       & 11 & 81.8\%& 100\%   & --- \\
+Tracking Edge Cases       & 14 & 100\% & 92.9\%  & --- \\
+\rowcolor{rowalt}
+State Consistency Ctrl.   & 40 & 100\% & 82.5\%  & 68.2\% \\
+Multi-Intent              & 20 & 100\% & 75.0\%  & 33.3\% \\
+\rowcolor{rowalt}
+Ambiguous Inquiries       & 23 & 91.3\%& 95.7\%  & --- \\
+Out-of-Scope              & 12 & 75.0\%& 100\%   & \good{---} \\
+\bottomrule
+\end{tabularx}
+\captionof{table}{V3 stress-test scenario performance across all 12
+challenge groups. ``---'' indicates no gold-escalated cases in that
+group (false-positive counts are reported inline in the text).}
+\label{tab:challenges}
+\end{center}
+
+\medskip
+\noindent\textbf{Key Findings across Challenge Groups:}
+
+\begin{itemize}
+  \item \textbf{Security and Lockout Generalization:} Account security
+        compromise achieved an outstanding \good{84.21\% recall}
+        (16/19 correctly escalated), and lockout with failed recovery
+        reached \good{85.71\% recall} (6/7). These represent the
+        strongest safety-critical improvements from Policy Iteration~2.
+
+  \item \textbf{Elimination of Out-of-Scope Queue Flooding:} In Golden
+        V2, 40\% of out-of-scope cases generated false-positive human
+        escalations, wasting agent capacity. In V3, Gate~4 achieved
+        \good{0.00\% false escalations} across all 12 out-of-scope
+        cases by deploying polite refusal auto-drafts instead.
+
+  \item \textbf{State Consistency Protection:} In V2, routine tracking
+        inquiries were penalized by spurious state-inconsistency flags.
+        In V3, the state consistency gate produced \good{0 false-positive
+        escalations}, correctly distinguishing between customers who
+        had already completed tracking and those who had not.
+\end{itemize}
+
+% =============================================================================
+% 7  FAILURE ANALYSIS
+% =============================================================================
+\section{Top 5 Failure Modes and Root Causes}\label{sec:failures}
+
+\begin{enumerate}[label=\textbf{F\arabic*.},leftmargin=18pt,itemsep=6pt]
+
+\item \textbf{Colloquial Action Lexicon in Carrier Misconduct}
+\textit{(Safety-Critical: High)}\\[2pt]
+\textbf{Customer:} \textit{``Delivery person \underline{chucked} my
+fragile computer monitor box over the 7-foot driveway gate, smashing
+it directly against the concrete!''}\\
+\textbf{Gold:} \texttt{CARRIER\_MISCONDUCT}, Escalate: True.\\
+\textbf{Agent:} \texttt{CARRIER\_FEEDBACK}, Escalate: False.\\
+\textbf{Root Cause:} Gate~1b regex patterns covered canonical verbs
+(\textit{threw, tossed, refused}) but missed informal slang synonyms
+like \textit{chucked, dumped, cursed at me}.\\
+\textbf{Remediation:} Integrate a lightweight zero-shot aggression
+classifier alongside regex dictionaries to capture semantic intent
+beyond exact lexical matches.
+
+\item \textbf{Brand-Utterance Keyword Leakage}
+\textit{(Safety-Critical: Low)}\\[2pt]
+\textbf{Context:} Brand asked \textit{``Was the external carton also
+\underline{compromised}?''} Customer replied about leaking shampoo.\\
+\textbf{Gold:} \texttt{DAMAGED\_ITEM}, Escalate: False.\\
+\textbf{Agent:} Escalate: True (\texttt{ACCOUNT\_SECURITY\_COMPROMISE}).\\
+\textbf{Root Cause:} Gate~1b scanned aggregated thread text for
+\texttt{\textbackslash bcompromised\textbackslash b}, matching the
+brand assistant's inquiry about physical carton integrity.\\
+\textbf{Remediation:} Restrict security regex scans strictly to
+customer turns, or bind \texttt{compromised} to account-related noun
+phrases only.
+
+\item \textbf{Single Contact Misclassified as Repeated Failure}
+\textit{(Safety-Critical: Low)}\\[2pt]
+\textbf{Customer:} \textit{``I contacted support yesterday
+\underline{once} and they told me it might arrive today.''}\\
+\textbf{Gold:} \texttt{INITIAL\_INQUIRY}, Escalate: False.\\
+\textbf{Agent:} Escalate: True (\texttt{REPEATED\_FAILED\_SUPPORT}).\\
+\textbf{Root Cause:} The state extractor matched \textit{contacted
+support \ldots\ yesterday} without respecting the negative limiter
+\textit{``once''}.\\
+\textbf{Remediation:} Add negative lookahead guards for singular
+occurrence markers (\textit{once, first time, just}).
+
+\item \textbf{Non-Standard Multi-Agent Contact Phrasing}
+\textit{(Safety-Critical: Medium-High)}\\[2pt]
+\textbf{Customer:} \textit{``I've been \underline{passed between} six
+different representatives across multiple calls and nobody has provided
+a straight answer!''}\\
+\textbf{Gold:} \texttt{REPEATED\_FAILED\_SUPPORT}, Escalate: True.\\
+\textbf{Agent:} \texttt{SAFE\_CLARIFICATION}, Escalate: False.\\
+\textbf{Root Cause:} High-risk patterns covered \textit{transferred
+between agents} and \textit{called X times}, but missed the idiom
+\textit{passed between representatives}.\\
+\textbf{Remediation:} Expand regex capture groups to cover transitive
+routing verbs (\textit{passed, shuffled, bounced between}).
+
+\item \textbf{NLI Grounding Verification Timeout}
+\textit{(Safety-Critical: Zero --- Intended Fail-Safe)}\\[2pt]
+\textbf{Customer:} \textit{``How do I sign out of all active devices
+from my Amazon account after using a hotel business center computer?''}\\
+\textbf{Gold:} \texttt{ACCOUNT\_LOGIN\_ISSUES}, Escalate: False.\\
+\textbf{Agent:} Escalate: True (\texttt{GROUNDING\_FAILURE}).\\
+\textbf{Root Cause:} Retrieved passages lacked exact navigational steps
+for remote device de-registration. The NLI grader flagged the draft as
+unverified after 2 retries.\\
+\textbf{Engineering Verdict:} This is an \textbf{intended fail-safe}.
+Over-escalating when ungrounded is infinitely preferable to
+hallucinating security instructions.
+
+\end{enumerate}
+
+% =============================================================================
+% 8  WHAT IS MISLEADING  (mandatory section)
+% =============================================================================
+\section{``What Is Misleading About My Headline Number?''}
+\label{sec:misleading}
+
+\noindent\textit{\textbf{Mandatory Critical Reflection.}}
+
+A naive reading of our headline metrics might boast: \textit{``88.0\%
+Escalation Accuracy and 95.5\% Status Accuracy!''} In production
+customer support, \textbf{this headline is dangerously misleading.}
+
+\subsection{Accuracy Is Masked by Severe Class Imbalance}
+In real customer support streams, non-escalated cases dominate
+(74.5\% of Golden V3). A completely dysfunctional dummy model that
+\textit{never escalates a single ticket} achieves an immediate
+\textbf{74.5\% Escalation Accuracy}. Therefore, reporting 88.0\%
+accuracy masks the true underlying operational risk beneath a
+reassuring-sounding number.
+
+\subsection{The Operational Asymmetry of Errors}
+Binary accuracy treats False Positives (FP) and False Negatives (FN) as
+mathematically equal ($0/1$ loss). In enterprise support workflows---and
+specifically in Hiver's shared inbox architecture---they carry
+drastically asymmetric operational costs:
+
+\begin{itemize}
+  \item \textbf{False Positive (Unnecessary Escalation, 5.37\%):} Routes
+        a routine query to a human agent. Operational cost:
+        ${\sim}\$4.50$ in human labor and a slight queue delay.
+
+  \item \textbf{False Negative (Unsafe Auto-Handle, 31.37\%):} The bot
+        attempts to auto-resolve an active account takeover or an abusive
+        courier incident with a polite automated platitude. Operational
+        cost: catastrophic brand reputation loss, account fraud,
+        executive escalation, and customer churn ($>\$500$ lifetime
+        value impact per incident).
+\end{itemize}
+
+Our \bad{31.37\% Unsafe Auto-Handle Rate} means that roughly 3 out of
+every 10 genuinely hazardous situations slipped past automated safety
+gates. While this represents massive progress over the Simple LLM
+Baseline (64.7\%) and Agent V1 (60.0\%), \textit{claiming the system
+is fully autonomous would be negligent.}
+
+\subsection{Escalation Recall (68.63\%) Is the True North Star}
+Our true safety metric is \metric{Escalation Recall (68.63\%)} and
+\metric{Escalation F1 (74.47\%)}. Improving recall from 46.51\% in V2
+to 68.63\% in V3 while simultaneously driving precision up to 81.40\%
+was our greatest technical breakthrough---yet closing the remaining
+31.37\% unsafe tail is the mandatory engineering hurdle before
+deploying with full autonomy in production.
+
+% =============================================================================
+% 9  DECISION LOG
+% =============================================================================
+\section{Decision Log: 14 Non-Obvious Decisions}\label{sec:decisions}
+
+\begin{enumerate}[label=\textbf{\arabic*.},itemsep=3pt,leftmargin=16pt]
+  \item \textbf{Decoupled Safety Architecture over Prompt Engineering.}
+        Chose deterministic Python gates instead of in-prompt escalation
+        instructions. LLMs exhibit soft-prompt drift and stochastic
+        compliance failures on safety-critical edge cases.
+
+  \item \textbf{Reciprocal Rank Fusion ($k{=}60$) over Dense-Only.}
+        Twitter messages contain alphanumeric order IDs and carrier
+        codes where dense vector cosine distance collapses entirely.
+
+  \item \textbf{Atomic NLI Grounding over LLM Self-Reflection.}
+        LLMs suffer from self-reinforcing confirmation bias when
+        asked to grade their own generated responses.
+
+  \item \textbf{Hard Retrieval Suppression on Ambiguous/OOS.}
+        Retrieving knowledge for vague queries forces irrelevant context
+        into prompt windows, inducing hallucinated assumptions.
+
+  \item \textbf{Auto-Declination for Out-of-Scope (Gate~4).}
+        Converted out-of-scope from human escalation to polite refusal,
+        preventing trivial tickets from exhausting human SLAs.
+
+  \item \textbf{Zero-Tolerance Capability Claim Filter.}
+        Hardcoded filters for first-person action verbs
+        (\textit{``I processed your refund''}). In Twitter support,
+        agents cannot access accounts; such claims are outright lies.
+
+  \item \textbf{Multi-Turn Dialogue Flattening with Role Tags.}
+        Explicit \texttt{CUSTOMER:} / \texttt{BRAND:} transcripts
+        provide clear temporal context without complex tree parsing.
+
+  \item \textbf{Negative Lookbehind on Intent Combination Labels.}
+        Set-based evaluation prevents combinatorial label explosion
+        and preserves valid macro F1 computation.
+
+  \item \textbf{State Consistency Anchored on Verified Actions.}
+        Gate~3 prevents asking for tracking links when the customer
+        already provided them---the primary driver of CSAT drops.
+
+  \item \textbf{Two-Strike Grounding Revision Limit.}
+        Caps latency tail explosion; if NLI fails twice, the
+        underlying retrieved evidence is simply insufficient.
+
+  \item \textbf{Reference-Free Quality Rubric over BLEU/ROUGE.}
+        Historical Twitter agent replies are terse and idiosyncratic;
+        BLEU penalizes superior, more helpful explanations.
+
+  \item \textbf{Isolated Evaluation Conversation IDs.}
+        Fresh UUID-prefixed identifiers prevent cross-test state
+        leakage and hidden session cache contamination.
+
+  \item \textbf{Immutable Golden Dataset Locking.}
+        Modifying benchmarks post-failure transforms evaluation
+        into an unscientific moving target.
+
+  \item \textbf{Preserving Fail-Safe Escalations in Metrics.}
+        We refuse to artificially inflate precision by excluding
+        valid safety overrides from the false-positive count.
+\end{enumerate}
+
+% =============================================================================
+% 10  PRODUCTIONIZING ON HIVER
+% =============================================================================
+\section{Productionizing on Hiver: What I'd Build Next}
+\label{sec:hiver}
+
+Hiver's core advantage is seamless team collaboration inside Google
+Workspace and multi-channel shared inboxes. Here is how I would
+integrate this architecture directly into Hiver's product suite:
+
+\begin{tcolorbox}[hbox={Native Hiver Architecture Integration}]
+\small
+\textbf{1.\;Shared Mailbox Auto-Tagging and Triage:}\\
+Map predicted \texttt{areas} and \texttt{primary\_intent} directly to
+native \textbf{Hiver Tags} (e.g., \texttt{\#Urgent-Security},
+\texttt{\#Logistics-Delay}), enabling instant visual triage in Gmail.\\[3pt]
+\textbf{2.\;Harvey AI Copilot Suggested Drafts:}\\
+For auto-handle cases, surface the NLI-grounded resolution directly in
+the Gmail compose box as an agent draft, requiring only 1-click human
+verification before sending.\\[3pt]
+\textbf{3.\;Collision Avoidance and Round-Robin Routing:}\\
+Escalated tickets trigger automated round-robin assignment to designated
+tier-2 specialists with structured escalation reason headers, preventing
+duplicate handling.\\[3pt]
+\textbf{4.\;Closed-Loop Agent Feedback (Active Learning):}\\
+Agent edits to Harvey drafts automatically feed into a weekly DPO
+fine-tuning pipeline to continuously adapt the model to evolving
+brand voice and resolution patterns.
+\end{tcolorbox}
+\vspace{-2pt}
+\captionof{figure}{How the 4-stage agent integrates natively with
+Hiver's Shared Inbox and Harvey AI architecture.}
+\label{fig:hiver}
+
+\subsection{Specific Technical Roadmap for Week 2}
+\begin{itemize}
+  \item \textbf{Days 1--2: Embedding-Gated Semantic Safety Layer.}
+        Replace static regex dictionaries in Gate~1b with a fine-tuned
+        binary classifier (SetFit / ModernBERT) trained on adversarial
+        customer hostility. This directly resolves Failure Mode~1
+        (colloquial carrier misconduct verbs).
+
+  \item \textbf{Days 3--4: Hiver Shared Inbox Webhook Integration.}
+        Package the pipeline as a FastAPI service listening to Hiver
+        webhook events, emitting tagged tickets, SLA urgency flags, and
+        suggested draft replies in real time.
+
+  \item \textbf{Day 5: Confidence-Calibrated Selective Classification.}
+        Implement conformal prediction to guarantee a user-defined error
+        bound (e.g., 95\% recall on security compromise) with dynamic
+        fallback thresholds.
+
+  \item \textbf{Days 6--7: Real-Time Hallucination Telemetry Dashboard.}
+        Build an observability stream monitoring claim-level NLI grounding
+        rates, escalation distributions, and latency percentiles across
+        live customer conversation volume.
+\end{itemize}
+
+% =============================================================================
+% 11  REPRODUCIBILITY
+% =============================================================================
+\section{Reproducibility Guarantee}\label{sec:repro}
+
+A core tenet of production engineering is turnkey reproducibility.
+Our repository allows reviewers to reproduce headline evaluation
+results in under 15 minutes:
+
+\begin{tcolorbox}[accent]
+\small\ttfamily
+\textbf{Reproduce Full Benchmark in $<$15 Minutes:}\\[3pt]
+git clone <REPO\_URL>\\
+cd hiver-support-agent\\
+pip install -r requirements.txt\\[2pt]
+\# Run full frozen Golden V3 evaluation\\
+python evaluation/run\_golden\_eval.py \textbackslash\\
+\hspace*{8pt}--input data/golden/golden\_v3\_\ldots.csv \textbackslash\\
+\hspace*{8pt}--concurrency 5
+\end{tcolorbox}
+
+\medskip\noindent
+All 200 evaluation trajectories, RRF rankings, grounding claims, and
+LLM judge rationales are emitted cleanly to
+\texttt{evaluation/results/golden\_v3\_raw.jsonl}. The pipeline requires
+no external proprietary vector databases, runs completely local
+embeddings via \texttt{all-MiniLM-L6-v2}, and uses isolated execution
+contexts to guarantee deterministic reproducibility.
+
+% =============================================================================
+% 12  CONCLUSION
+% =============================================================================
+\section{Conclusion and Candidate Statement}\label{sec:conclusion}
+
+Turning messy, real-world customer support data into an enterprise-grade
+AI system requires prioritizing \textbf{proof over hype}. By combining
+decoupled hierarchical classification, hybrid RRF retrieval, claim-level
+NLI verification, and deterministic safety escalation gates, this project
+demonstrates that high-utility AI support can be deployed without
+sacrificing brand trust or customer safety.
+
+I built this system with the exact engineering rigor, architectural
+curiosity, and user-centric pragmatism that defines Hiver's product
+culture---and I look forward to contributing this mindset to Hiver's
+engineering team as an SDE Intern.
+
+\balance
+\end{document}

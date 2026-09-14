@@ -1,4 +1,6 @@
 reranking:
+  method: "rrf"
+  k: 60
   weights:
     semantic: 1.0
     lexical: 0.3
@@ -7,3 +9,4 @@ reranking:
     state: 0.1
     action_penalty: -0.2
   max_results_per_conversation: 1
+

@@ -17,11 +17,18 @@ export const CustomLiveChat: React.FC = () => {
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
+  // Track whether the user has intentionally scrolled up to inspect previous details
+  const isUserScrolledUpRef = useRef(false);
+  const isProgrammaticScrollRef = useRef(false);
+  const prevMessagesLengthRef = useRef(messages.length);
+  const touchStartYRef = useRef<number | null>(null);
 
-  // Auto-scroll when new message/activity is added
-  useEffect(() => {
+  const scrollToBottom = (smooth = true) => {
+    isUserScrolledUpRef.current = false;
+    setShowScrollBottom(false);
     if (scrollRef.current) {
-      if (typeof scrollRef.current.scrollTo === 'function') {
+      isProgrammaticScrollRef.current = true;
+      if (smooth && typeof scrollRef.current.scrollTo === 'function') {
         scrollRef.current.scrollTo({
           top: scrollRef.current.scrollHeight,
           behavior: 'smooth',
@@ -29,27 +36,90 @@ export const CustomLiveChat: React.FC = () => {
       } else {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
       }
+      setTimeout(() => {
+        isProgrammaticScrollRef.current = false;
+      }, 350);
     }
-  }, [messages]);
+  };
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
     const distanceToBottom = scrollHeight - scrollTop - clientHeight;
-    setShowScrollBottom(distanceToBottom > 150);
+    const isScrolledUp = distanceToBottom > 60;
+
+    if (!isProgrammaticScrollRef.current) {
+      isUserScrolledUpRef.current = isScrolledUp;
+    }
+    setShowScrollBottom(isScrolledUp);
   };
 
-  const scrollToBottom = () => {
-    if (scrollRef.current) {
-      if (typeof scrollRef.current.scrollTo === 'function') {
-        scrollRef.current.scrollTo({
-          top: scrollRef.current.scrollHeight,
-          behavior: 'smooth',
-        });
-      } else {
-        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (e.deltaY < 0) {
+      // User is scrolling UP: immediately disable auto-scrolling
+      isUserScrolledUpRef.current = true;
+    } else if (e.deltaY > 0) {
+      // User is scrolling DOWN
+      if (scrollRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+        const distanceToBottom = scrollHeight - scrollTop - clientHeight;
+        if (distanceToBottom <= 60) {
+          isUserScrolledUpRef.current = false;
+        }
       }
     }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchStartYRef.current = e.touches[0]?.clientY ?? null;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartYRef.current !== null && e.touches[0]) {
+      const diff = e.touches[0].clientY - touchStartYRef.current;
+      if (diff > 5) {
+        // Dragging downwards = scrolling UP content
+        isUserScrolledUpRef.current = true;
+      }
+    }
+  };
+
+  // Smart auto-scroll: respects user scrolling upward to inspect previous turns
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    const isNewMessage = messages.length > prevMessagesLengthRef.current;
+    prevMessagesLengthRef.current = messages.length;
+
+    // If the user has manually scrolled up to inspect previous details, DO NOT auto-scroll!
+    if (isUserScrolledUpRef.current && !isNewMessage) {
+      return;
+    }
+
+    if (isNewMessage) {
+      scrollToBottom(true);
+    } else {
+      // Live pipeline stage update: keep pinned to bottom directly without animation lock
+      isProgrammaticScrollRef.current = true;
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      setTimeout(() => {
+        isProgrammaticScrollRef.current = false;
+      }, 60);
+    }
+  }, [messages]);
+
+  const handleSendMessage = (text: string) => {
+    isUserScrolledUpRef.current = false;
+    setShowScrollBottom(false);
+    sendMessage(text);
+    setTimeout(() => {
+      scrollToBottom(true);
+    }, 60);
+  };
+
+  const handleNewConversation = () => {
+    isUserScrolledUpRef.current = false;
+    setShowScrollBottom(false);
+    newConversation();
   };
 
   const samplePrompts = [
@@ -72,6 +142,9 @@ export const CustomLiveChat: React.FC = () => {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
+        onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
         style={{
           flex: 1,
           overflowY: 'auto',
@@ -157,7 +230,7 @@ export const CustomLiveChat: React.FC = () => {
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => sendMessage(prompt)}
+                    onClick={() => handleSendMessage(prompt)}
                     style={{
                       padding: '10px 14px',
                       borderRadius: 'var(--radius-xs)',
@@ -198,7 +271,7 @@ export const CustomLiveChat: React.FC = () => {
       {showScrollBottom && (
         <button
           type="button"
-          onClick={scrollToBottom}
+          onClick={() => scrollToBottom(true)}
           style={{
             position: 'absolute',
             bottom: '80px',
@@ -223,8 +296,8 @@ export const CustomLiveChat: React.FC = () => {
 
       {/* Fixed Bottom Message Composer */}
       <CustomComposer
-        onSendMessage={sendMessage}
-        onNewConversation={newConversation}
+        onSendMessage={handleSendMessage}
+        onNewConversation={handleNewConversation}
         isRunning={isRunning}
       />
     </div>

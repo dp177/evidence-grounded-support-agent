@@ -119,7 +119,13 @@ export const StageDrawer: React.FC<StageDrawerProps> = ({
             <div>
               <span className="mono-label">Funnel Configuration</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', marginTop: '2px' }}>
-                30 semantic candidates → {response.retrieved_evidence.length} precedent evidence cases
+                30 semantic + 30 lexical candidates → {response.retrieved_evidence.length} precedent evidence cases
+              </div>
+            </div>
+            <div>
+              <span className="mono-label">Fusion Method</span>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', marginTop: '2px' }}>
+                Reciprocal Rank Fusion (k = {response.reranking.k || 60})
               </div>
             </div>
             <div>
@@ -129,16 +135,16 @@ export const StageDrawer: React.FC<StageDrawerProps> = ({
               </div>
             </div>
             <div>
-              <span className="mono-label">Scoring Factors</span>
+              <span className="mono-label">Fusion Signals</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', marginTop: '4px', lineHeight: '1.5' }}>
-                • Dense semantic distance<br />
-                • BM25 keyword overlap<br />
-                • Intent compatibility filter<br />
-                • Conversation state alignment
+                • Dense semantic cosine ranking (Top 30)<br />
+                • Sparse TF-IDF lexical ranking (Top 30)<br />
+                • RRF(d) = 1/(60 + sem_rank) + 1/(60 + lex_rank)
               </div>
             </div>
           </div>
         );
+
 
       case 'Generate':
         return (

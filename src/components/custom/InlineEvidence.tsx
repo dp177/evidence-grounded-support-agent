@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { RetrievalEvidence, RerankingResult, ClassificationResult } from '../../types/agent';
-import { Database, ChevronDown, ChevronUp, Layers } from 'lucide-react';
-import { RankingSignal } from '../reranking/RankingSignal';
-import { CheckCircle2 } from 'lucide-react';
+import { Database, ChevronDown, ChevronUp, Layers, CheckCircle2 } from 'lucide-react';
+
 
 interface InlineEvidenceProps {
   evidenceList: RetrievalEvidence[];
@@ -147,69 +146,40 @@ export const InlineEvidence: React.FC<InlineEvidenceProps> = ({
                     borderRadius: '2px',
                   }}
                 >
-                  FEATURE SCORING
+                  RRF FUSION
                 </span>
               </div>
 
-              {/* Selected Candidate Compatibility Signals */}
+              {/* Two-Ranking RRF Retrieval Summary */}
               {evidenceList.length > 0 && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span className="mono-label" style={{ fontSize: '10px' }}>
-                      SELECTED CANDIDATE SIGNALS (Rank #{evidenceList[0]?.rank || 1}: {evidenceList[0]?.case_id})
-                    </span>
-                    <span style={{ fontSize: '10px', color: 'var(--slate)', fontFamily: 'var(--font-mono)' }}>
-                      Per-candidate feature scores
-                    </span>
+                <div
+                  style={{
+                    padding: '8px 10px',
+                    backgroundColor: '#f8fafc',
+                    border: '1px solid var(--border-light)',
+                    borderRadius: 'var(--radius-xs)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    color: 'var(--slate)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '4px',
+                  }}
+                >
+                  <div style={{ fontWeight: 600, color: 'var(--ink)' }}>
+                    FUSION FLOW:
                   </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    {[
-                      {
-                        name: 'semantic',
-                        label: 'Semantic Similarity',
-                        score: evidenceList[0]?.semantic_score !== null && evidenceList[0]?.semantic_score !== undefined
-                          ? evidenceList[0].semantic_score
-                          : (evidenceList[0]?.similarity ?? null),
-                        weight: reranking.weights?.semantic ?? 1.0,
-                      },
-                      {
-                        name: 'lexical',
-                        label: 'Lexical Match',
-                        score: evidenceList[0]?.lexical_score ?? null,
-                        weight: reranking.weights?.lexical ?? 0.3,
-                      },
-                      {
-                        name: 'intent',
-                        label: 'Intent Compatibility',
-                        score: evidenceList[0]?.intent_score ?? null,
-                        weight: reranking.weights?.intent ?? 0.2,
-                      },
-                      {
-                        name: 'state',
-                        label: 'State Compatibility',
-                        score: evidenceList[0]?.state_score ?? null,
-                        weight: reranking.weights?.state ?? 0.1,
-                      },
-                      {
-                        name: 'action_usefulness',
-                        label: 'Action Usefulness',
-                        score: evidenceList[0]?.action_usefulness ?? null,
-                        weight: reranking.weights?.action_penalty ?? -0.2,
-                      },
-                    ].map((sig) => (
-                      <RankingSignal
-                        key={sig.name}
-                        signal={sig}
-                        currentIntent={classification?.primary_intent}
-                        currentStates={classification?.states}
-                      />
-                    ))}
+                  <div>
+                    30 semantic candidates + 30 lexical candidates → Reciprocal Rank Fusion (k=60) → Top {evidenceList.length} precedents
+                  </div>
+                  <div style={{ color: 'var(--deep-enterprise-green)', fontWeight: 600 }}>
+                    RRF Formula: RRF(d) = 1/(60 + semantic_rank) + 1/(60 + lexical_rank)
                   </div>
                 </div>
               )}
 
-              {/* Why This Case Was Selected Checklist */}
+
+              {/* Why This Case Ranked High */}
               <div
                 style={{
                   padding: '10px 12px',
@@ -231,68 +201,59 @@ export const InlineEvidence: React.FC<InlineEvidenceProps> = ({
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink)' }}>
-                    <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0 }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', color: 'var(--ink)' }}>
+                    <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0, marginTop: '2px' }} />
                     <span>
-                      <strong>Semantic similarity ({evidenceList[0]?.semantic_score !== null && evidenceList[0]?.semantic_score !== undefined ? evidenceList[0].semantic_score.toFixed(2) : (evidenceList[0]?.similarity ? evidenceList[0].similarity.toFixed(2) : 'N/A')}):</strong> Cosine similarity between current retrieval query embedding and this historical document embedding.
+                      <strong>Semantic position:</strong>{' '}
+                      {evidenceList[0]?.semantic_rank !== null && evidenceList[0]?.semantic_rank !== undefined ? (
+                        <>
+                          Ranked <strong>#{evidenceList[0].semantic_rank}</strong> in dense semantic retrieval
+                          {evidenceList[0].semantic_score !== null && evidenceList[0].semantic_score !== undefined
+                            ? ` (cosine similarity: ${evidenceList[0].semantic_score.toFixed(2)})`
+                            : ''}
+                          , contributing <code>1/(60 + {evidenceList[0].semantic_rank}) = {(1.0 / (60 + evidenceList[0].semantic_rank)).toFixed(5)}</code>.
+                        </>
+                      ) : (
+                        <>Did not appear in Top 30 dense semantic candidates (contributes 0.0).</>
+                      )}
                     </span>
                   </div>
 
-                  {evidenceList[0]?.lexical_score !== null && evidenceList[0]?.lexical_score !== undefined && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink)' }}>
-                      <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0 }} />
-                      <span>
-                        <strong>Lexical match ({evidenceList[0].lexical_score.toFixed(2)}):</strong> TF-IDF vocabulary overlap between query and customer message.
-                      </span>
-                    </div>
-                  )}
-
-                  {evidenceList[0]?.action_usefulness !== null && evidenceList[0]?.action_usefulness !== undefined && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink)' }}>
-                      <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0 }} />
-                      <span>
-                        <strong>Action usefulness ({evidenceList[0].action_usefulness.toFixed(2)}):</strong> {evidenceList[0].action_usefulness >= 1.0 ? 'Historical brand response provides operational resolution guidance without deflection boilerplate.' : 'Action penalty applied for boilerplate deflection.'}
-                      </span>
-                    </div>
-                  )}
-
-                  {evidenceList[0]?.intent_score !== null && evidenceList[0]?.intent_score !== undefined ? (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink)' }}>
-                      <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0 }} />
-                      <span>
-                        <strong>Intent compatibility ({evidenceList[0].intent_score.toFixed(2)}):</strong> Compatibility signal between current predicted intent and candidate.
-                      </span>
-                    </div>
-                  ) : null}
-
-                  {evidenceList[0]?.state_score !== null && evidenceList[0]?.state_score !== undefined ? (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink)' }}>
-                      <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0 }} />
-                      <span>
-                        <strong>State compatibility ({evidenceList[0].state_score.toFixed(2)}):</strong> Inferred compatibility signal with current conversation state.
-                      </span>
-                    </div>
-                  ) : null}
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink)' }}>
-                    <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0 }} />
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', color: 'var(--ink)' }}>
+                    <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0, marginTop: '2px' }} />
                     <span>
-                      <strong>Final rerank score ({evidenceList[0]?.rerank_score !== null && evidenceList[0]?.rerank_score !== undefined ? evidenceList[0].rerank_score.toFixed(3) : (evidenceList[0]?.final_score !== null && evidenceList[0]?.final_score !== undefined ? evidenceList[0].final_score.toFixed(3) : 'N/A')}):</strong> Weighted multi-signal rank score.
+                      <strong>Lexical position:</strong>{' '}
+                      {evidenceList[0]?.lexical_rank !== null && evidenceList[0]?.lexical_rank !== undefined ? (
+                        <>
+                          Ranked <strong>#{evidenceList[0].lexical_rank}</strong> in sparse lexical retrieval
+                          {evidenceList[0].lexical_score !== null && evidenceList[0].lexical_score !== undefined
+                            ? ` (TF-IDF overlap: ${evidenceList[0].lexical_score.toFixed(2)})`
+                            : ''}
+                          , contributing <code>1/(60 + {evidenceList[0].lexical_rank}) = {(1.0 / (60 + evidenceList[0].lexical_rank)).toFixed(5)}</code>.
+                        </>
+                      ) : (
+                        <>Did not appear in Top 30 lexical candidates (contributes 0.0).</>
+                      )}
                     </span>
                   </div>
 
-                  {(evidenceList[0]?.intent_score === null || evidenceList[0]?.intent_score === undefined || evidenceList[0]?.state_score === null || evidenceList[0]?.state_score === undefined) && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--slate)', fontSize: '10px', marginTop: '2px' }}>
-                      <span>
-                        ℹ Additional compatibility signals (Intent &amp; State) were not computed for this candidate (historical cases lack metadata labels).
-                      </span>
-                    </div>
-                  )}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', color: 'var(--ink)' }}>
+                    <CheckCircle2 size={12} color="var(--deep-enterprise-green)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <span>
+                      <strong>Combined RRF score:</strong>{' '}
+                      <strong style={{ color: 'var(--deep-enterprise-green)' }}>
+                        {evidenceList[0]?.rrf_score !== null && evidenceList[0]?.rrf_score !== undefined
+                          ? evidenceList[0].rrf_score.toFixed(5)
+                          : (evidenceList[0]?.final_score !== null && evidenceList[0]?.final_score !== undefined ? evidenceList[0].final_score.toFixed(5) : '—')}
+                      </strong>
+                      . Fused using Reciprocal Rank Fusion (k=60) over semantic and lexical rankings.
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Truthful Candidate Table: Rank | Case | Semantic | Lexical | Intent | State | Action | Final */}
+              {/* Truthful Candidate Table: Rank | Case | Semantic Rank | Lexical Rank | RRF Score */}
               <div
                 style={{
                   overflowX: 'auto',
@@ -308,50 +269,53 @@ export const InlineEvidence: React.FC<InlineEvidenceProps> = ({
                     <tr style={{ backgroundColor: '#f1f5f9', borderBottom: '1px solid var(--border-light)' }}>
                       <th style={{ padding: '6px 8px' }}>Rank</th>
                       <th style={{ padding: '6px 8px' }}>Case</th>
-                      <th style={{ padding: '6px 8px' }}>Semantic</th>
-                      <th style={{ padding: '6px 8px' }}>Lexical</th>
-                      <th style={{ padding: '6px 8px' }}>Intent</th>
-                      <th style={{ padding: '6px 8px' }}>State</th>
-                      <th style={{ padding: '6px 8px' }}>Action</th>
-                      <th style={{ padding: '6px 8px' }}>Final</th>
+                      <th style={{ padding: '6px 8px' }}>Semantic Rank</th>
+                      <th style={{ padding: '6px 8px' }}>Lexical Rank</th>
+                      <th style={{ padding: '6px 8px' }}>RRF Score</th>
                     </tr>
                   </thead>
                   <tbody>
                     {evidenceList.slice(0, 5).map((c, idx) => {
                       const rankNum = c.rank ?? idx + 1;
+                      const rrfVal =
+                        c.rrf_score !== null && c.rrf_score !== undefined
+                          ? c.rrf_score.toFixed(5)
+                          : (c.final_score !== null && c.final_score !== undefined ? c.final_score.toFixed(5) : '—');
+
                       return (
                         <tr key={c.case_id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                           <td style={{ padding: '6px 8px', fontWeight: 600 }}>#{rankNum}</td>
                           <td style={{ padding: '6px 8px', fontWeight: 600, color: 'var(--ink)' }}>{c.case_id}</td>
                           <td style={{ padding: '6px 8px' }}>
-                            {c.semantic_score !== null && c.semantic_score !== undefined
-                              ? c.semantic_score.toFixed(2)
-                              : (c.similarity ? c.similarity.toFixed(2) : <span title="Not computed for this candidate." style={{ color: 'var(--slate)' }}>N/A</span>)}
+                            {c.semantic_rank !== null && c.semantic_rank !== undefined ? (
+                              <span>
+                                #{c.semantic_rank}{' '}
+                                {c.semantic_score !== null && c.semantic_score !== undefined && (
+                                  <span style={{ color: 'var(--slate)', fontSize: '9px' }}>
+                                    (cos {c.semantic_score.toFixed(2)})
+                                  </span>
+                                )}
+                              </span>
+                            ) : (
+                              <span style={{ color: 'var(--slate)' }}>—</span>
+                            )}
                           </td>
                           <td style={{ padding: '6px 8px' }}>
-                            {c.lexical_score !== null && c.lexical_score !== undefined
-                              ? c.lexical_score.toFixed(2)
-                              : <span title="Not computed for this candidate." style={{ color: 'var(--slate)' }}>N/A</span>}
-                          </td>
-                          <td style={{ padding: '6px 8px' }}>
-                            {c.intent_score !== null && c.intent_score !== undefined
-                              ? c.intent_score.toFixed(2)
-                              : <span title="Not computed for this candidate." style={{ color: 'var(--slate)' }}>N/A</span>}
-                          </td>
-                          <td style={{ padding: '6px 8px' }}>
-                            {c.state_score !== null && c.state_score !== undefined
-                              ? c.state_score.toFixed(2)
-                              : <span title="Not computed for this candidate." style={{ color: 'var(--slate)' }}>N/A</span>}
-                          </td>
-                          <td style={{ padding: '6px 8px' }}>
-                            {c.action_usefulness !== null && c.action_usefulness !== undefined
-                              ? c.action_usefulness.toFixed(2)
-                              : <span title="Not computed for this candidate." style={{ color: 'var(--slate)' }}>N/A</span>}
+                            {c.lexical_rank !== null && c.lexical_rank !== undefined ? (
+                              <span>
+                                #{c.lexical_rank}{' '}
+                                {c.lexical_score !== null && c.lexical_score !== undefined && (
+                                  <span style={{ color: 'var(--slate)', fontSize: '9px' }}>
+                                    (tfidf {c.lexical_score.toFixed(2)})
+                                  </span>
+                                )}
+                              </span>
+                            ) : (
+                              <span style={{ color: 'var(--slate)' }}>—</span>
+                            )}
                           </td>
                           <td style={{ padding: '6px 8px', fontWeight: 700, color: 'var(--deep-enterprise-green)' }}>
-                            {c.rerank_score !== null && c.rerank_score !== undefined
-                              ? c.rerank_score.toFixed(3)
-                              : (c.final_score !== null && c.final_score !== undefined ? c.final_score.toFixed(3) : <span title="Not computed for this candidate." style={{ color: 'var(--slate)' }}>N/A</span>)}
+                            {rrfVal}
                           </td>
                         </tr>
                       );
@@ -371,7 +335,7 @@ export const InlineEvidence: React.FC<InlineEvidenceProps> = ({
                   paddingTop: '6px',
                 }}
               >
-                These scores are ranking signals used to order historical evidence. They are not calibrated probabilities or human-labelled historical ground truth.
+                These scores are reciprocal rank fusion values (k=60) combining ordinal positions from semantic and lexical retrievers. They are ranking values, not calibrated probabilities.
               </div>
             </>
           ) : (

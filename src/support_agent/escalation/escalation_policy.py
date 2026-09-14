@@ -32,7 +32,7 @@ class EscalationConfig:
         clf_cfg = cfg.get("classification", {})
         self.min_confidence: float = float(clf_cfg.get("min_confidence", 0.70))
         self.allow_ambiguous_clarification: bool = bool(clf_cfg.get("allow_ambiguous_clarification", True))
-        self.block_out_of_scope: bool = bool(clf_cfg.get("block_out_of_scope", True))
+        self.block_out_of_scope: bool = bool(clf_cfg.get("block_out_of_scope", False))
 
         # Security & Fraud
         sec_cfg = cfg.get("security_and_fraud", {})
@@ -107,9 +107,18 @@ def detect_security_fraud_signals(
     if config.escalate_on_risk_keywords:
         for kw in config.risk_keywords:
             if re.search(rf"\b{re.escape(kw)}\b", full_text, re.IGNORECASE):
-                reason_code = "FRAUD_CONCERN" if kw in ("fraud", "scam", "police") else "HIGH_RISK_SECURITY"
+                if kw in ("fraud", "scam", "police"):
+                    reason_code = "FRAUD_CONCERN"
+                    trig_type = "FRAUD"
+                elif kw in ("kill", "threat"):
+                    reason_code = "SAFETY_THREAT"
+                    trig_type = "SECURITY"
+                else:
+                    reason_code = "HIGH_RISK_SECURITY"
+                    trig_type = "SECURITY"
+
                 triggers.append({
-                    "type": "FRAUD" if reason_code == "FRAUD_CONCERN" else "SECURITY",
+                    "type": trig_type,
                     "reason_code": reason_code,
                     "message": f"Customer conversation mentions severe risk keyword: '{kw}'.",
                 })
@@ -124,7 +133,11 @@ def check_state_consistency(
     customer_conversation: Dict[str, Any],
     config: EscalationConfig,
 ) -> List[Dict[str, str]]:
-    """Evaluate whether the generated response is operationally consistent with conversation states."""
+    """Evaluate whether the generated response is operationally consistent with conversation states.
+
+    Operates on ACTIONS already completed by the customer vs actions demanded by the assistant,
+    rather than merely the existence of a state label.
+    """
     violations: List[Dict[str, str]] = []
     if not states or not response_text:
         return violations
@@ -132,13 +145,60 @@ def check_state_consistency(
     resp = response_text.lower()
     state_set = set(states)
 
+    cust_msg = str(customer_conversation.get("customer_message") or "").lower()
+    ctx = str(customer_conversation.get("context") or "").lower()
+    full_text = f"{ctx} {cust_msg}".strip()
+
     for st in state_set:
+        # Special case: asking where/how to locate tracking number or order number is NOT inconsistent
+        if st == "TRACKING_ALREADY_CHECKED":
+            if re.search(r"\b(?:where|how)\b.*\b(?:find|locate|get|check|see)\b.*\b(?:tracking|order)\s*(?:number|id|#)?\b", cust_msg):
+                continue
+
         rule = config.state_inconsistency_rules.get(st)
         if not rule:
             continue
         patterns = rule.get("blocked_response_patterns", [])
         code = rule.get("reason_code", "INCONSISTENT_WITH_STATE")
         msg = rule.get("message", f"Response is inconsistent with state '{st}'.")
+
+        # Handle DETAILS_ALREADY_PROVIDED based on what actions were actually completed
+        if st == "DETAILS_ALREADY_PROVIDED":
+            matched_pat = None
+            for pat in patterns:
+                if re.search(pat, resp, re.IGNORECASE):
+                    matched_pat = pat
+                    break
+
+            if matched_pat:
+                if full_text:
+                    asking_order_id = bool(re.search(r"\b(?:order\s+(?:number|id|#)|order\s+reference|account\s+details)\b", resp, re.IGNORECASE))
+                    customer_asserted_order_provided = bool(re.search(
+                        r"\b(?:already|previously)\s+(?:sent|provided|given|shared)\b.*?\b(?:order\s+(?:details|number|id|#)|details|information|info)\b",
+                        full_text,
+                        re.IGNORECASE,
+                    ))
+                    customer_has_order_id = customer_asserted_order_provided or bool(re.search(
+                        r"\b\d{3}-\d{7}-\d{7}\b|\border\s*(?:#|number|id)?\s*:?\s*\d{5,}\b",
+                        full_text,
+                        re.IGNORECASE,
+                    ))
+                    asking_email = bool(re.search(r"\b(?:email(?:\s+address)?)\b", resp, re.IGNORECASE))
+                    customer_has_email = bool(re.search(r"[\w\.-]+@[\w\.-]+\.\w+", full_text))
+
+                    # Asking for missing order number or email when not yet provided is legitimate follow-up
+                    if asking_order_id and not customer_has_order_id:
+                        continue
+                    if asking_email and not customer_has_email:
+                        continue
+
+                violations.append({
+                    "state": st,
+                    "reason_code": code,
+                    "matched_pattern": matched_pat,
+                    "message": msg,
+                })
+            continue
 
         for pat in patterns:
             if re.search(pat, resp, re.IGNORECASE):

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AgentActivityStepInfo } from '../../types/customChat';
 import { AgentActivityStep } from './AgentActivityStep';
 import { Sparkles, ChevronDown, ChevronUp, AlertOctagon, RotateCw } from 'lucide-react';
@@ -14,6 +14,27 @@ interface AgentActivityMessageProps {
   onSwitchToDemo?: () => void;
 }
 
+// Dedicated micro-component for the live timer:
+// Updates its local state every 100ms WITHOUT causing re-renders of the parent message list or activity steps.
+const ThinkingTimer: React.FC<{ isRunning: boolean; elapsedSeconds?: number }> = ({ isRunning, elapsedSeconds }) => {
+  const [liveElapsed, setLiveElapsed] = useState<number>(0);
+
+  useEffect(() => {
+    if (!isRunning) {
+      setLiveElapsed(0);
+      return;
+    }
+    const start = Date.now();
+    const timer = setInterval(() => {
+      setLiveElapsed(Number(((Date.now() - start) / 1000).toFixed(1)));
+    }, 100);
+    return () => clearInterval(timer);
+  }, [isRunning]);
+
+  const displaySec = elapsedSeconds !== undefined ? elapsedSeconds : liveElapsed;
+  return <>✦ Thinking ({displaySec.toFixed(1)}s)</>;
+};
+
 export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
   steps,
   isRunning,
@@ -24,16 +45,27 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
   onSwitchToDemo,
 }) => {
   const [expanded, setExpanded] = useState(isRunning);
+  const [justCompleted, setJustCompleted] = useState(false);
+  const prevRunningRef = useRef(isRunning);
   const isMock = agentApi.isMock();
 
-  // Keep open while running; auto-collapse when completed so the user can read the response
-  React.useEffect(() => {
+  // Keep open while running so the user sees real-time progress
+  useEffect(() => {
     if (isRunning) {
       setExpanded(true);
-    } else {
-      setExpanded(false);
     }
   }, [isRunning]);
+
+  // Subtle completion transition pulse when running completes
+  useEffect(() => {
+    const hasFailed = steps.some((s) => s.status === 'FAILED');
+    if (prevRunningRef.current && !isRunning && !hasFailed) {
+      setJustCompleted(true);
+      const timer = setTimeout(() => setJustCompleted(false), 1200);
+      return () => clearTimeout(timer);
+    }
+    prevRunningRef.current = isRunning;
+  }, [isRunning, steps]);
 
   if (!steps || steps.length === 0) return null;
 
@@ -41,21 +73,9 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
   const failureStep = steps.find((s) => s.status === 'FAILED');
   const activeStep = steps.find((s) => s.status === 'RUNNING');
 
-  const getTitle = () => {
-    if (hasFailed) return 'LIVE AGENT UNAVAILABLE';
-    if (isRunning) {
-      const timeDisplay = elapsedSeconds !== undefined ? ` (${elapsedSeconds.toFixed(1)}s)` : '...';
-      return `Thinking${timeDisplay}`;
-    }
-    if (thoughtDuration !== undefined) {
-      return `Thought for ${thoughtDuration}s`;
-    }
-    if (isEscalated) return 'Agent activity · Human Review Required';
-    return 'Agent activity · Completed';
-  };
-
   return (
     <div
+      className={justCompleted ? 'agent-activity-panel--just-completed' : undefined}
       style={{
         borderRadius: 'var(--radius-sm)',
         border: `1px solid ${
@@ -70,7 +90,7 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
         overflow: 'hidden',
         fontSize: '13px',
         margin: 'var(--space-8) 0',
-        transition: 'all 200ms ease',
+        transition: 'border-color 260ms ease, background-color 260ms ease, box-shadow 260ms ease',
       }}
     >
       {/* Animated shimmer progress line while running */}
@@ -97,13 +117,17 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           {hasFailed ? (
             <AlertOctagon size={13} color="var(--error-red)" />
+          ) : isRunning ? (
+            <span className="thinking-indicator-spinner" aria-label="Processing">
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="none">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="2" strokeOpacity="0.25" />
+                <path d="M14 8a6 6 0 0 0-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </span>
           ) : (
-            <Sparkles
-              size={13}
-              color="var(--deep-enterprise-green)"
-              className={isRunning ? 'thinking-pulse-icon' : undefined}
-            />
+            <Sparkles size={13} color="var(--deep-enterprise-green)" />
           )}
+
           <span
             style={{
               fontWeight: 600,
@@ -112,9 +136,22 @@ export const AgentActivityMessage: React.FC<AgentActivityMessageProps> = ({
                 : isRunning
                 ? 'var(--deep-enterprise-green)'
                 : 'var(--ink)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
             }}
           >
-            ✦ {getTitle()}
+            {hasFailed ? (
+              '✦ LIVE AGENT UNAVAILABLE'
+            ) : isRunning ? (
+              <ThinkingTimer isRunning={isRunning} elapsedSeconds={elapsedSeconds} />
+            ) : thoughtDuration !== undefined ? (
+              `✦ Thought for ${thoughtDuration}s`
+            ) : isEscalated ? (
+              '✦ Agent activity · Human Review Required'
+            ) : (
+              '✦ Agent activity · Completed'
+            )}
           </span>
 
           {/* Active step subtitle indicator while running */}

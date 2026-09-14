@@ -69,6 +69,23 @@ const SIGNAL_EXPLANATIONS: Record<string, SignalExplanation> = {
     limitation:
       'Historical retrieval documents do not have trusted full-corpus intent labels. This score therefore estimates compatibility rather than performing label equality. We never invent historical intent labels.',
   },
+  area: {
+    whatItMeans:
+      'Domain area alignment between customer issue area (e.g. DELIVERY_ISSUES, REFUND_ISSUES) and candidate.',
+    howWeCalculateIt:
+      'Taxonomy domain mapping evaluates whether the historical candidate matches the predicted operational area.',
+    pipelineSteps: [
+      'CURRENT PREDICTED AREA',
+      'TAXONOMY DOMAIN CLASSIFICATION',
+      'AREA COMPATIBILITY EVALUATION',
+      'AREA COMPATIBILITY SCORE',
+    ],
+    whatItDoes:
+      'Ensures candidate cases match the high-level domain area.',
+    configuredWeight: 'Weight: 0.1 (configs/reranking.yaml)',
+    limitation:
+      'Deterministic taxonomy domain matching, not a probability.',
+  },
   state: {
     whatItMeans:
       'Inferred compatibility signal. The historical case does not necessarily have a human-verified state label.',
@@ -145,6 +162,7 @@ export const RankingSignal: React.FC<RankingSignalProps> = ({
   // Clean label names per requirement
   let displayLabel = signal.label;
   if (signalKey === 'intent') displayLabel = 'Intent Compatibility';
+  if (signalKey === 'area') displayLabel = 'Area Compatibility';
   if (signalKey === 'lexical') displayLabel = 'Lexical Match';
   if (signalKey === 'semantic') displayLabel = 'Semantic Similarity';
   if (signalKey === 'state') displayLabel = 'State Compatibility';

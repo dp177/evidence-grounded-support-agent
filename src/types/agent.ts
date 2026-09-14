@@ -29,11 +29,16 @@ export interface RetrievalEvidence {
   relevant_context: string;
   brand_response: string;
   doc_id?: string;
+  semantic_rank?: number | null;
+  lexical_rank?: number | null;
+  rrf_score?: number | null;
   semantic_score?: number | null;
   lexical_score?: number | null;
   intent_score?: number | null;
+  area_score?: number | null;
   state_score?: number | null;
   action_usefulness?: number | null;
+  action_penalty?: number | null;
   action_penalty_flag?: number | null;
   final_score?: number | null;
   rerank_score?: number | null;
@@ -52,9 +57,16 @@ export interface RerankingResult {
   final_count: number;
   unique_conversations: number;
   signals: RerankingSignal[];
-  ranked_cases: RetrievalEvidence[];
+  ranked_cases?: RetrievalEvidence[];
   weights?: Record<string, number>;
+  method?: string;
+  k?: number;
+  formula?: string;
+  semantic_candidate_count?: number;
+  lexical_candidate_count?: number;
 }
+
+
 
 export interface GeneratedResponse {
   reply: string;

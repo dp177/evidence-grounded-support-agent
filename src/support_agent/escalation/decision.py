@@ -16,6 +16,7 @@ from support_agent.escalation.escalation_policy import (
     detect_security_fraud_signals,
     is_clarification_response,
 )
+from support_agent.escalation.high_risk import evaluate_high_risk_escalation
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +90,26 @@ def decide_escalation(
             "blocking_factors": ["Empty or malformed generated reply."],
             "state_consistency": {"violations": []},
         }
+
+    # -----------------------------------------------------------------------
+    # Gate 1b: Deterministic High-Risk Escalation Overrides
+    # -----------------------------------------------------------------------
+    high_risk_override = evaluate_high_risk_escalation(
+        customer_conversation=customer_conv,
+        classification=classification,
+        conversation_state=states,
+    )
+    if high_risk_override:
+        return {
+            "decision": "HUMAN_REVIEW",
+            "sub_decision": "ESCALATE",
+            "reason_codes": [high_risk_override["reason_code"]],
+            "reason": high_risk_override["message"],
+            "confidence": 0.0,
+            "blocking_factors": [high_risk_override["message"]],
+            "state_consistency": {"violations": []},
+        }
+
 
     # -----------------------------------------------------------------------
     # Gate 2: Grounding Verification Hard Blockers
@@ -172,16 +193,27 @@ def decide_escalation(
     clf_confidence = float(classification.get("confidence", 1.0) if classification.get("confidence") is not None else 1.0)
     is_clarify = is_clarification_response(generated_reply)
 
-    if clf_status == "OUT_OF_SCOPE" and config.block_out_of_scope:
-        return {
-            "decision": "HUMAN_REVIEW",
-            "sub_decision": "ESCALATE",
-            "reason_codes": ["OUT_OF_SCOPE"],
-            "reason": "Customer inquiry falls outside supported Amazon retail support domain.",
-            "confidence": clf_confidence,
-            "blocking_factors": ["Inquiry classified as OUT_OF_SCOPE."],
-            "state_consistency": {"violations": []},
-        }
+    if clf_status == "OUT_OF_SCOPE":
+        if config.block_out_of_scope:
+            return {
+                "decision": "HUMAN_REVIEW",
+                "sub_decision": "ESCALATE",
+                "reason_codes": ["OUT_OF_SCOPE"],
+                "reason": "Customer inquiry falls outside supported Amazon retail support domain.",
+                "confidence": clf_confidence,
+                "blocking_factors": ["Inquiry classified as OUT_OF_SCOPE."],
+                "state_consistency": {"violations": []},
+            }
+        else:
+            return {
+                "decision": "AUTO_HANDLE",
+                "sub_decision": "RESOLVE",
+                "reason_codes": ["SAFE_TO_AUTO_HANDLE"],
+                "reason": "Customer inquiry is outside supported Amazon retail domain; safely declined without human escalation.",
+                "confidence": clf_confidence,
+                "blocking_factors": [],
+                "state_consistency": {"violations": []},
+            }
 
     if clf_status == "AMBIGUOUS" or primary_intent == "UNKNOWN":
         if config.allow_ambiguous_clarification and is_clarify:

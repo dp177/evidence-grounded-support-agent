@@ -161,6 +161,7 @@ class AgentHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
 def run_server(port: int = 8000, host: str = "0.0.0.0"):
+    ThreadingHTTPServer.allow_reuse_address = True
     server_address = (host, port)
     httpd = ThreadingHTTPServer(server_address, AgentHTTPRequestHandler)
     logger.info("SupportAgent Live Server running on http://%s:%d", host, port)

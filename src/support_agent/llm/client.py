@@ -82,48 +82,52 @@ def parse_json_from_text(text: str) -> Any:
 
     cleaned = text.strip()
 
-    # If wrapped in markdown ```json ... ``` or ``` ... ```
-    pattern = r"```(?:json)?\s*([\s\S]*?)\s*```"
-    match = re.search(pattern, cleaned)
-    if match:
-        candidate = match.group(1).strip()
-        try:
-            return json.loads(candidate, strict=False)
-        except json.JSONDecodeError:
-            pass
-
-    # Direct JSON parse attempt with strict=False
+    # Strategy 1: Direct JSON parse attempt
     try:
         return json.loads(cleaned, strict=False)
-    except json.JSONDecodeError:
+    except Exception:
         pass
 
-    # Look for the first '{' and last '}' or first '[' and last ']'
+    # Strategy 2: Code blocks ```json ... ``` or ``` ... ```
+    for match in re.finditer(r"```(?:json)?\s*([\s\S]*?)(?:```|$)", cleaned):
+        candidate = match.group(1).strip()
+        if candidate:
+            try:
+                return json.loads(candidate, strict=False)
+            except Exception:
+                # Try comma fix
+                fixed = re.sub(r",\s*([\]}])", r"\1", candidate)
+                try:
+                    return json.loads(fixed, strict=False)
+                except Exception:
+                    pass
+
+    # Strategy 3: Find outermost { ... }
     first_obj = cleaned.find("{")
     last_obj = cleaned.rfind("}")
     if first_obj != -1 and last_obj > first_obj:
         candidate = cleaned[first_obj:last_obj + 1]
         try:
             return json.loads(candidate, strict=False)
-        except json.JSONDecodeError:
-            # Try removing trailing commas before closing braces/brackets
+        except Exception:
             fixed = re.sub(r",\s*([\]}])", r"\1", candidate)
             try:
                 return json.loads(fixed, strict=False)
-            except json.JSONDecodeError:
+            except Exception:
                 pass
 
+    # Strategy 4: Find outermost [ ... ]
     first_arr = cleaned.find("[")
     last_arr = cleaned.rfind("]")
     if first_arr != -1 and last_arr > first_arr:
         candidate = cleaned[first_arr:last_arr + 1]
         try:
             return json.loads(candidate, strict=False)
-        except json.JSONDecodeError:
+        except Exception:
             fixed = re.sub(r",\s*([\]}])", r"\1", candidate)
             try:
                 return json.loads(fixed, strict=False)
-            except json.JSONDecodeError:
+            except Exception:
                 pass
 
     raise ValueError(f"Failed to parse valid JSON from text: {text[:200]}...")

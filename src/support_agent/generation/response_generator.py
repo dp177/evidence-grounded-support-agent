@@ -22,6 +22,27 @@ DEFAULT_CONFIG = {
     "max_evidence_items": 3,
 }
 
+CLARIFICATION_SYSTEM_PROMPT = """You are a helpful, professional, and friendly AI customer-support assistant for Amazon retail customer support.
+The customer's message lacks sufficient information or a specific actionable issue (classification status: AMBIGUOUS, primary_intent: null).
+
+Your task is to ask a concise, polite, and natural clarifying question to find out what specific Amazon issue the customer needs help with.
+
+STRICT RULES:
+1. Be concise (1 to 2 sentences max).
+2. Acknowledge the customer's greeting or message naturally and politely.
+3. Ask for the missing details needed to identify their specific support issue (e.g., asking if they need assistance with an order, package delivery, return, refund, or account).
+4. NEVER invent order numbers, tracking IDs, delivery dates, refund amounts, or account facts.
+5. NEVER promise specific actions, refunds, replacements, or account changes.
+6. NEVER claim that a refund, replacement, escalation, or account change has occurred, and NEVER claim that you have checked or received account details yourself (e.g. do not say "we have received your details" or "I checked your account").
+7. NEVER expose internal reasoning or mention words like "classification", "intent", "RAG", "confidence", "AMBIGUOUS", "pipeline", or model internals.
+8. Output MUST be a single valid JSON object:
+{
+  "reply": "concise, natural clarifying response",
+  "evidence_ids": []
+}
+"""
+
+
 class ResponseGenerator:
     """Synthesizes customer replies using LLM grounded in semantic retrieval."""
 
@@ -66,12 +87,26 @@ class ResponseGenerator:
             parts.append(f"Context:\n{context.strip()}")
         parts.append(f"Customer:\n{customer_message.strip()}")
         
-        # 2. Classification
+        # 2. Classification & Operational State Constraints
+        states = classification.get("states", [])
+        state_hints = []
+        for s in states:
+            if s == "WAITING_WINDOW_EXCEEDED":
+                state_hints.append("Customer waiting window elapsed or repeated support attempts reported. Acknowledge prior delay/attempts and provide next escalation/investigation steps; do NOT advise merely waiting more.")
+            elif s == "CARRIER_ALREADY_CONTACTED":
+                state_hints.append("Customer has already contacted the carrier. Do NOT tell them to contact carrier again.")
+            elif s == "TRACKING_ALREADY_CHECKED":
+                state_hints.append("Customer has already verified tracking. Do NOT tell them to check tracking again (locating tracking number instructions are allowed if requested).")
+            elif s == "DETAILS_ALREADY_PROVIDED":
+                state_hints.append("Customer has already provided details/order info. Do NOT ask for the same details again.")
+
         parts.append("\nCLASSIFICATION\n--------------")
         parts.append(f"Primary intent: {classification.get('primary_intent', 'UNKNOWN')}")
         parts.append(f"Intent(s): {classification.get('intents', [])}")
         parts.append(f"Area: {classification.get('areas', [])}")
-        parts.append(f"State: {classification.get('states', [])}")
+        parts.append(f"State: {states}")
+        if state_hints:
+            parts.append(f"State Constraints: {' '.join(state_hints)}")
         
         # 3. Historical Evidence
         parts.append("\nHISTORICAL EVIDENCE\n-------------------")
@@ -87,6 +122,29 @@ class ResponseGenerator:
                 if ev.get("relevant_context"):
                     parts.append(f"Context:\n{ev.get('relevant_context')}")
                 parts.append(f"Amazon:\n{ev.get('brand_response', '')}")
+
+        return "\n".join(parts)
+
+    def format_clarification_input(
+        self,
+        customer_message: str,
+        context: Optional[str] = None,
+        classification: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Structure the prompt for generating a clarification question."""
+        parts = []
+        parts.append("CURRENT CONVERSATION\n--------------------")
+        if context and context.strip():
+            parts.append(f"Context:\n{context.strip()}")
+        parts.append(f"Customer:\n{customer_message.strip()}")
+
+        parts.append("\nCLASSIFICATION\n--------------")
+        clf = classification or {}
+        parts.append(f"Status: {clf.get('classification_status', 'AMBIGUOUS')}")
+        parts.append(f"Primary intent: {clf.get('primary_intent')}")
+
+        parts.append("\nINSTRUCTION\n-----------")
+        parts.append("The customer inquiry is ambiguous or missing specific details. Ask a helpful, polite clarifying question to identify their Amazon retail support issue.")
 
         return "\n".join(parts)
 
@@ -137,3 +195,53 @@ class ResponseGenerator:
                 "needs_human_review": True,
                 "error": str(e)
             }
+
+    def generate_clarification(
+        self,
+        customer_message: str,
+        context: Optional[str] = None,
+        classification: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Generate a natural clarifying question for AMBIGUOUS inquiries via LLM."""
+        prompt = self.format_clarification_input(customer_message, context, classification)
+        fallback_reply = "Hi! How can I help you today?"
+
+        try:
+            llm_resp = self.llm_client.generate(
+                prompt=prompt,
+                system_prompt=CLARIFICATION_SYSTEM_PROMPT,
+                json_mode=True,
+                temperature=0.3,
+                max_tokens=150,
+            )
+
+            output = llm_resp.json()
+            if not isinstance(output, dict):
+                raise ValueError(f"LLM did not return a JSON object: {type(output)}")
+
+            reply = str(output.get("reply", "")).strip()
+            if not reply or len(reply) < 5:
+                raise ValueError("LLM returned empty or too short clarification reply")
+
+            # Validate that the reply doesn't leak internal pipeline words
+            leak_words = ["classification", "confidence", "ambiguous", "rag", "pipeline", "taxonomy"]
+            if any(w in reply.lower() for w in leak_words):
+                logger.warning(f"Clarification leaked internal words: {reply}. Using fallback.")
+                reply = fallback_reply
+
+            return {
+                "reply": reply,
+                "evidence_ids": [],
+                "needs_grounding_review": False,
+                "needs_human_review": False,
+            }
+        except Exception as e:
+            logger.error(f"Clarification generation failed: {e}. Using deterministic emergency fallback.")
+            return {
+                "reply": fallback_reply,
+                "evidence_ids": [],
+                "needs_grounding_review": False,
+                "needs_human_review": False,
+                "error": str(e),
+            }
+

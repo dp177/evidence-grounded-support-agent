@@ -18,8 +18,8 @@ classification:
   allow_ambiguous_clarification: true
 
   # When classification status is OUT_OF_SCOPE:
-  # Always blocks auto-handling and escalates to human review.
-  block_out_of_scope: true
+  # If false, allows safe auto-handle/decline without escalating to human review.
+  block_out_of_scope: false
 
 # ---------------------------------------------------------------------------
 # 2. Security & Fraud Risk Triggers
@@ -41,6 +41,10 @@ security_and_fraud:
     - "compromised"
     - "identity theft"
     - "impersonat"
+    - "kill"
+    - "threat"
+    - "sue"
+    - "lawyer"
 
   # If true, any match in risk_keywords immediately escalates to human review
   escalate_on_risk_keywords: true
@@ -81,11 +85,11 @@ retrieval:
 # ---------------------------------------------------------------------------
 state_inconsistency:
   # When customer already checked tracking:
-  # Block responses that redundantly tell them to check tracking again.
+  # Block responses that redundantly command them to go check tracking again.
   TRACKING_ALREADY_CHECKED:
     blocked_response_patterns:
-      - "(?:please\\s+)?(?:check|track|view|monitor)\\s+(?:the\\s+)?(?:tracking|order\\s+status|parcel|shipment)"
-      - "tracking\\s+(?:link|page|details|number|information)"
+      - "(?:please\\s+)?(?:check|track|view|monitor|visit)\\s+(?:the\\s+)?(?:carrier\\s+)?(?:tracking|order\\s+status)\\s+(?:portal|website|page|link)"
+      - "(?:please\\s+)?(?:go\\s+to|refer\\s+to)\\s+(?:the\\s+)?carrier\\s+tracking"
     reason_code: "INCONSISTENT_WITH_STATE"
     message: "Response tells customer to check tracking when tracking was already verified."
 
@@ -120,6 +124,9 @@ state_inconsistency:
 reason_codes:
   - "SAFE_TO_AUTO_HANDLE"
   - "SAFE_CLARIFICATION"
+  - "ACCOUNT_SECURITY_COMPROMISE"
+  - "REPEATED_FAILED_SUPPORT_ATTEMPTS"
+  - "CARRIER_MISCONDUCT_AND_REFUSAL"
   - "GROUNDING_FAILURE"
   - "CONTRADICTED_RESPONSE"
   - "UNSUPPORTED_CURRENT_ACTION"
@@ -132,3 +139,4 @@ reason_codes:
   - "INCONSISTENT_WITH_STATE"
   - "MALFORMED_RESPONSE"
   - "INVALID_EVIDENCE_IDS"
+
